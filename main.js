@@ -1,14 +1,6 @@
 // Checkers in pure-js; Author: David Adler; Date: 12/02/2013
 
-var SQUARE_SIZE = 100;
-var BOARD_DIM = 8;
-var BOARD_WIDTH = SQUARE_SIZE * BOARD_DIM;
-var BOARD_HEIGHT = SQUARE_SIZE * BOARD_DIM;
-// 1 red, 2 black
-var CHECKER_COLORS = {1: 'firebrick', 2: 'darkgray'};
-var CHECKER_BORDER = {width: 5, color: '#000'};
-// 0 white, 1 black, 2 active
-var SQUARE_COLORS = {0: '#fff', 1: '#ccc', 2: 'steelblue'};
+// Inital positions of checkers and squares
 var INIT_CHECKERS = [
         [1, 0, 1, 0, 1, 0, 1, 0],
         [0, 1, 0, 1, 0, 1, 0, 1],
@@ -27,19 +19,30 @@ var INIT_SQUARES = [
         [0, 1, 0, 1, 0, 1, 0, 1],
         [1, 0, 1, 0, 1, 0, 1, 0],
         [0, 1, 0, 1, 0, 1, 0, 1]];
+
+// -----Checkers and sqaures config-----
+// 1 red, 2 black
+var CHECKER_COLORS = {1: 'firebrick', 2: '#313131'};
+var CHECKER_BORDER = {width: 5, color: '#000'};
+// 0 white, 1 black, 2 active
+var SQUARE_COLORS = {0: '#ccc', 1: '#fff', 2: 'steelblue'};
 // the int representing the checker of the other color
 var ANTI_CHECKER = {1: 2, 2: 1};
+// 1 can move bottom right or bottom left. (second value in array need to check if checer can jump)
+// 2 can move top right or top left relative to self.
+var CHECKER_MOVES = {1: [{row: 1, col: 1}, {row: 1, col: -1}], 
+                     2: [{row: -1, col: 1}, {row: -1, col: -1}]};
 
+// -----Dimensions config------
+var SQUARE_SIZE = 50;
+var BOARD_DIM = INIT_SQUARES.length;
+var BOARD_WIDTH = SQUARE_SIZE * BOARD_DIM;
+var BOARD_HEIGHT = SQUARE_SIZE * BOARD_DIM;
 
 function deep_copy(array) {
     var out = Array(array.length);
     for (var i = 0; i < array.length; i++) {
-        out[i] = Array(array[i].length)
-    }
-    for (var i = 0; i < array.length; i++) {
-        for (var j = 0; j < array[i].length; j++) {
-            out[i][j] = array[i].slice(j, j+1)[0];
-        }
+        out[i] = array[i].slice();
     }
     return out;
 }
@@ -52,78 +55,51 @@ function Board (canvas) {
     document.body.addEventListener("mouseup", board.onUp().mouse, false);
     board.can.addEventListener("touchend", board.onUp().touch, false);
 
-    board.currently_animated = [];
+    board.active = [];
     board.checkers = deep_copy(INIT_CHECKERS);
     board.squares = deep_copy(INIT_SQUARES);
 
 }
 
-Board.prototype.find_legal_positions = function(pos) {
+Board.prototype.find_legal_moves = function(pos) {
     var board = this;
     var checker = board.checkers[pos.row][pos.col];
     // anti means a checker of opposite color
     var anti = ANTI_CHECKER[checker];
 
-    if (checker === 1) {
+    var moves = CHECKER_MOVES[checker];
 
-        // bottom right
-        if (board.checkers[pos.row+1][pos.col+1] === 0) {
-            // empty
-            board.currently_animated.push({row: pos.row+1, col: pos.col+1});
-        } else if (board.checkers[pos.row+1][pos.col+1] == anti &&
-                   board.checkers[pos.row+2][pos.col+2] === 0) {
-            // can jump
-            board.currently_animated.push({row: pos.row+1, col: pos.col+1});
-        }
+    if (moves !== undefined) {
 
-        // bottom left
-        if (board.checkers[pos.row+1][pos.col-1] === 0) {
-            // empty
-            board.currently_animated.push({row: pos.row+1, col: pos.col-1});
-        } else if (board.checkers[pos.row+1][pos.col-1] == anti &&
-                   board.checkers[pos.row+2][pos.col-2] === 0) {
-            // can jump
-            board.currently_animated.push({row: pos.row+1, col: pos.col-1});
-        }
-        
-        if (board.currently_animated.length) {
-            // if checker can move animate 
-            board.currently_animated.push({row: pos.row, col: pos.col});
-        }
-    } else if (checker === 2) {
+        for (var i = 0; i < moves.length; i++) {
+            var delta = moves[i];
 
-        // top right
-        if (board.checkers[pos.row-1][pos.col+1] === 0) {
-            // empty
-            board.currently_animated.push({row: pos.row-1, col: pos.col+1});
-        } else if (board.checkers[pos.row-1][pos.col+1] == anti &&
-                   board.checkers[pos.row-2][pos.col+2] === 0) {
-            // can jump
-            board.currently_animated.push({row: pos.row-1, col: pos.col+1});
-        }
+            // new trail position
+            var mv = {};
+            mv.row = pos.row + delta.row;
+            mv.col = pos.col + delta.col;
 
-        // top left
-        if (board.checkers[pos.row-1][pos.col-1] === 0) {
-            // empty
-            board.currently_animated.push({row: pos.row-1, col: pos.col-1});
-        } else if (board.checkers[pos.row-1][pos.col-1] == anti &&
-                   board.checkers[pos.row-2][pos.col-2] === 0) {
-            // can jump
-            board.currently_animated.push({row: pos.row-1, col: pos.col-1});
-        }
-        
-        if (board.currently_animated.length) {
-            // if checker can move animate 
-            board.currently_animated.push({row: pos.row, col: pos.col});
-        }
+            if (board.checkers[mv.row][mv.col] === 0) {
+                // adjacent empty
+                board.active.push({row: mv.row, col: mv.col});
 
+            } else if (board.checkers[mv.row][mv.col] == anti &&
+                       board.checkers[mv.row*2][mv.col*2] === 0) {
+                // can jump adjacent
+                board.active.push({row: mv.row*2, col: mv.col*2});
+            }
+
+            if (board.active.length) {
+                // also animate square beneath checker if it has legal moves
+                board.active.push({row: pos.row, col: pos.col});
+            }
+
+        }
     }
-
 };
 
 Board.prototype.onUp = function(e) {
     var board = this;
-    // reset anim
     return {
         mouse: function(e) {
             var coords = {};
@@ -159,19 +135,19 @@ Board.prototype.selectChecker = function(pos) {
 
 Board.prototype.reset_animated = function() {
     var board = this;
-    for (var i = 0; i < board.currently_animated.length; i++) {
-        var pos = board.currently_animated[i];
+    for (var i = 0; i < board.active.length; i++) {
+        var pos = board.active[i];
         board.squares[pos.row][pos.col] = INIT_SQUARES[pos.row][pos.col];
     }
-    board.currently_animated = [];
+    board.active = [];
     board.draw();
 };
 
 Board.prototype.show_legal = function(pos) {
     var board = this;
-    board.find_legal_positions(pos);
-    for (var i = 0; i < board.currently_animated.length; i++) {
-        pos = board.currently_animated[i];
+    board.find_legal_moves(pos);
+    for (var i = 0; i < board.active.length; i++) {
+        pos = board.active[i];
         board.squares[pos.row][pos.col] = 2;
     }
     board.draw();
