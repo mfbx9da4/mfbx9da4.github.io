@@ -98,11 +98,11 @@ Board.prototype.find_legal_moves = function(pos) {
             jump.row = pos.row + (delta.row * 2);
             jump.col = pos.col + (delta.col * 2);
             
-            if (mv.row >= 0 && mv.row <= BOARD_DIM && 
+            if (mv.row >= 0 && mv.row < BOARD_DIM && 
                 board.checkers[mv.row][mv.col] === 0) {
                 // adjacent empty
                 board.animated.push(mv);
-            } else if (mv.row <= BOARD_DIM && jump.row <= BOARD_DIM &&
+            } else if (mv.row < BOARD_DIM && jump.row < BOARD_DIM &&
                        mv.row >= 0 && jump.row >= 0 &&
                        board.checkers[mv.row][mv.col] === anti &&
                        board.checkers[jump.row][jump.col] === 0) {
@@ -145,7 +145,7 @@ Board.prototype.find_jump_moves = function(pos) {
             var jump = {};
             jump.row = pos.row + (delta.row * 2);
             jump.col = pos.col + (delta.col * 2);
-            if (mv.row <= BOARD_DIM && jump.row <= BOARD_DIM &&
+            if (mv.row < BOARD_DIM && jump.row < BOARD_DIM &&
                 mv.row >= 0 && jump.row >= 0 &&
                 board.checkers[mv.row][mv.col] === anti &&
                 board.checkers[jump.row][jump.col] === 0) {
@@ -209,14 +209,16 @@ Board.prototype.selectSquare = function(pos) {
             for (var i = 0; i < board.animated.length; i++) {
                 var animated = board.animated[i];
                 if (pos.row === animated.row && pos.col === animated.col) {
+                    // if selected a valid new dest
                     if (board.must_jump) {
                         board.must_jump = false;
                     }
-                    // if selected a valid new dest
                     return board.move(pos);
                 }
             }
-            board.selectChecker(pos);    
+            if (!board.must_jump) {
+                board.selectChecker(pos);
+            }
         }
     } else {
         board.selectChecker(pos);
