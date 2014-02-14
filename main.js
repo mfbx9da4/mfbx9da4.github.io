@@ -126,6 +126,7 @@ function Board (canvas) {
     board.squares = deep_copy(INIT_SQUARES);
     board.selected_checker = null;
     board.who_to_play = 1;
+    board.winner;
     board.switch_player();
 
 }
@@ -323,7 +324,9 @@ Board.prototype.selectChecker = function(pos) {
 
 Board.prototype.move = function(pos) {
     var board = this;
-    var switch_player, reset_animated;
+    var switch_player;
+    var reset_animated;
+    var game_over;
     // Source and destination positions
     var src = board.selected_checker;
     var des = pos;
@@ -343,6 +346,7 @@ Board.prototype.move = function(pos) {
             return board.show_legal();
         } else {
             // can not do second jump
+            if (board.is_game_over()) {game_over = true;}
             switch_player = true;
             reset_animated = true;
         }
@@ -364,9 +368,28 @@ Board.prototype.move = function(pos) {
             }
         }
     }
-
+    if (game_over) {return board.game_over();}
     if (switch_player) {board.switch_player();}
     if (reset_animated){board.reset_animated();}
+};
+
+Board.prototype.is_game_over = function() {
+    var board = this;
+    for (var i in teams) {
+        if (teams[i].score == 12) {
+            board.winner = team[i];
+            return true;
+        }
+    }
+};
+
+Board.prototype.game_over = function() {
+    var board = this;
+    board.ctx.fillStyle = "rgba(87, 101, 86, 0.75)";
+    board.ctx.fillRect(0, 0, board.can.width, board.can.height);
+    board.ctx.fillStyle = "white";
+    board.ctx.font = "16px humor";
+    board.ctx.fillText("Game over. The winner was " + board.winner.name, 100, 100);
 };
 
 Board.prototype.jumped_peice = function(src, des, anti) {
@@ -566,7 +589,7 @@ function main() {
     var canvas = initCanvas();
     var info_div = initInfoDiv();
 
-    var board = new Board(canvas);
+    window.board = new Board(canvas);
     board.draw();
 
 }

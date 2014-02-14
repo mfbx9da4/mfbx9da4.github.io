@@ -12,17 +12,18 @@
 - Have an animation loop: animate moving of peices
 - Refactor to shorten methods into sub methods
 - Score animations
-- need to fix how determining whether queen did jump
 - don't actually need row and col
-- fix when queen jumps, if she can't play change
-- fix queen can jump non adjacent
-- implement game over
 - implement computer
+- fix queen can jump non adjacent
+- clean up logs and window.
 
 ###Done
+- need to fix how determining whether queen did jump
 - Large refactor of globals to peices object
 - Queen color
 - fix queen can jump queen
+- fix when queen jumps, if she can't play change
+- implement game over
 
 
 
