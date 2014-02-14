@@ -5,21 +5,9 @@
 
 ##Todo
 
-- Board has an array of cells
-- Each cell contains a reference to a square and a ref to a checker
-- Each square contains a div element which is absolutely positioned and a method animate to indicate as potential location
-- Each checker contains a div element which is absolutely positioned and contains the following methods:	
-	- checker.pos(_) {
-        if (!arguments.length) return pos;
-        pos = _;
-        return checker;
-	}
-	- onClick, grid.find_legal_moves(pos, color) ? grid.current_cell(pos), [grid.highlight_legal_move(pos) in legal_positions] : False 
-	- isLegal()
-- If click on same square, reset
-- If click on animated square , if same square then reset else move to that sqaure
-- Support 
-- Handle indexing outside of grid
+- Large refactor
+- Queen color
+- Computer playing
 
 ###Done
 
