@@ -1,15 +1,19 @@
 ##Features
 - all essential styles are set inside javascript to make game more reusable
+- you can also use this on a touch screen
+- reusable: easy to change colors, size and appearance by modifying variables at the top
 
 
 
 ##Todo
-
-- Large refactor
-- Queen color
+- is_queen move many squares if not jumping
 - Computer playing
+- Have an animation loop: animate moving of peices
+- Refactor to shorten methods into sub methods
 
 ###Done
+- Large refactor of globals to peices object
+- Queen color
 
 
 

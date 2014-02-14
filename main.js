@@ -11,11 +11,11 @@
 //         [0, 2, 0, 2, 0, 2, 0, 2],
 //         [2, 0, 2, 0, 2, 0, 2, 0]];
 var INIT_CHECKERS = [
-        [0, 1, 0, 1, 0, 1, 0, 1],
-        [1, 0, 1, 0, 1, 0, 0, 0],
-        [0, 1, 0, 1, 0, 1, 0, 1],
+        [0, 1, 0, 0, 0, 1, 0, 1],
+        [1, 0, 1, 0, 2, 0, 0, 0],
+        [0, 0, 0, 1, 0, 1, 0, 1],
+        [0, 0, 1, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 1, 0, 0, 0, 0],
         [2, 0, 2, 0, 2, 0, 2, 0],
         [0, 2, 0, 2, 0, 2, 0, 2],
         [2, 0, 2, 0, 2, 0, 2, 0]];
@@ -58,6 +58,7 @@ var queens = [3, 4];
 // checker peices
 var peices = {
     1: {name: 'red pawn',
+        is_queen: false,
         color: 'firebrick',
         moves: [{row: 1, col: 1}, {row: 1, col: -1}],
         border: {width: 5, color: '#000'},
@@ -65,6 +66,7 @@ var peices = {
         team: 1
     },
     2: {name: 'black pawn',
+        is_queen: false,
         color: '#313131',
         moves: [{row: -1, col: 1}, {row: -1, col: -1}],
         border: {width: 5, color: '#000'},
@@ -72,17 +74,21 @@ var peices = {
         team: 2
     },
     3: {name: 'red queen',
+        is_queen: true,
         color: 'firebrick',
         moves: [{row: 1, col: 1}, {row: 1, col: -1}, 
                 {row: -1, col: 1}, {row: -1, col: -1}],
+        trigger_row: BOARD_DIM,
         border: {width: 5, color: 'gold'},
         anti: 2,
         team: 1
     },
-    2: {name: 'black queen',
+    4: {name: 'black queen',
+        is_queen: true,
         color: '#313131',
         moves: [{row: 1, col: 1}, {row: 1, col: -1}, 
                 {row: -1, col: 1}, {row: -1, col: -1}],
+        trigger_row: 0,        
         border: {width: 5, color: 'gold'},
         anti: 1,
         team: 2
@@ -123,11 +129,11 @@ function Board (canvas) {
 
 Board.prototype.find_legal_moves = function(pos) {
     var board = this;
-    if (pos.row >=0 && pos.row < BOARD_DIM) {
+    if (pos.row >= 0 && pos.row < BOARD_DIM) {
         var checker = board.checkers[pos.row][pos.col];
         // anti means a checker of opposite color
 
-        if (peices[checker] !== undefined && checker === board.who_to_play) {
+        if (peices[checker] !== undefined && peices[checker].team === board.who_to_play) {
             // if user selected a checker and it is this color to play 
             var anti = peices[checker].anti;
             var moves = peices[checker].moves;
@@ -135,22 +141,22 @@ Board.prototype.find_legal_moves = function(pos) {
                 var delta = moves[i];
 
                 // new trial position
-                var mv = {};
-                mv.row = pos.row + delta.row;
-                mv.col = pos.col + delta.col;
+                var des = {};
+                des.row = pos.row + delta.row;
+                des.col = pos.col + delta.col;
 
                 // jump pos
-                var jump ={};
+                var jump = {};
                 jump.row = pos.row + (delta.row * 2);
                 jump.col = pos.col + (delta.col * 2);
                 
-                if (mv.row >= 0 && mv.row < BOARD_DIM && 
-                    board.checkers[mv.row][mv.col] === 0) {
+                if (des.row >= 0 && des.row < BOARD_DIM && 
+                    board.checkers[des.row][des.col] === 0) {
                     // adjacent empty
-                    board.animated.push(mv);
-                } else if (mv.row < BOARD_DIM && jump.row < BOARD_DIM &&
-                           mv.row >= 0 && jump.row >= 0 &&
-                           board.checkers[mv.row][mv.col] === anti &&
+                    board.animated.push(des);
+                } else if (des.row < BOARD_DIM && jump.row < BOARD_DIM &&
+                           des.row >= 0 && jump.row >= 0 &&
+                           board.checkers[des.row][des.col] === anti &&
                            board.checkers[jump.row][jump.col] === 0) {
                     
                     // can jump adjacent
@@ -184,17 +190,17 @@ Board.prototype.find_jump_moves = function(pos) {
             var delta = moves[i];
 
             // new trial position
-            var mv = {};
-            mv.row = pos.row + delta.row;
-            mv.col = pos.col + delta.col;
+            var des = {};
+            des.row = pos.row + delta.row;
+            des.col = pos.col + delta.col;
 
             // jump pos
             var jump = {};
             jump.row = pos.row + (delta.row * 2);
             jump.col = pos.col + (delta.col * 2);
-            if (mv.row < BOARD_DIM && jump.row < BOARD_DIM &&
-                mv.row >= 0 && jump.row >= 0 &&
-                board.checkers[mv.row][mv.col] === anti &&
+            if (des.row < BOARD_DIM && jump.row < BOARD_DIM &&
+                des.row >= 0 && jump.row >= 0 &&
+                board.checkers[des.row][des.col] === anti &&
                 board.checkers[jump.row][jump.col] === 0) {
                 // can jump adjacent
                 board.animated.push({row: jump.row, col: jump.col});
@@ -221,7 +227,6 @@ Board.prototype.onUp = function(e) {
             coords.x = e.pageX - board.can.offsetLeft;
             coords.y = e.pageY - board.can.offsetTop;
             var pos = board.translateCoords(coords);
-            // board.selectChecker(pos);
             board.selectSquare(pos);
         },
         touch: function(e) {
@@ -230,7 +235,6 @@ Board.prototype.onUp = function(e) {
             coords.x = e.targetTouches[0].pageX - board.can.offsetLeft;
             coords.y = e.targetTouches[0].pageY - board.can.offsetTop;
             var pos = board.translateCoords(coords);
-            // board.selectChecker(pos);
             board.selectSquare(pos);
         }
     };
@@ -248,7 +252,8 @@ Board.prototype.selectSquare = function(pos) {
     var board = this;
     if (board.selected_checker) {
         // if there already is a checker selected
-        if (pos.row === board.selected_checker.row && pos.col === board.selected_checker.col) {
+        if (pos.row === board.selected_checker.row && 
+            pos.col === board.selected_checker.col) {
             // if reselect the selected_checker, deselect it
             board.selected_checker = null;
             board.reset_animated();
@@ -264,17 +269,26 @@ Board.prototype.selectSquare = function(pos) {
                 }
             }
             if (!board.must_jump) {
+                // user chose to move a different checker
                 board.selectChecker(pos);
             }
         }
     } else {
+        // no checker selected
         board.selectChecker(pos);
     }
 };
 
+Board.prototype.selectChecker = function(pos) {
+    var board = this;
+    board.reset_animated();
+    board.find_legal_moves(pos);
+    board.show_legal(pos);
+};
+
 Board.prototype.move = function(pos) {
     var board = this;
-    var switch_player;
+    var switch_player, reset_animated;
     // Source and destination positions
     var src = board.selected_checker;
     var des = pos;
@@ -303,10 +317,12 @@ Board.prototype.move = function(pos) {
         } else {
             // can not do second jump
             switch_player = true;
+            reset_animated = true;
         }
     } else {
         // did not jump
         switch_player = true;
+        reset_animated = true;
     }
 
     // check if has become a queen
@@ -316,25 +332,19 @@ Board.prototype.move = function(pos) {
             // make queen
             board.checkers[des.row][des.col] = queens[i];
             switch_player = false;
+            reset_animated = false;
+            board.selectChecker(des);
         }
     }
-    // if (des.row === BOARD_DIM-1 && src.team === 1) {
-    //     // make red queen
-    //     board.checkers[des.row][des.col] = 3;
-    //     switch_player = false;
-    // } else if (des.row === 0 && src.team === 2) {
-    //     // make black queen
-    //     board.checkers[des.row][des.col] = 4;
-    //     switch_player = false;
 
-    }
+
     // reset_animated, switch_player = false
     // check team and switch to queen black or red
     // if des == BOARD_DIM, change_peice, 
     // find_queen_legal_moves(pos), 
 
     if (switch_player) {board.switch_player();}
-    board.reset_animated();
+    if (reset_animated){board.reset_animated();}
 };
 
 Board.prototype.updateScore = function() {
@@ -351,13 +361,6 @@ Board.prototype.switch_player = function() {
     document.querySelector('#whos-turn-to-play b').innerHTML = name;
     var color = peices[board.who_to_play].color;
     document.getElementById('whos-turn-to-play').style.backgroundColor = color;
-};
-
-Board.prototype.selectChecker = function(pos) {
-    var board = this;
-    board.reset_animated();
-    board.find_legal_moves(pos);
-    board.show_legal(pos);
 };
 
 Board.prototype.reset_animated = function() {
