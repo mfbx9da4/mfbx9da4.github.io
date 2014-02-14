@@ -2,6 +2,7 @@
 - all essential styles are set inside javascript to make game more reusable
 - you can also use this on a touch screen
 - reusable: easy to change colors, size and appearance by modifying variables at the top
+- xkcd font :-)
 
 
 
@@ -10,10 +11,18 @@
 - Computer playing
 - Have an animation loop: animate moving of peices
 - Refactor to shorten methods into sub methods
+- Score animations
+- need to fix how determining whether queen did jump
+- don't actually need row and col
+- fix when queen jumps, if she can't play change
+- fix queen can jump non adjacent
+- implement game over
+- implement computer
 
 ###Done
 - Large refactor of globals to peices object
 - Queen color
+- fix queen can jump queen
 
 
 

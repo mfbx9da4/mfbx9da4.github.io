@@ -1,24 +1,24 @@
 // Checkers in pure-js; Author: David Adler; Date: 12/02/2013
 
 // Inital positions of checkers and squares
-// var INIT_CHECKERS = [
-//         [0, 1, 0, 1, 0, 1, 0, 1],
-//         [1, 0, 1, 0, 1, 0, 1, 0],
-//         [0, 1, 0, 1, 0, 1, 0, 1],
-//         [0, 0, 0, 0, 0, 0, 0, 0],
-//         [0, 0, 0, 0, 0, 0, 0, 0],
-//         [2, 0, 2, 0, 2, 0, 2, 0],
-//         [0, 2, 0, 2, 0, 2, 0, 2],
-//         [2, 0, 2, 0, 2, 0, 2, 0]];
 var INIT_CHECKERS = [
-        [0, 1, 0, 0, 0, 1, 0, 1],
-        [1, 0, 1, 0, 2, 0, 0, 0],
-        [0, 0, 0, 1, 0, 1, 0, 1],
-        [0, 0, 1, 0, 0, 0, 0, 0],
+        [0, 1, 0, 1, 0, 1, 0, 1],
+        [1, 0, 1, 0, 1, 0, 1, 0],
+        [0, 1, 0, 1, 0, 1, 0, 1],
+        [0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0],
         [2, 0, 2, 0, 2, 0, 2, 0],
         [0, 2, 0, 2, 0, 2, 0, 2],
         [2, 0, 2, 0, 2, 0, 2, 0]];
+var INIT_CHECKERS = [
+        [0, 1, 0, 0, 0, 0, 0, 0],
+        [1, 0, 3, 0, 1, 1, 1, 0],
+        [0, 4, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 4, 0, 0, 1, 0, 0, 0],
+        [2, 0, 1, 1, 1, 1, 2, 0],
+        [0, 2, 0, 0, 0, 1, 0, 2],
+        [2, 0, 2, 0, 2, 0, 0, 0]];
 var INIT_SQUARES = [
         [1, 0, 1, 0, 1, 0, 1, 0],
         [0, 1, 0, 1, 0, 1, 0, 1],
@@ -29,6 +29,14 @@ var INIT_SQUARES = [
         [1, 0, 1, 0, 1, 0, 1, 0],
         [0, 1, 0, 1, 0, 1, 0, 1]];
 
+
+// -----Dimensions config------
+var SQUARE_SIZE = 50;
+var BOARD_DIM = INIT_SQUARES.length;
+var BOARD_WIDTH = SQUARE_SIZE * BOARD_DIM;
+var BOARD_HEIGHT = SQUARE_SIZE * BOARD_DIM;
+var INFO_WIDTH = SQUARE_SIZE * 2;
+
 // -----Checkers and sqaures config-----
 // 1 red, 2 black
 // var CHECKER_NAMES = {1: 'RED', 2: 'BLACK'};
@@ -38,6 +46,7 @@ var INIT_SQUARES = [
 // var ANTI_CHECKER = {1: 2, 2: 1};
 // 1 can move bottom right or bottom left. (second value in array need to check if checer can jump)
 // 2 can move top right or top left relative to self.
+
 
 // 0 black, 1 white, 2 active
 var SQUARE_COLORS = {0: '#ccc', 1: '#fff', 2: 'steelblue'};
@@ -78,7 +87,7 @@ var peices = {
         color: 'firebrick',
         moves: [{row: 1, col: 1}, {row: 1, col: -1}, 
                 {row: -1, col: 1}, {row: -1, col: -1}],
-        trigger_row: BOARD_DIM,
+        trigger_row: BOARD_DIM - 1,
         border: {width: 5, color: 'gold'},
         anti: 2,
         team: 1
@@ -95,12 +104,6 @@ var peices = {
     }
 };
 
-// -----Dimensions config------
-var SQUARE_SIZE = 50;
-var BOARD_DIM = INIT_SQUARES.length;
-var BOARD_WIDTH = SQUARE_SIZE * BOARD_DIM;
-var BOARD_HEIGHT = SQUARE_SIZE * BOARD_DIM;
-var INFO_WIDTH = SQUARE_SIZE * 2;
 
 function deep_copy(array) {
     var out = Array(array.length);
@@ -139,30 +142,24 @@ Board.prototype.find_legal_moves = function(pos) {
             var moves = peices[checker].moves;
             for (var i = 0; i < moves.length; i++) {
                 var delta = moves[i];
-
-                // new trial position
-                var des = {};
-                des.row = pos.row + delta.row;
-                des.col = pos.col + delta.col;
-
+                // adjacent position
+                var adj = {row: pos.row + delta.row, 
+                           col: pos.col + delta.col};
                 // jump pos
-                var jump = {};
-                jump.row = pos.row + (delta.row * 2);
-                jump.col = pos.col + (delta.col * 2);
+                var jump = {row: pos.row + (delta.row * 2),
+                            col: pos.col + (delta.col * 2)};
                 
-                if (des.row >= 0 && des.row < BOARD_DIM && 
-                    board.checkers[des.row][des.col] === 0) {
+                if (board.position_is_empty(adj)) {
                     // adjacent empty
-                    board.animated.push(des);
-                } else if (des.row < BOARD_DIM && jump.row < BOARD_DIM &&
-                           des.row >= 0 && jump.row >= 0 &&
-                           board.checkers[des.row][des.col] === anti &&
-                           board.checkers[jump.row][jump.col] === 0) {
-                    
-                    // can jump adjacent
+                    board.animated.push(adj);
+                    if (peices[checker].is_queen) {
+                        // get sequential empty cells
+                        var empty_cells = board.find_empty_cells_in_direction(adj, delta);
+                        board.animated = board.animated.concat(empty_cells);
+                    }
+                } else if (board.can_jump_adjacent(adj, jump, anti)) {
                     board.animated.push({row: jump.row, col: jump.col});
                 }
-
 
             }
             if (board.animated.length) {
@@ -177,6 +174,49 @@ Board.prototype.find_legal_moves = function(pos) {
     return [];
 };
 
+Board.prototype.find_empty_cells_in_direction = function(start, delta) {
+    // delta is direction
+    var board = this;
+    var empty_cells = [];
+    var des = {row: start.row + delta.row,
+               col: start.col + delta.col};
+
+    while (board.position_in_board(des) && 
+           board.position_is_empty(des)) {
+
+            empty_cells.push({row: des.row, col: des.col});
+        
+            des.row = des.row + delta.row;
+            des.col = des.col + delta.col;
+    }
+
+    return empty_cells;
+};
+
+Board.prototype.position_in_board = function(pos) {
+    return (pos.row < BOARD_DIM && pos.row < BOARD_DIM &&
+            pos.row >= 0 && pos.row >= 0);
+};
+
+Board.prototype.position_is_empty = function(pos) {
+    var board = this;
+    return (pos.row >= 0 && pos.row < BOARD_DIM && 
+            board.checkers[pos.row][pos.col] === 0);
+};
+
+Board.prototype.can_jump_adjacent = function(adj, jump, anti) {
+    var board = this;
+    if (board.position_in_board(adj) && board.position_in_board(jump)) {
+        if (board.position_is_empty(jump)) {
+            var adjacent_checker = board.checkers[adj.row][adj.col];
+            return (adjacent_checker !== 0 &&
+                    peices[adjacent_checker].team === anti &&
+                    board.checkers[jump.row][jump.col] === 0);
+            
+        }
+        
+    }
+};
 
 Board.prototype.find_jump_moves = function(pos) {
     var board = this;
@@ -184,25 +224,20 @@ Board.prototype.find_jump_moves = function(pos) {
     var anti = peices[checker].anti;
     var moves = peices[checker].moves;
 
-    if (moves !== undefined && checker === board.who_to_play) {
+    if (moves !== undefined && peices[checker].team === board.who_to_play) {
         // if it is this color to play
         for (var i = 0; i < moves.length; i++) {
             var delta = moves[i];
 
             // new trial position
-            var des = {};
-            des.row = pos.row + delta.row;
-            des.col = pos.col + delta.col;
+            var adj = {row: pos.row + delta.row, 
+                       col: pos.col + delta.col};
 
             // jump pos
-            var jump = {};
-            jump.row = pos.row + (delta.row * 2);
-            jump.col = pos.col + (delta.col * 2);
-            if (des.row < BOARD_DIM && jump.row < BOARD_DIM &&
-                des.row >= 0 && jump.row >= 0 &&
-                board.checkers[des.row][des.col] === anti &&
-                board.checkers[jump.row][jump.col] === 0) {
-                // can jump adjacent
+            var jump = {row: pos.row + (delta.row * 2),
+                        col: pos.col + (delta.col * 2)};
+
+            if (board.can_jump_adjacent(adj, jump, anti)) {
                 board.animated.push({row: jump.row, col: jump.col});
             }
 
@@ -211,7 +246,7 @@ Board.prototype.find_jump_moves = function(pos) {
         if (board.animated.length) {
             // board.animated.push(pos);
             board.selected_checker = pos;
-            board.selected_checker.team = checker;
+            board.selected_checker.team = peices[checker].team;
             return board.animated;
         }
     }
@@ -296,18 +331,10 @@ Board.prototype.move = function(pos) {
     board.checkers[des.row][des.col] = board.checkers[src.row][src.col];
     board.checkers[src.row][src.col] = 0;
 
-    if (Math.abs(des.row - src.row) > 1) {
+    if (board.jumped_peice(src, des, peices[src.team].anti)) {
         // if jumping rm intermediate checker
-        var delta = {};
-        delta.row = des.row - src.row;
-        delta.col = des.col - src.col;
-        var inter = {};
-        inter.row = src.row + (delta.row / 2);
-        inter.col = src.col + (delta.col / 2);
-
-        teams[board.selected_checker.team].score ++;
-        board.updateScore();
-        board.checkers[inter.row][inter.col] = 0;
+        board.updateScore(board.selected_checker.team);
+        board.remove_intermediate_peice(src, des);
         board.reset_animated();
         var legal_moves = board.find_jump_moves(des);
         if (legal_moves.length) {
@@ -325,33 +352,60 @@ Board.prototype.move = function(pos) {
         reset_animated = true;
     }
 
-    // check if has become a queen
-    for (var i = 0; i < queens.length; i++) {
-        var queen = peices[queens[i]];
-        if (des.row === queen.trigger_row && src.team === queen.team) {
-            // make queen
-            board.checkers[des.row][des.col] = queens[i];
-            switch_player = false;
-            reset_animated = false;
-            board.selectChecker(des);
+    if (!src.is_queen) {
+        // check if has become a queen
+        for (var i = 0; i < queens.length; i++) {
+            var queen = peices[queens[i]];
+            if (des.row === queen.trigger_row && src.team === queen.team) {
+                // make queen
+                board.checkers[des.row][des.col] = queens[i];
+                switch_player = true;
+                reset_animated = true;
+            }
         }
     }
-
-
-    // reset_animated, switch_player = false
-    // check team and switch to queen black or red
-    // if des == BOARD_DIM, change_peice, 
-    // find_queen_legal_moves(pos), 
 
     if (switch_player) {board.switch_player();}
     if (reset_animated){board.reset_animated();}
 };
 
-Board.prototype.updateScore = function() {
+Board.prototype.jumped_peice = function(src, des, anti) {
     var board = this;
-    for (var i in teams) {
-        document.querySelector('#score' + i).innerText = teams[i].score;
+    var delta = board.get_delta(src, des);
+    var inter = board.get_intermediate_position(src, des);
+    if (Math.abs(delta.row) === 2) {
+        var inter_peice = board.checkers[inter.row][inter.col];
+        if (peices[inter_peice].team === anti) {
+            return true;
+        }
     }
+};
+
+Board.prototype.get_delta = function(src, des) {
+    var delta = {};
+    delta.row = des.row - src.row;
+    delta.col = des.col - src.col;
+    return delta;
+};
+
+Board.prototype.get_intermediate_position = function(src, des) {
+    var board = this;
+    var inter = {};
+    var delta = board.get_delta(src, des);
+    inter.row = src.row + (delta.row / 2);
+    inter.col = src.col + (delta.col / 2);
+    return inter;
+};
+
+Board.prototype.remove_intermediate_peice = function(src, des) {
+    var board = this;
+    var inter = board.get_intermediate_position(src, des);
+    board.checkers[inter.row][inter.col] = 0;
+};
+
+Board.prototype.updateScore = function(team) {
+    teams[team].score ++;
+    document.querySelector('#score' + team).innerText = teams[team].score;
 };
 
 Board.prototype.switch_player = function() {
@@ -457,7 +511,8 @@ function initInfoDiv() {
     // info div
     var info_div = document.createElement('div');
     info_div.id = 'checkers-game-info-div';
-    info_div.style.fontFamily = 'Arial';
+    info_div.style.fontFamily = 'humor, Arial';
+    info_div.style.fontSize = '17px';
     info_div.style.backgroundColor = '#999';
     info_div.style.borderLeft = 'black solid 4px';
     info_div.style.width = SQUARE_SIZE * 2 + 'px';
