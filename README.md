@@ -1,3 +1,8 @@
+##Features
+- all essential styles are set inside javascript to make game more reusable
+
+
+
 ##Todo
 
 - Board has an array of cells
@@ -11,7 +16,10 @@
 	}
 	- onClick, grid.find_legal_moves(pos, color) ? grid.current_cell(pos), [grid.highlight_legal_move(pos) in legal_positions] : False 
 	- isLegal()
-
+- If click on same square, reset
+- If click on animated square , if same square then reset else move to that sqaure
+- Support 
+- Handle indexing outside of grid
 
 ###Done
 
