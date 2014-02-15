@@ -11,15 +11,15 @@ var INIT_CHECKERS = [
         [0, 2, 0, 2, 0, 2, 0, 2],
         [2, 0, 2, 0, 2, 0, 2, 0]];
 // for testing purposes, a more varied grid
-var INIT_CHECKERS = [
-        [0, 1, 0, 0, 0, 0, 0, 0],
-        [1, 0, 3, 0, 1, 1, 1, 0],
-        [0, 4, 0, 0, 0, 4, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 4, 0, 0, 1, 0, 0, 0],
-        [2, 0, 1, 1, 1, 1, 2, 0],
-        [0, 2, 0, 0, 0, 1, 0, 2],
-        [2, 0, 2, 0, 2, 0, 0, 0]];
+// var INIT_CHECKERS = [
+//         [0, 1, 0, 0, 0, 0, 0, 0],
+//         [1, 0, 3, 0, 0, 1, 1, 0],
+//         [0, 4, 0, 1, 0, 4, 0, 0],
+//         [0, 0, 0, 0, 0, 0, 0, 0],
+//         [0, 4, 0, 0, 1, 0, 0, 0],
+//         [2, 0, 1, 1, 1, 1, 2, 0],
+//         [0, 2, 0, 0, 0, 1, 0, 2],
+//         [2, 0, 2, 0, 2, 0, 0, 0]];
 var INIT_SQUARES = [
         [1, 0, 1, 0, 1, 0, 1, 0],
         [0, 1, 0, 1, 0, 1, 0, 1],
@@ -152,14 +152,16 @@ Board.prototype.find_legal_moves = function(pos) {
                         if (empty_cells.length) {
                             board.animated = board.animated.concat(empty_cells);
 
-                            var last_empty = empty_cells.slice(-1)[0];
-                            var last_adj = {row: last_empty.row + (delta.row),
-                                            col: last_empty.col + (delta.col)};
-                            jump = {row: last_empty.row + (delta.row * 2),
-                                        col: last_empty.col + (delta.col * 2)};
-                            if (board.can_jump_adjacent(last_adj, jump, anti)) {
-                                board.animated.push(jump);
-                            }
+                        }
+
+                        // find long distance jump
+                        var last_empty = board.animated.slice(-1)[0];
+                        var last_adj = {row: last_empty.row + (delta.row),
+                                        col: last_empty.col + (delta.col)};
+                        jump = {row: last_empty.row + (delta.row * 2),
+                                    col: last_empty.col + (delta.col * 2)};
+                        if (board.can_jump_adjacent(last_adj, jump, anti)) {
+                            board.animated.push(jump);
                         }
                     }
                 } else if (board.can_jump_adjacent(adj, jump, anti)) {
@@ -390,7 +392,6 @@ Board.prototype.move = function(pos) {
     // Source and destination positions
     var src = board.selected_checker;
     var des = pos;
-    console.log(pos);
     // make the move
     board.checkers[des.row][des.col] = board.checkers[src.row][src.col];
     board.checkers[src.row][src.col] = 0;
