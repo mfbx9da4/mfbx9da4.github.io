@@ -22,6 +22,7 @@
 - fix queen can jump queen
 - fix when queen jumps, if she can't play change
 - implement game over
+- handling computer when it has a second jump
 
 
 
