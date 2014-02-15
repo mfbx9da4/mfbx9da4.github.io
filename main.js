@@ -149,10 +149,21 @@ Board.prototype.find_legal_moves = function(pos) {
                     if (peices[checker].is_queen) {
                         // get sequential empty cells
                         var empty_cells = board.find_empty_cells_in_direction(adj, delta);
-                        board.animated = board.animated.concat(empty_cells);
+                        if (empty_cells.length) {
+                            board.animated = board.animated.concat(empty_cells);
+
+                            var last_empty = empty_cells.slice(-1)[0];
+                            var last_adj = {row: last_empty.row + (delta.row),
+                                            col: last_empty.col + (delta.col)};
+                            jump = {row: last_empty.row + (delta.row * 2),
+                                        col: last_empty.col + (delta.col * 2)};
+                            if (board.can_jump_adjacent(last_adj, jump, anti)) {
+                                board.animated.push(jump);
+                            }
+                        }
                     }
                 } else if (board.can_jump_adjacent(adj, jump, anti)) {
-                    board.animated.push({row: jump.row, col: jump.col});
+                    board.animated.push(jump);
                 }
 
             }
@@ -444,9 +455,9 @@ Board.prototype.game_over = function() {
 
 Board.prototype.jumped_peice = function(src, des, anti) {
     var board = this;
-    var delta = board.get_delta(src, des);
+    var delta = board.get_distance(src, des);
     var inter = board.get_intermediate_position(src, des);
-    if (Math.abs(delta.row) === 2) {
+    if (Math.abs(delta.row) > 1) {
         var inter_peice = board.checkers[inter.row][inter.col];
         if (peices[inter_peice] !== undefined &&
             peices[inter_peice].team === anti) {
@@ -455,10 +466,17 @@ Board.prototype.jumped_peice = function(src, des, anti) {
     }
 };
 
+Board.prototype.get_distance = function(src, des) {
+    var dist = {};
+    dist.row = des.row - src.row;
+    dist.col = des.col - src.col;
+    return dist;
+};
+
 Board.prototype.get_delta = function(src, des) {
     var delta = {};
-    delta.row = des.row - src.row;
-    delta.col = des.col - src.col;
+    delta.row = (des.row - src.row) / Math.abs(des.row - src.row);
+    delta.col = (des.col - src.col) / Math.abs(des.col - src.col);
     return delta;
 };
 
@@ -466,8 +484,8 @@ Board.prototype.get_intermediate_position = function(src, des) {
     var board = this;
     var inter = {};
     var delta = board.get_delta(src, des);
-    inter.row = src.row + (delta.row / 2);
-    inter.col = src.col + (delta.col / 2);
+    inter.row = des.row - (delta.row);
+    inter.col = des.col - (delta.col);
     return inter;
 };
 
