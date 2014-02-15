@@ -10,10 +10,11 @@ var INIT_CHECKERS = [
         [2, 0, 2, 0, 2, 0, 2, 0],
         [0, 2, 0, 2, 0, 2, 0, 2],
         [2, 0, 2, 0, 2, 0, 2, 0]];
+// for testing purposes, a more varied grid
 var INIT_CHECKERS = [
         [0, 1, 0, 0, 0, 0, 0, 0],
         [1, 0, 3, 0, 1, 1, 1, 0],
-        [0, 4, 0, 0, 0, 0, 0, 0],
+        [0, 4, 0, 0, 0, 4, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0],
         [0, 4, 0, 0, 1, 0, 0, 0],
         [2, 0, 1, 1, 1, 1, 2, 0],
@@ -38,16 +39,6 @@ var BOARD_HEIGHT = SQUARE_SIZE * BOARD_DIM;
 var INFO_WIDTH = SQUARE_SIZE * 2;
 
 // -----Checkers and sqaures config-----
-// 1 red, 2 black
-// var CHECKER_NAMES = {1: 'RED', 2: 'BLACK'};
-// var CHECKER_COLORS = {1: 'firebrick', 2: '#313131'};
-// var CHECKER_BORDER = {width: 5, color: '#000'};
-// the int representing the checker of the other color
-// var ANTI_CHECKER = {1: 2, 2: 1};
-// 1 can move bottom right or bottom left. (second value in array need to check if checer can jump)
-// 2 can move top right or top left relative to self.
-
-
 // 0 black, 1 white, 2 active
 var SQUARE_COLORS = {0: '#ccc', 1: '#fff', 2: 'steelblue'};
 
@@ -113,21 +104,23 @@ function deep_copy(array) {
     return out;
 }
 
-function Board (canvas) {
+function Board (canvas, is_playing_computer) {
     var board = this;
     board.can = canvas;
     board.ctx = canvas.getContext('2d');
+    board.computer_team = is_playing_computer ? 1 : 0;
 
-    document.body.addEventListener("mouseup", board.onUp().mouse, false);
-    board.can.addEventListener("touchend", board.onUp().touch, false);
+    board.can.addEventListener("mouseup", board.onUp().mouse, false);
+    board.can.addEventListener("touchstart", board.onUp().touch, false);
 
     board.animated = [];
     board.checkers = deep_copy(INIT_CHECKERS);
     board.squares = deep_copy(INIT_SQUARES);
     board.selected_checker = null;
     board.who_to_play = 1;
-    board.winner;
+    board.winner = null;
     board.switch_player();
+    board.screen_locked = false;
 
 }
 
@@ -254,24 +247,81 @@ Board.prototype.find_jump_moves = function(pos) {
     return [];
 };
 
+Board.prototype.find_a_checker_to_jump = function() {
+    var board = this;
+    for (var i = 0; i < board.checkers.length; i++) {
+        for (var j = 0; j < board.checkers[i].length; j++) {
+            var checker = board.checkers[i][j];
+            if (checker !== 0) {
+                var pos = {row: i, col: j};
+                board.selected_checker = pos;
+                board.selected_checker = board.computer_team;
+                var checker_peice = peices[checker];
+                if (checker === board.computer_team) {
+                    var moves = board.find_jump_moves(pos);
+                    if (moves.length) {
+                        return moves[0];
+                    }
+                }
+            }
+        }
+    }
+};
+
+Board.prototype.find_a_checker_to_move = function() {
+    var board = this;
+    for (var i = 0; i < board.checkers.length; i++) {
+        for (var j = 0; j < board.checkers[i].length; j++) {
+            var checker = board.checkers[i][j];
+            if (checker !== 0) {
+                var pos = {row: i, col: j};
+                board.selected_checker = pos;
+                board.selected_checker = board.computer_team;
+                var checker_peice = peices[checker];
+                if (checker === board.computer_team) {
+                    var moves = board.find_legal_moves(pos);
+                    if (moves.length) {
+                        return moves[0];
+                    }
+                }
+            }
+        }
+    }
+};
+
+Board.prototype.computer_play = function() {
+    var board = this;
+    board.screen_locked = true;
+    board.reset_animated();
+    var movement = board.find_a_checker_to_jump();
+    if (!movement) {
+        movement = board.find_a_checker_to_move();
+    }
+    board.move(movement);
+    board.screen_locked = false;
+};
 
 Board.prototype.onUp = function(e) {
     var board = this;
     return {
         mouse: function(e) {
-            var coords = {};
-            coords.x = e.pageX - board.can.offsetLeft;
-            coords.y = e.pageY - board.can.offsetTop;
-            var pos = board.translateCoords(coords);
-            board.selectSquare(pos);
+            if (!board.screen_locked) {
+                var coords = {};
+                coords.x = e.pageX - board.can.offsetLeft;
+                coords.y = e.pageY - board.can.offsetTop;
+                var pos = board.translateCoords(coords);
+                board.selectSquare(pos);
+            }
         },
         touch: function(e) {
             e.preventDefault();
-            var coords = {};
-            coords.x = e.targetTouches[0].pageX - board.can.offsetLeft;
-            coords.y = e.targetTouches[0].pageY - board.can.offsetTop;
-            var pos = board.translateCoords(coords);
-            board.selectSquare(pos);
+            if (!board.screen_locked) {
+                var coords = {};
+                coords.x = e.targetTouches[0].pageX - board.can.offsetLeft;
+                coords.y = e.targetTouches[0].pageY - board.can.offsetTop;
+                var pos = board.translateCoords(coords);
+                board.selectSquare(pos);
+            }
         }
     };
 };
@@ -398,7 +448,8 @@ Board.prototype.jumped_peice = function(src, des, anti) {
     var inter = board.get_intermediate_position(src, des);
     if (Math.abs(delta.row) === 2) {
         var inter_peice = board.checkers[inter.row][inter.col];
-        if (peices[inter_peice].team === anti) {
+        if (peices[inter_peice] !== undefined &&
+            peices[inter_peice].team === anti) {
             return true;
         }
     }
@@ -438,6 +489,9 @@ Board.prototype.switch_player = function() {
     document.querySelector('#whos-turn-to-play b').innerHTML = name;
     var color = peices[board.who_to_play].color;
     document.getElementById('whos-turn-to-play').style.backgroundColor = color;
+    if (board.who_to_play === board.computer_team) {
+        board.computer_play();
+    }
 };
 
 Board.prototype.reset_animated = function() {
@@ -525,6 +579,7 @@ function initCanvas() {
     canvas.height = BOARD_HEIGHT;
     canvas.style.float = 'left';
     container.appendChild(canvas);
+
     return canvas;
 }
 
@@ -583,15 +638,44 @@ function initInfoDiv() {
     return info_div;
 }
 
+function initGameDialog(canvas) {
+    var ctx = canvas.getContext('2d');
+    ctx.fillStyle = teams[1].color;
+    ctx.fillRect(0, 0, canvas.width, canvas.height / 2);
+    ctx.fillStyle = "white";
+    ctx.font = "16px humor";
+    ctx.fillText("Click here to play computer", 100, 100);
+
+    ctx.fillStyle = teams[2].color;
+    ctx.fillRect(0, canvas.height /2, canvas.width, canvas.height /2);
+    ctx.fillStyle = "white";
+    ctx.font = "16px humor";
+    ctx.fillText("Click here to play a friend", 100, 100 + canvas.height/2);
+
+    canvas.addEventListener('mouseup', function handler(e) {
+        var coords = {};
+        coords.x = e.pageX - canvas.offsetLeft;
+        coords.y = e.pageY - canvas.offsetTop;
+        if (coords.y < canvas.height/2) {
+            canvas.removeEventListener('mouseup', handler, true);
+            startGame(canvas, true);
+        } else {
+            canvas.removeEventListener('mouseup', handler, true);
+            startGame(canvas, false);
+        }
+    }, true);
+}
+
+function startGame(canvas, is_playing_computer) {
+    var info_div = initInfoDiv();
+    var board = new Board(canvas, is_playing_computer);
+    board.draw();
+}
 
 function main() {
     // Create canvas
     var canvas = initCanvas();
-    var info_div = initInfoDiv();
-
-    window.board = new Board(canvas);
-    board.draw();
-
+    initGameDialog(canvas);
 }
 
 main();

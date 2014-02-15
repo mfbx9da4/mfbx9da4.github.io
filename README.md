@@ -7,18 +7,16 @@
 
 
 ##Todo
-- is_queen move many squares if not jumping
-- Computer playing
 - Have an animation loop: animate moving of peices
 - Refactor to shorten methods into sub methods
 - Score animations
 - don't actually need row and col
-- implement computer
-- fix queen can jump non adjacent
+- implement computer:
 - clean up logs and window.
 
 ###Done
 - need to fix how determining whether queen did jump
+- is_queen move many squares if not jumping
 - Large refactor of globals to peices object
 - Queen color
 - fix queen can jump queen
