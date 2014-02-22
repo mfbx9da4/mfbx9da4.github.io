@@ -1,6 +1,10 @@
 // Checkers in pure-js; Author: David Adler; Date: 12/02/2013
 
-// Inital positions of checkers and squares
+/*
+*                                                         *
+*   Inital positions of checkers and squares              *  
+*                                                         *
+*/
 var INIT_CHECKERS = [
         [0, 1, 0, 1, 0, 1, 0, 1],
         [1, 0, 1, 0, 1, 0, 1, 0],
@@ -15,8 +19,8 @@ var INIT_CHECKERS = [
         [0, 1, 0, 1, 0, 1, 0, 1],
         [1, 0, 1, 0, 1, 0, 1, 0],
         [0, 1, 0, 1, 0, 1, 0, 1],
-        [0, 0, 0, 0, 1, 0, 0, 0],
-        [0, 0, 0, 0, 0, 2, 0, 0],
+        [0, 0, 0, 0, 3, 0, 0, 0],
+        [0, 0, 0, 0, 0, 4, 0, 0],
         [2, 0, 2, 0, 2, 0, 0, 0],
         [0, 2, 0, 2, 0, 2, 0, 2],
         [2, 0, 2, 0, 2, 0, 2, 0]];
@@ -31,14 +35,32 @@ var INIT_SQUARES = [
         [0, 1, 0, 1, 0, 1, 0, 1]];
 
 
-// -----Dimensions config------
+/*
+*                                  *
+*   Dimensions config              *  
+*                                  *
+*/
 var SQUARE_SIZE = 50;
 var BOARD_DIM = INIT_SQUARES.length;
 var BOARD_WIDTH = SQUARE_SIZE * BOARD_DIM;
 var BOARD_HEIGHT = SQUARE_SIZE * BOARD_DIM;
 var INFO_WIDTH = SQUARE_SIZE * 2;
 
-// -----Checkers and sqaures config-----
+
+/*
+*                                           *
+*   Checkers and sqaures config             *  
+*                                           *
+*/
+Utils = {};
+Utils.deep_copy = function(array) {
+    var out = Array(array.length);
+    for (var i = 0; i < array.length; i++) {
+        out[i] = array[i].slice();
+    }
+    return out;
+}
+
 // 0 black, 1 white, 2 active
 var SQUARE_COLORS = {0: '#ccc', 1: '#fff', 2: 'steelblue'};
 
@@ -53,9 +75,10 @@ var teams = {
     }
 };
 
+// "type ids" of queens
 var queens = [3, 4];
 
-// checker pieces
+// checker pieces config
 var pieces = {
     1: {name: 'red pawn',
         is_queen: false,
@@ -99,6 +122,25 @@ var pieces = {
     }
 };
 
+/*
+*                   *
+*   Utils           *  
+*                   *
+*/
+Utils = {};
+Utils.deep_copy = function(array) {
+    var out = Array(array.length);
+    for (var i = 0; i < array.length; i++) {
+        out[i] = array[i].slice();
+    }
+    return out;
+}
+
+/*
+*                   *
+*   A checker piece *  
+*                   *
+*/
 function Piece(config, pos) {
     var piece = this;
     piece.type = config.type;
@@ -112,16 +154,16 @@ function Piece(config, pos) {
     piece.team =  config.team;
     piece.radius = SQUARE_SIZE / 2;
 
-    piece.pos = pos;
-    piece.loc = piece.translatePosToCoords(pos);
 
-    // for animation
+    // variables for animation
     piece.is_animating = false;
     piece.animation_duration = 200;
     piece.start_time = null;
     piece.current_dir = {};
     piece.src = {};
     piece.des = {};
+    piece.pos = pos;
+    piece.loc = piece.translatePosToCoords(pos);
 }
 
 Piece.prototype.translatePosToCoords = function(pos) {
@@ -134,25 +176,38 @@ Piece.prototype.translatePosToCoords = function(pos) {
 
 Piece.prototype.move = function(src, des) {
     var piece = this;
+
+    piece.start_animation(src, des);
+
+    board.checker_objects[piece.des.row][piece.des.col] = piece;
+    board.checker_objects[piece.src.row][piece.src.col] = undefined;
+
+};
+
+Piece.prototype.start_animation = function(src, des) {
+    var piece = this;
     piece.start_time = new Date().getTime();
     piece.is_animating = true;
+
+    piece.setSrcAndDes(src, des);
+
+    piece.current_dir = piece.get_direction(piece.des, piece.src);
+    var distance = piece.get_total_distance();
+    piece.speed = distance / piece.animation_duration;
+};
+
+Piece.prototype.setSrcAndDes = function(src, des) {
+    var piece = this;
 
     piece.src = src;
     var coords =  piece.translatePosToCoords(src);
     piece.src.x = coords.x;
     piece.src.y = coords.y;
+    
     piece.des = des;
     coords = piece.translatePosToCoords(des);
     piece.des.x = coords.x;
     piece.des.y = coords.y;
-
-    piece.current_dir = piece.get_direction(piece.des, piece.src);
-    var distance = piece.get_total_distance();
-    piece.speed = distance / piece.animation_duration;
-
-    board.checker_objects[piece.des.row][piece.des.col] = piece;
-    board.checker_objects[piece.src.row][piece.src.col] = undefined;
-
 };
 
 Piece.prototype.get_direction = function(src, des) {
@@ -180,13 +235,18 @@ Piece.prototype.update_loc = function(board) {
         piece.loc.y = piece.src.y + (piece.current_dir.y * piece.speed * elapsed);
     }
 
+    piece.check_if_finished_animation(board);
+};
+
+Piece.prototype.check_if_finished_animation = function(board) {
+    var piece = this;
     if (piece.current_dir.x === 1) {
         if (piece.loc.x > piece.des.x) {
             piece.finished_animation(board);
         }
     } else if (piece.current_dir.x === -1) {
         if (piece.loc.x < piece.des.x) {
-            piece.finished_animation(board);            
+            piece.finished_animation(board);
         }
     }
 };
@@ -199,8 +259,6 @@ Piece.prototype.finished_animation = function(board) {
 
     piece.loc.x = piece.des.x;        
     piece.loc.y = piece.des.y;        
-    
-
 
     piece.src = {};
     piece.des = {};
@@ -212,13 +270,13 @@ Piece.prototype.finished_animation = function(board) {
 
 Piece.prototype.draw = function(board) {
     var piece = this;
+
     if (piece.is_animating) {
         piece.update_loc(board);
     }
 
     var center_x = piece.loc.x + (SQUARE_SIZE / 2);
     var center_y = piece.loc.y + (SQUARE_SIZE / 2);
-
     var radius = piece.radius - piece.border.width;
 
     board.ctx.beginPath();
@@ -230,14 +288,11 @@ Piece.prototype.draw = function(board) {
     board.ctx.stroke();
 };
 
-function deep_copy(array) {
-    var out = Array(array.length);
-    for (var i = 0; i < array.length; i++) {
-        out[i] = array[i].slice();
-    }
-    return out;
-}
-
+/*
+*                   *
+*   The board       *  
+*                   *
+*/
 function Board (canvas, is_playing_computer) {
     var board = this;
     board.can = canvas;
@@ -247,10 +302,10 @@ function Board (canvas, is_playing_computer) {
     board.can.addEventListener("mouseup", board.onUp().mouse, false);
     board.can.addEventListener("touchstart", board.onUp().touch, false);
 
-    board.animated = [];
+    board.available_positions = [];
     board.checker_objects = board.init_checkers();
-    board.squares = deep_copy(INIT_SQUARES);
-    board.selected_checker = null;
+    board.squares = Utils.deep_copy(INIT_SQUARES);
+    board.selected_pos = null;
     board.who_to_play = 1;
     board.winner = null;
     board.switch_player();
@@ -267,22 +322,17 @@ Board.prototype.init_checkers = function() {
             var type = INIT_CHECKERS[i][j];
             if (type !== 0) {
                 var pos = {row: i, col:j};
-                var checker = new Piece(pieces[type], pos);
-                window.a = checker;
-                checker_objects[i][j] = checker;
+                checker_objects[i][j] = new Piece(pieces[type], pos);
             }
         }
     }
     return checker_objects;
-
 };
 
 Board.prototype.find_legal_moves = function(pos) {
     var board = this;
     if (pos.row >= 0 && pos.row < BOARD_DIM) {
         var checker_piece = board.checker_objects[pos.row][pos.col];
-        // anti means a checker of opposite color
-
         if (checker_piece !== undefined && checker_piece.team === board.who_to_play) {
             // if user selected a checker and it is this color to play 
             var anti = checker_piece.anti;
@@ -296,42 +346,46 @@ Board.prototype.find_legal_moves = function(pos) {
                 var jump = {row: pos.row + (delta.row * 2),
                             col: pos.col + (delta.col * 2)};
                 
-                if (board.position_is_empty(adj)) {
+                if (board.position_in_board(adj) && board.position_is_empty(adj)) {
                     // adjacent empty
-                    board.animated.push(adj);
+                    board.available_positions.push(adj);
                     if (checker_piece.is_queen) {
                         // get sequential empty cells
                         var empty_cells = board.find_empty_cells_in_direction(adj, delta);
                         if (empty_cells.length) {
-                            board.animated = board.animated.concat(empty_cells);
+                            board.available_positions = board.available_positions.concat(empty_cells);
 
                         }
-
-                        // find long distance jump
-                        var last_empty = board.animated.slice(-1)[0];
-                        var last_adj = {row: last_empty.row + (delta.row),
-                                        col: last_empty.col + (delta.col)};
-                        jump = {row: last_empty.row + (delta.row * 2),
-                                    col: last_empty.col + (delta.col * 2)};
-                        if (board.can_jump_adjacent(last_adj, jump, anti)) {
-                            board.animated.push(jump);
-                        }
+                        board.find_long_distance_jump(delta, jump, anti);
                     }
                 } else if (board.can_jump_adjacent(adj, jump, anti)) {
-                    board.animated.push(jump);
+                    board.available_positions.push(jump);
                 }
 
             }
-            if (board.animated.length) {
+            if (board.available_positions.length) {
                 // also animate square beneath checker if it has legal moves
-                board.animated.push(pos);
-                board.selected_checker = pos;
-                board.selected_checker.team = checker_piece.team;
-                return board.animated;
+                board.available_positions.push(pos);
+                board.selected_pos = pos;
+                board.selected_pos.team = checker_piece.team;
+                return board.available_positions;
             }
         }
     }
     return [];
+};
+
+Board.prototype.find_long_distance_jump = function(delta, jump, anti) {
+    var board = this;
+    // find long distance jump
+    var last_empty = board.available_positions.slice(-1)[0];
+    var last_adj = {row: last_empty.row + (delta.row),
+                    col: last_empty.col + (delta.col)};
+    jump = {row: last_empty.row + (delta.row * 2),
+                col: last_empty.col + (delta.col * 2)};
+    if (board.can_jump_adjacent(last_adj, jump, anti)) {
+        board.available_positions.push(jump);
+    }
 };
 
 Board.prototype.find_empty_cells_in_direction = function(start, delta) {
@@ -354,14 +408,14 @@ Board.prototype.find_empty_cells_in_direction = function(start, delta) {
 };
 
 Board.prototype.position_in_board = function(pos) {
-    return (pos.row < BOARD_DIM && pos.col < BOARD_DIM &&
-            pos.row >= 0 && pos.col >= 0);
+    var cond = (pos.row < BOARD_DIM && pos.col < BOARD_DIM && pos.row >= 0 && pos.col >= 0);
+    return cond;
 };
 
 Board.prototype.position_is_empty = function(pos) {
     var board = this;
-    return (pos.row >= 0 && pos.row < BOARD_DIM && 
-            board.checker_objects[pos.row][pos.col] === undefined);
+    var cond = (board.checker_objects[pos.row][pos.col] === undefined);
+    return cond;
 };
 
 Board.prototype.can_jump_adjacent = function(adj, jump, anti) {
@@ -397,15 +451,15 @@ Board.prototype.find_jump_moves = function(pos) {
             var jump = {row: pos.row + (delta.row * 2),
                         col: pos.col + (delta.col * 2)};
             if (board.can_jump_adjacent(adj, jump, anti)) {
-                board.animated.push({row: jump.row, col: jump.col});
+                board.available_positions.push({row: jump.row, col: jump.col});
             }
 
 
         }
-        if (board.animated.length) {
-            board.selected_checker = pos;
-            board.selected_checker.team = checker_piece.team;
-            return board.animated;
+        if (board.available_positions.length) {
+            board.selected_pos = pos;
+            board.selected_pos.team = checker_piece.team;
+            return board.available_positions;
         }
     }
     return [];
@@ -418,8 +472,8 @@ Board.prototype.find_a_checker_to_jump = function() {
             var checker = board.checker_objects[i][j];
             if (checker !== undefined) {
                 var pos = {row: i, col: j};
-                board.selected_checker = pos;
-                board.selected_checker = board.computer_team;
+                board.selected_pos = pos;
+                board.selected_pos = board.computer_team;
                 if (checker.team === board.computer_team) {
                     var moves = board.find_jump_moves(pos);
                     if (moves.length) {
@@ -438,8 +492,8 @@ Board.prototype.find_a_checker_to_move = function() {
             var checker = board.checker_objects[i][j];
             if (checker !== undefined) {
                 var pos = {row: i, col: j};
-                board.selected_checker = pos;
-                board.selected_checker = board.computer_team;
+                board.selected_pos = pos;
+                board.selected_pos = board.computer_team;
                 if (checker.team === board.computer_team) {
                     var moves = board.find_legal_moves(pos);
                     if (moves.length) {
@@ -498,16 +552,16 @@ Board.prototype.translateCoordsToPos = function(coords) {
 
 Board.prototype.selectSquare = function(pos) {
     var board = this;
-    if (board.selected_checker) {
+    if (board.selected_pos) {
         // if there already is a checker selected
-        if (pos.row === board.selected_checker.row && 
-            pos.col === board.selected_checker.col) {
-            // if reselect the selected_checker, deselect it
-            board.selected_checker = null;
+        if (pos.row === board.selected_pos.row && 
+            pos.col === board.selected_pos.col) {
+            // if reselect the selected_pos, deselect it
+            board.selected_pos = null;
             board.reset_animated();
         } else {
-            for (var i = 0; i < board.animated.length; i++) {
-                var animated = board.animated[i];
+            for (var i = 0; i < board.available_positions.length; i++) {
+                var animated = board.available_positions[i];
                 if (pos.row === animated.row && pos.col === animated.col) {
                     // if selected a valid new dest
                     if (board.must_jump) {
@@ -539,7 +593,7 @@ Board.prototype.move = function(pos) {
     var switch_player;
     var reset_animated;
     // Source and destination positions
-    var src = board.selected_checker;
+    var src = board.selected_pos;
     var des = pos;
 
     // make the move
@@ -547,13 +601,13 @@ Board.prototype.move = function(pos) {
 
     if (board.jumped_piece(src, des, pieces[src.team].anti)) {
         // if jumping rm intermediate checker
-        board.updateScore(board.selected_checker.team);
+        board.updateScore(board.selected_pos.team);
         board.remove_intermediate_piece(src, des);
         board.reset_animated();
         var legal_moves = board.find_jump_moves(des);
         if (legal_moves.length) {
             // if can do second jump
-            board.selected_checker = des;
+            board.selected_pos = des;
             board.must_jump = true;
         } else {
             // can not do second jump
@@ -570,7 +624,6 @@ Board.prototype.move = function(pos) {
         // check if has become a queen
         for (var i = 0; i < queens.length; i++) {
             var queen = pieces[queens[i]];
-            // console.log(queen);
             if (des.row === queen.trigger_row && src.team === queen.team) {
                 // make queen
                 var new_queen = new Piece(queen, des);
@@ -580,7 +633,7 @@ Board.prototype.move = function(pos) {
             }
         }
     }
-    if (board.must_jump && board.computer_team !== board.selected_checker.team) {return board.show_legal();}
+    if (board.must_jump && board.computer_team !== board.selected_pos.team) {return board.show_legal();}
     if (board.must_jump && board.computer_team) {return board.computer_play();}
     if (switch_player) {board.switch_player();}
     if (reset_animated){board.reset_animated();}
@@ -643,7 +696,7 @@ Board.prototype.updateScore = function(team) {
     document.querySelector('#score' + team).innerText = teams[team].score;
     for (var i in teams) {
         if (teams[i].score == 12) {
-            board.winner = team[i];
+            board.winner = teams[i];
             return board.game_over();
         }
     }
@@ -663,18 +716,18 @@ Board.prototype.switch_player = function() {
 
 Board.prototype.reset_animated = function() {
     var board = this;
-    for (var i = 0; i < board.animated.length; i++) {
-        var pos = board.animated[i];
+    for (var i = 0; i < board.available_positions.length; i++) {
+        var pos = board.available_positions[i];
         board.squares[pos.row][pos.col] = INIT_SQUARES[pos.row][pos.col];
     }
-    board.animated = [];
+    board.available_positions = [];
     board.draw();
 };
 
 Board.prototype.show_legal = function(pos) {
     var board = this;
-    for (var i = 0; i < board.animated.length; i++) {
-        pos = board.animated[i];
+    for (var i = 0; i < board.available_positions.length; i++) {
+        pos = board.available_positions[i];
         board.squares[pos.row][pos.col] = 2;
     }
     board.draw();
@@ -718,7 +771,10 @@ Board.prototype.draw_checkers = function() {
 
 Board.prototype.animate_move = function(src, des) {
     var board = this;
-    board.checker_objects[src.row][src.col].move(src, des);
+    if (board.position_in_board(src)) {
+        board.checker_objects[src.row][src.col].move(src, des);
+    
+    }
 };
 
 function initCanvas() {
