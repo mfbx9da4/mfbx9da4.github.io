@@ -10,9 +10,12 @@
 - Have an animation loop: animate moving of peices
 - Refactor to shorten methods into sub methods
 - Score animations
-- don't actually need row and col
+- Animate sidebar to appear
+- don't actually need row and col!
 - implement computer:
 - clean up logs and window.
+- after anim working refactor moves to directions
+- piece on first row isnt able to move?
 
 ###Done
 - need to fix how determining whether queen did jump

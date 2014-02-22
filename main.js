@@ -12,9 +12,9 @@ var INIT_CHECKERS = [
         [2, 0, 2, 0, 2, 0, 2, 0]];
 // for testing purposes, a more varied grid
 // var INIT_CHECKERS = [
-//         [0, 1, 0, 0, 0, 0, 0, 0],
-//         [1, 0, 3, 0, 0, 1, 1, 0],
-//         [0, 4, 0, 1, 0, 4, 0, 0],
+//         [0, 0, 0, 0, 0, 0, 0, 0],
+//         [0, 0, 1, 0, 0, 1, 0, 0],
+//         [0, 2, 0, 1, 0, 4, 0, 0],
 //         [0, 0, 0, 0, 0, 0, 0, 0],
 //         [0, 4, 0, 0, 1, 0, 0, 0],
 //         [2, 0, 1, 1, 1, 1, 2, 0],
@@ -55,13 +55,14 @@ var teams = {
 
 var queens = [3, 4];
 
-// checker peices
-var peices = {
+// checker pieces
+var pieces = {
     1: {name: 'red pawn',
         is_queen: false,
         color: 'firebrick',
         moves: [{row: 1, col: 1}, {row: 1, col: -1}],
         border: {width: 5, color: '#000'},
+        type: 1,
         anti: 2,
         team: 1
     },
@@ -70,6 +71,7 @@ var peices = {
         color: '#313131',
         moves: [{row: -1, col: 1}, {row: -1, col: -1}],
         border: {width: 5, color: '#000'},
+        type: 2,
         anti: 1,
         team: 2
     },
@@ -80,6 +82,7 @@ var peices = {
                 {row: -1, col: 1}, {row: -1, col: -1}],
         trigger_row: BOARD_DIM - 1,
         border: {width: 5, color: 'gold'},
+        type: 3,
         anti: 2,
         team: 1
     },
@@ -90,11 +93,144 @@ var peices = {
                 {row: -1, col: 1}, {row: -1, col: -1}],
         trigger_row: 0,        
         border: {width: 5, color: 'gold'},
+        type: 4,
         anti: 1,
         team: 2
     }
 };
 
+function Piece(config, pos) {
+    var piece = this;
+    piece.type = config.type;
+    piece.name = config.name;
+    piece.is_queen = config.is_queen;
+    piece.color = config.color;
+    piece.moves = config.moves;
+    piece.trigger_row = config.trigger_row;
+    piece.border = config.border;
+    piece.anti =  config.anti;
+    piece.team =  config.team;
+    piece.radius = SQUARE_SIZE / 2;
+
+    piece.pos = pos;
+    piece.loc = piece.translatePosToCoords(pos);
+
+    // for animation
+    piece.is_animating = false;
+    piece.animation_duration = 200;
+    piece.start_time = null;
+    piece.current_dir = {};
+    piece.src = {};
+    piece.des = {};
+}
+
+Piece.prototype.translatePosToCoords = function(pos) {
+    var board = this;
+    var coords = {};
+    coords.x = pos.col * SQUARE_SIZE;
+    coords.y = pos.row * SQUARE_SIZE;
+    return coords;
+};
+
+Piece.prototype.move = function(src, des) {
+    var piece = this;
+    piece.start_time = new Date().getTime();
+    piece.is_animating = true;
+
+    piece.src = src;
+    var coords =  piece.translatePosToCoords(src);
+    piece.src.x = coords.x;
+    piece.src.y = coords.y;
+    piece.des = des;
+    coords = piece.translatePosToCoords(des);
+    piece.des.x = coords.x;
+    piece.des.y = coords.y;
+
+    piece.current_dir = piece.get_direction(piece.des, piece.src);
+    var distance = piece.get_total_distance();
+    piece.speed = distance / piece.animation_duration;
+
+    board.checkers[piece.des.row][piece.des.col] = piece.type;
+    board.checkers[piece.src.row][piece.src.col] = 0;
+    board.checker_objects[piece.des.row][piece.des.col] = piece;
+    board.checker_objects[piece.src.row][piece.src.col] = null;
+
+};
+
+Piece.prototype.get_direction = function(src, des) {
+    var direction = {};
+    direction.x = (src.x - des.x) > 0 ? 1 : (src.x - des.x) < 0 ? -1 : 0;
+    direction.y = (src.y - des.y) > 0 ? 1 : (src.y - des.y) < 0 ? -1 : 0;
+    return direction;
+};
+
+Piece.prototype.get_total_distance = function() {
+    var piece = this;
+    var delta = {};
+    delta.x = piece.des.x - piece.src.x;
+    delta.y = piece.des.y - piece.src.y;
+    return Math.sqrt((delta.x * delta.x) + (delta.y * delta.y));
+};
+
+Piece.prototype.update_loc = function(board) {
+    var piece = this;
+
+    var now = new Date().getTime();
+    var elapsed = now - piece.start_time;
+    if(piece.is_animating) {
+        piece.loc.x = piece.src.x + (piece.current_dir.x * piece.speed * elapsed);
+        piece.loc.y = piece.src.y + (piece.current_dir.y * piece.speed * elapsed);
+    }
+
+    if (piece.current_dir.x === 1) {
+        if (piece.loc.x > piece.des.x) {
+            piece.finished_animation(board);
+        }
+    } else if (piece.current_dir.x === -1) {
+        if (piece.loc.x < piece.des.x) {
+            piece.finished_animation(board);            
+        }
+    }
+};
+
+Piece.prototype.finished_animation = function(board) {
+    var piece = this;
+    piece.current_dir = null;
+    piece.start_time = null;
+    piece.is_animating = false;
+
+    piece.loc.x = piece.des.x;        
+    piece.loc.y = piece.des.y;        
+    
+
+
+    piece.src = null;
+    piece.des = null;
+
+    if (!board.computer_team) {
+        board.screen_locked = false;
+    }
+};
+
+Piece.prototype.draw = function(board) {
+    var piece = this;
+    if (piece.is_animating) {
+        piece.update_loc(board);
+    }
+
+    var center_x = piece.loc.x + (SQUARE_SIZE / 2);
+    var center_y = piece.loc.y + (SQUARE_SIZE / 2);
+
+    var radius = piece.radius - piece.border.width;
+
+    board.ctx.beginPath();
+    board.ctx.arc(center_x, center_y, radius, 0, 2 * Math.PI, false);
+    board.ctx.fillStyle = piece.color;
+    board.ctx.fill();
+    board.ctx.lineWidth = piece.border.width;
+    board.ctx.strokeStyle = piece.border.color;
+    board.ctx.stroke();
+};
 
 function deep_copy(array) {
     var out = Array(array.length);
@@ -115,6 +251,7 @@ function Board (canvas, is_playing_computer) {
 
     board.animated = [];
     board.checkers = deep_copy(INIT_CHECKERS);
+    board.checker_objects = board.init_checkers();
     board.squares = deep_copy(INIT_SQUARES);
     board.selected_checker = null;
     board.who_to_play = 1;
@@ -124,16 +261,35 @@ function Board (canvas, is_playing_computer) {
 
 }
 
+Board.prototype.init_checkers = function() {
+    var board = this;
+    var checker_objects = Array(INIT_CHECKERS.length);
+    for (var i = 0; i < INIT_CHECKERS.length; i ++) {
+        checker_objects[i] = Array(INIT_CHECKERS[i].length);
+        for (var j = 0; j < INIT_CHECKERS[i].length; j ++) {
+            var type = INIT_CHECKERS[i][j];
+            if (type !== 0) {
+                var pos = {row: i, col:j};
+                var checker = new Piece(pieces[type], pos);
+                window.a = checker;
+                checker_objects[i][j] = checker;
+            }
+        }
+    }
+    return checker_objects;
+
+};
+
 Board.prototype.find_legal_moves = function(pos) {
     var board = this;
     if (pos.row >= 0 && pos.row < BOARD_DIM) {
         var checker = board.checkers[pos.row][pos.col];
         // anti means a checker of opposite color
 
-        if (peices[checker] !== undefined && peices[checker].team === board.who_to_play) {
+        if (pieces[checker] !== undefined && pieces[checker].team === board.who_to_play) {
             // if user selected a checker and it is this color to play 
-            var anti = peices[checker].anti;
-            var moves = peices[checker].moves;
+            var anti = pieces[checker].anti;
+            var moves = pieces[checker].moves;
             for (var i = 0; i < moves.length; i++) {
                 var delta = moves[i];
                 // adjacent position
@@ -146,7 +302,7 @@ Board.prototype.find_legal_moves = function(pos) {
                 if (board.position_is_empty(adj)) {
                     // adjacent empty
                     board.animated.push(adj);
-                    if (peices[checker].is_queen) {
+                    if (pieces[checker].is_queen) {
                         // get sequential empty cells
                         var empty_cells = board.find_empty_cells_in_direction(adj, delta);
                         if (empty_cells.length) {
@@ -173,7 +329,7 @@ Board.prototype.find_legal_moves = function(pos) {
                 // also animate square beneath checker if it has legal moves
                 board.animated.push(pos);
                 board.selected_checker = pos;
-                board.selected_checker.team = peices[checker].team;
+                board.selected_checker.team = pieces[checker].team;
                 return board.animated;
             }
         }
@@ -217,7 +373,7 @@ Board.prototype.can_jump_adjacent = function(adj, jump, anti) {
         if (board.position_is_empty(jump)) {
             var adjacent_checker = board.checkers[adj.row][adj.col];
             return (adjacent_checker !== 0 &&
-                    peices[adjacent_checker].team === anti &&
+                    pieces[adjacent_checker].team === anti &&
                     board.checkers[jump.row][jump.col] === 0);
             
         }
@@ -228,10 +384,10 @@ Board.prototype.can_jump_adjacent = function(adj, jump, anti) {
 Board.prototype.find_jump_moves = function(pos) {
     var board = this;
     var checker = board.checkers[pos.row][pos.col];
-    var anti = peices[checker].anti;
-    var moves = peices[checker].moves;
+    var anti = pieces[checker].anti;
+    var moves = pieces[checker].moves;
 
-    if (moves !== undefined && peices[checker].team === board.who_to_play) {
+    if (moves !== undefined && pieces[checker].team === board.who_to_play) {
         // if it is this color to play
         for (var i = 0; i < moves.length; i++) {
             var delta = moves[i];
@@ -253,7 +409,7 @@ Board.prototype.find_jump_moves = function(pos) {
         if (board.animated.length) {
             // board.animated.push(pos);
             board.selected_checker = pos;
-            board.selected_checker.team = peices[checker].team;
+            board.selected_checker.team = pieces[checker].team;
             return board.animated;
         }
     }
@@ -269,7 +425,7 @@ Board.prototype.find_a_checker_to_jump = function() {
                 var pos = {row: i, col: j};
                 board.selected_checker = pos;
                 board.selected_checker = board.computer_team;
-                var checker_peice = peices[checker];
+                var checker_piece = pieces[checker];
                 if (checker === board.computer_team) {
                     var moves = board.find_jump_moves(pos);
                     if (moves.length) {
@@ -290,7 +446,7 @@ Board.prototype.find_a_checker_to_move = function() {
                 var pos = {row: i, col: j};
                 board.selected_checker = pos;
                 board.selected_checker = board.computer_team;
-                var checker_peice = peices[checker];
+                var checker_piece = pieces[checker];
                 if (checker === board.computer_team) {
                     var moves = board.find_legal_moves(pos);
                     if (moves.length) {
@@ -322,7 +478,7 @@ Board.prototype.onUp = function(e) {
                 var coords = {};
                 coords.x = e.pageX - board.can.offsetLeft;
                 coords.y = e.pageY - board.can.offsetTop;
-                var pos = board.translateCoords(coords);
+                var pos = board.translateCoordsToPos(coords);
                 board.selectSquare(pos);
             }
         },
@@ -332,14 +488,14 @@ Board.prototype.onUp = function(e) {
                 var coords = {};
                 coords.x = e.targetTouches[0].pageX - board.can.offsetLeft;
                 coords.y = e.targetTouches[0].pageY - board.can.offsetTop;
-                var pos = board.translateCoords(coords);
+                var pos = board.translateCoordsToPos(coords);
                 board.selectSquare(pos);
             }
         }
     };
 };
 
-Board.prototype.translateCoords = function(coords) {
+Board.prototype.translateCoordsToPos = function(coords) {
     var board = this;
     var pos = {};
     pos.col = parseInt(coords.x / SQUARE_SIZE);
@@ -396,10 +552,12 @@ Board.prototype.move = function(pos) {
     board.checkers[des.row][des.col] = board.checkers[src.row][src.col];
     board.checkers[src.row][src.col] = 0;
 
-    if (board.jumped_peice(src, des, peices[src.team].anti)) {
+    board.animate_move(src, des);
+
+    if (board.jumped_piece(src, des, pieces[src.team].anti)) {
         // if jumping rm intermediate checker
         board.updateScore(board.selected_checker.team);
-        board.remove_intermediate_peice(src, des);
+        board.remove_intermediate_piece(src, des);
         board.reset_animated();
         var legal_moves = board.find_jump_moves(des);
         if (legal_moves.length) {
@@ -420,7 +578,7 @@ Board.prototype.move = function(pos) {
     if (!src.is_queen) {
         // check if has become a queen
         for (var i = 0; i < queens.length; i++) {
-            var queen = peices[queens[i]];
+            var queen = pieces[queens[i]];
             if (des.row === queen.trigger_row && src.team === queen.team) {
                 // make queen
                 board.checkers[des.row][des.col] = queens[i];
@@ -444,14 +602,14 @@ Board.prototype.game_over = function() {
     board.ctx.fillText("Game over. The winner was " + board.winner.name, 100, 100);
 };
 
-Board.prototype.jumped_peice = function(src, des, anti) {
+Board.prototype.jumped_piece = function(src, des, anti) {
     var board = this;
     var delta = board.get_distance(src, des);
     var inter = board.get_intermediate_position(src, des);
     if (Math.abs(delta.row) > 1) {
-        var inter_peice = board.checkers[inter.row][inter.col];
-        if (peices[inter_peice] !== undefined &&
-            peices[inter_peice].team === anti) {
+        var inter_piece = board.checkers[inter.row][inter.col];
+        if (pieces[inter_piece] !== undefined &&
+            pieces[inter_piece].team === anti) {
             return true;
         }
     }
@@ -480,10 +638,11 @@ Board.prototype.get_intermediate_position = function(src, des) {
     return inter;
 };
 
-Board.prototype.remove_intermediate_peice = function(src, des) {
+Board.prototype.remove_intermediate_piece = function(src, des) {
     var board = this;
     var inter = board.get_intermediate_position(src, des);
     board.checkers[inter.row][inter.col] = 0;
+    board.checker_objects[inter.row][inter.col] = null;
 };
 
 Board.prototype.updateScore = function(team) {
@@ -500,10 +659,10 @@ Board.prototype.updateScore = function(team) {
 
 Board.prototype.switch_player = function() {
     var board = this;
-    board.who_to_play = peices[board.who_to_play].anti;
+    board.who_to_play = pieces[board.who_to_play].anti;
     var name = teams[board.who_to_play].name;
     document.querySelector('#whos-turn-to-play b').innerHTML = name;
-    var color = peices[board.who_to_play].color;
+    var color = pieces[board.who_to_play].color;
     document.getElementById('whos-turn-to-play').style.backgroundColor = color;
     if (board.who_to_play === board.computer_team) {
         board.computer_play();
@@ -553,30 +712,64 @@ Board.prototype.draw_board = function() {
 
 Board.prototype.draw_checkers = function() {
     var board = this;
-    var radius = (SQUARE_SIZE / 2) - peices[1].border.width;
+    var radius = (SQUARE_SIZE / 2) - pieces[1].border.width;
 
     for (var row = 0; row < BOARD_DIM; row++) {
         for (var col = 0; col < BOARD_DIM; col++) {
-            var checker = board.checkers[row][col];
-            if (checker !== 0) {
-                // If there is a checker in the square
+            var checker = board.checker_objects[row][col];
+            if (checker) {
+                checker.draw(board);
+                // // If there is a checker in the square
 
-                // get center of square
-                var x = col * SQUARE_SIZE;
-                var y = row * SQUARE_SIZE;
-                var center_x = x + (SQUARE_SIZE / 2);
-                var center_y = y + (SQUARE_SIZE / 2);
+                // // get center of square
+                // var x = col * SQUARE_SIZE;
+                // var y = row * SQUARE_SIZE;
+                // var center_x = x + (SQUARE_SIZE / 2);
+                // var center_y = y + (SQUARE_SIZE / 2);
 
-                board.ctx.beginPath();
-                board.ctx.arc(center_x, center_y, radius, 0, 2 * Math.PI, false);
-                board.ctx.fillStyle = peices[checker].color;
-                board.ctx.fill();
-                board.ctx.lineWidth = peices[checker].border.width;
-                board.ctx.strokeStyle = peices[checker].border.color;
-                board.ctx.stroke();
+                // board.ctx.beginPath();
+                // board.ctx.arc(center_x, center_y, radius, 0, 2 * Math.PI, false);
+                // board.ctx.fillStyle = pieces[checker].color;
+                // board.ctx.fill();
+                // board.ctx.lineWidth = pieces[checker].border.width;
+                // board.ctx.strokeStyle = pieces[checker].border.color;
+                // board.ctx.stroke();
             }
         }
     }
+};
+
+Board.prototype.animate_move = function(src, des) {
+    var board = this;
+    // board.screen_locked = true;
+    board.checker_objects[src.row][src.col].move(src, des);
+    // src = board.translatePosToCoords(src);
+    // des = board.translatePosToCoords(des);
+    
+
+    // // lock screen
+    // board.ctx.fillStyle = 'green';
+    // // board.ctx.fillRect(des.x, des.y, 10, 10);
+    // var duration = 200;
+    // var end_time = start_time + duration;
+    // var delta = {};
+    // delta.x = des.x - src.x;
+    // delta.y = des.y - src.y;
+    // var distance = Math.sqrt((delta.x * delta.x) + (delta.y * delta.y));
+    // // 2 squares/200ms
+    // var speed = distance / duration;
+
+    // var time = new Date().getTime();
+    // var elapsed = time - start_time;
+    // var loc = {};
+    // loc.x = src.x + (speed * elapsed);
+    // loc.y = src.y - (speed * elapsed);
+    // if (loc.x < des.x && loc.y > des.y) {
+    //     board.ctx.fillRect(loc.x, loc.y, 10, 10);
+    // }
+
+    // // translate pos to coords
+    // // speed = distance / time
 };
 
 function initCanvas() {
@@ -628,7 +821,7 @@ function initInfoDiv() {
     var score = document.createElement('div');
 
     var score1 = document.createElement('div');
-    score1.style.backgroundColor = peices[1].color;
+    score1.style.backgroundColor = pieces[1].color;
     score1.style.padding = '8px 8px';
     score1.style.margin = '70px 10px';
     score1.style.borderRadius = "4px";
@@ -638,7 +831,7 @@ function initInfoDiv() {
     score.appendChild(score1);
 
     var score2 = document.createElement('div');
-    score2.style.backgroundColor = peices[2].color;
+    score2.style.backgroundColor = pieces[2].color;
     score2.style.padding = '8px 8px';
     score2.style.margin = '70px 10px';
     score2.style.borderRadius = "4px";
@@ -682,10 +875,16 @@ function initGameDialog(canvas) {
     }, true);
 }
 
+
 function startGame(canvas, is_playing_computer) {
     var info_div = initInfoDiv();
-    var board = new Board(canvas, is_playing_computer);
-    board.draw();
+    window.board = new Board(canvas, is_playing_computer);
+    var start_time = new Date().getTime();
+
+    (function animloop(){
+        requestAnimFrame(animloop);
+        board.draw();
+    })();
 }
 
 function main() {
@@ -693,5 +892,16 @@ function main() {
     var canvas = initCanvas();
     initGameDialog(canvas);
 }
+
+// shim layer with setTimeout fallback
+window.requestAnimFrame = (function(){
+  return  window.requestAnimationFrame       ||
+          window.webkitRequestAnimationFrame ||
+          window.mozRequestAnimationFrame    ||
+          function( callback ){
+            window.setTimeout(callback, 1000 / 60);
+          };
+})();
+
 
 main();
