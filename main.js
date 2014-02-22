@@ -11,15 +11,15 @@ var INIT_CHECKERS = [
         [0, 2, 0, 2, 0, 2, 0, 2],
         [2, 0, 2, 0, 2, 0, 2, 0]];
 // for testing purposes, a more varied grid
-// var INIT_CHECKERS = [
-//         [0, 0, 0, 0, 0, 0, 0, 0],
-//         [0, 0, 1, 0, 0, 1, 0, 0],
-//         [0, 2, 0, 1, 0, 4, 0, 0],
-//         [0, 0, 0, 0, 0, 0, 0, 0],
-//         [0, 4, 0, 0, 1, 0, 0, 0],
-//         [2, 0, 1, 1, 1, 1, 2, 0],
-//         [0, 2, 0, 0, 0, 1, 0, 2],
-//         [2, 0, 2, 0, 2, 0, 0, 0]];
+var INIT_CHECKERS = [
+        [0, 1, 0, 1, 0, 1, 0, 1],
+        [1, 0, 1, 0, 1, 0, 1, 0],
+        [0, 1, 0, 1, 0, 1, 0, 1],
+        [0, 0, 0, 0, 1, 0, 0, 0],
+        [0, 0, 0, 0, 0, 2, 0, 0],
+        [2, 0, 2, 0, 2, 0, 0, 0],
+        [0, 2, 0, 2, 0, 2, 0, 2],
+        [2, 0, 2, 0, 2, 0, 2, 0]];
 var INIT_SQUARES = [
         [1, 0, 1, 0, 1, 0, 1, 0],
         [0, 1, 0, 1, 0, 1, 0, 1],
@@ -150,10 +150,8 @@ Piece.prototype.move = function(src, des) {
     var distance = piece.get_total_distance();
     piece.speed = distance / piece.animation_duration;
 
-    board.checkers[piece.des.row][piece.des.col] = piece.type;
-    board.checkers[piece.src.row][piece.src.col] = 0;
     board.checker_objects[piece.des.row][piece.des.col] = piece;
-    board.checker_objects[piece.src.row][piece.src.col] = null;
+    board.checker_objects[piece.src.row][piece.src.col] = undefined;
 
 };
 
@@ -204,8 +202,8 @@ Piece.prototype.finished_animation = function(board) {
     
 
 
-    piece.src = null;
-    piece.des = null;
+    piece.src = {};
+    piece.des = {};
 
     if (!board.computer_team) {
         board.screen_locked = false;
@@ -250,7 +248,6 @@ function Board (canvas, is_playing_computer) {
     board.can.addEventListener("touchstart", board.onUp().touch, false);
 
     board.animated = [];
-    board.checkers = deep_copy(INIT_CHECKERS);
     board.checker_objects = board.init_checkers();
     board.squares = deep_copy(INIT_SQUARES);
     board.selected_checker = null;
@@ -283,13 +280,13 @@ Board.prototype.init_checkers = function() {
 Board.prototype.find_legal_moves = function(pos) {
     var board = this;
     if (pos.row >= 0 && pos.row < BOARD_DIM) {
-        var checker = board.checkers[pos.row][pos.col];
+        var checker_piece = board.checker_objects[pos.row][pos.col];
         // anti means a checker of opposite color
 
-        if (pieces[checker] !== undefined && pieces[checker].team === board.who_to_play) {
+        if (checker_piece !== undefined && checker_piece.team === board.who_to_play) {
             // if user selected a checker and it is this color to play 
-            var anti = pieces[checker].anti;
-            var moves = pieces[checker].moves;
+            var anti = checker_piece.anti;
+            var moves = checker_piece.moves;
             for (var i = 0; i < moves.length; i++) {
                 var delta = moves[i];
                 // adjacent position
@@ -302,7 +299,7 @@ Board.prototype.find_legal_moves = function(pos) {
                 if (board.position_is_empty(adj)) {
                     // adjacent empty
                     board.animated.push(adj);
-                    if (pieces[checker].is_queen) {
+                    if (checker_piece.is_queen) {
                         // get sequential empty cells
                         var empty_cells = board.find_empty_cells_in_direction(adj, delta);
                         if (empty_cells.length) {
@@ -329,7 +326,7 @@ Board.prototype.find_legal_moves = function(pos) {
                 // also animate square beneath checker if it has legal moves
                 board.animated.push(pos);
                 board.selected_checker = pos;
-                board.selected_checker.team = pieces[checker].team;
+                board.selected_checker.team = checker_piece.team;
                 return board.animated;
             }
         }
@@ -357,24 +354,24 @@ Board.prototype.find_empty_cells_in_direction = function(start, delta) {
 };
 
 Board.prototype.position_in_board = function(pos) {
-    return (pos.row < BOARD_DIM && pos.row < BOARD_DIM &&
-            pos.row >= 0 && pos.row >= 0);
+    return (pos.row < BOARD_DIM && pos.col < BOARD_DIM &&
+            pos.row >= 0 && pos.col >= 0);
 };
 
 Board.prototype.position_is_empty = function(pos) {
     var board = this;
     return (pos.row >= 0 && pos.row < BOARD_DIM && 
-            board.checkers[pos.row][pos.col] === 0);
+            board.checker_objects[pos.row][pos.col] === undefined);
 };
 
 Board.prototype.can_jump_adjacent = function(adj, jump, anti) {
     var board = this;
     if (board.position_in_board(adj) && board.position_in_board(jump)) {
         if (board.position_is_empty(jump)) {
-            var adjacent_checker = board.checkers[adj.row][adj.col];
-            return (adjacent_checker !== 0 &&
-                    pieces[adjacent_checker].team === anti &&
-                    board.checkers[jump.row][jump.col] === 0);
+            var adjacent_checker = board.checker_objects[adj.row][adj.col];
+            return (adjacent_checker !== undefined &&
+                    adjacent_checker.team === anti &&
+                    board.checker_objects[jump.row][jump.col] === undefined);
             
         }
         
@@ -383,11 +380,11 @@ Board.prototype.can_jump_adjacent = function(adj, jump, anti) {
 
 Board.prototype.find_jump_moves = function(pos) {
     var board = this;
-    var checker = board.checkers[pos.row][pos.col];
-    var anti = pieces[checker].anti;
-    var moves = pieces[checker].moves;
+    var checker_piece = board.checker_objects[pos.row][pos.col];
+    var anti = checker_piece.anti;
+    var moves = checker_piece.moves;
 
-    if (moves !== undefined && pieces[checker].team === board.who_to_play) {
+    if (moves !== undefined && checker_piece.team === board.who_to_play) {
         // if it is this color to play
         for (var i = 0; i < moves.length; i++) {
             var delta = moves[i];
@@ -399,7 +396,6 @@ Board.prototype.find_jump_moves = function(pos) {
             // jump pos
             var jump = {row: pos.row + (delta.row * 2),
                         col: pos.col + (delta.col * 2)};
-
             if (board.can_jump_adjacent(adj, jump, anti)) {
                 board.animated.push({row: jump.row, col: jump.col});
             }
@@ -407,9 +403,8 @@ Board.prototype.find_jump_moves = function(pos) {
 
         }
         if (board.animated.length) {
-            // board.animated.push(pos);
             board.selected_checker = pos;
-            board.selected_checker.team = pieces[checker].team;
+            board.selected_checker.team = checker_piece.team;
             return board.animated;
         }
     }
@@ -418,15 +413,14 @@ Board.prototype.find_jump_moves = function(pos) {
 
 Board.prototype.find_a_checker_to_jump = function() {
     var board = this;
-    for (var i = 0; i < board.checkers.length; i++) {
-        for (var j = 0; j < board.checkers[i].length; j++) {
-            var checker = board.checkers[i][j];
-            if (checker !== 0) {
+    for (var i = 0; i < BOARD_DIM; i++) {
+        for (var j = 0; j < BOARD_DIM; j++) {
+            var checker = board.checker_objects[i][j];
+            if (checker !== undefined) {
                 var pos = {row: i, col: j};
                 board.selected_checker = pos;
                 board.selected_checker = board.computer_team;
-                var checker_piece = pieces[checker];
-                if (checker === board.computer_team) {
+                if (checker.team === board.computer_team) {
                     var moves = board.find_jump_moves(pos);
                     if (moves.length) {
                         return moves[0];
@@ -439,15 +433,14 @@ Board.prototype.find_a_checker_to_jump = function() {
 
 Board.prototype.find_a_checker_to_move = function() {
     var board = this;
-    for (var i = 0; i < board.checkers.length; i++) {
-        for (var j = 0; j < board.checkers[i].length; j++) {
-            var checker = board.checkers[i][j];
-            if (checker !== 0) {
+    for (var i = 0; i < BOARD_DIM; i++) {
+        for (var j = 0; j < BOARD_DIM; j++) {
+            var checker = board.checker_objects[i][j];
+            if (checker !== undefined) {
                 var pos = {row: i, col: j};
                 board.selected_checker = pos;
                 board.selected_checker = board.computer_team;
-                var checker_piece = pieces[checker];
-                if (checker === board.computer_team) {
+                if (checker.team === board.computer_team) {
                     var moves = board.find_legal_moves(pos);
                     if (moves.length) {
                         return moves[0];
@@ -548,10 +541,8 @@ Board.prototype.move = function(pos) {
     // Source and destination positions
     var src = board.selected_checker;
     var des = pos;
-    // make the move
-    board.checkers[des.row][des.col] = board.checkers[src.row][src.col];
-    board.checkers[src.row][src.col] = 0;
 
+    // make the move
     board.animate_move(src, des);
 
     if (board.jumped_piece(src, des, pieces[src.team].anti)) {
@@ -579,9 +570,11 @@ Board.prototype.move = function(pos) {
         // check if has become a queen
         for (var i = 0; i < queens.length; i++) {
             var queen = pieces[queens[i]];
+            // console.log(queen);
             if (des.row === queen.trigger_row && src.team === queen.team) {
                 // make queen
-                board.checkers[des.row][des.col] = queens[i];
+                var new_queen = new Piece(queen, des);
+                board.checker_objects[des.row][des.col] = new_queen;
                 switch_player = true;
                 reset_animated = true;
             }
@@ -607,9 +600,9 @@ Board.prototype.jumped_piece = function(src, des, anti) {
     var delta = board.get_distance(src, des);
     var inter = board.get_intermediate_position(src, des);
     if (Math.abs(delta.row) > 1) {
-        var inter_piece = board.checkers[inter.row][inter.col];
-        if (pieces[inter_piece] !== undefined &&
-            pieces[inter_piece].team === anti) {
+        var inter_piece = board.checker_objects[inter.row][inter.col];
+        if (inter_piece !== undefined &&
+            inter_piece.team === anti) {
             return true;
         }
     }
@@ -641,8 +634,7 @@ Board.prototype.get_intermediate_position = function(src, des) {
 Board.prototype.remove_intermediate_piece = function(src, des) {
     var board = this;
     var inter = board.get_intermediate_position(src, des);
-    board.checkers[inter.row][inter.col] = 0;
-    board.checker_objects[inter.row][inter.col] = null;
+    board.checker_objects[inter.row][inter.col] = undefined;
 };
 
 Board.prototype.updateScore = function(team) {
@@ -719,21 +711,6 @@ Board.prototype.draw_checkers = function() {
             var checker = board.checker_objects[row][col];
             if (checker) {
                 checker.draw(board);
-                // // If there is a checker in the square
-
-                // // get center of square
-                // var x = col * SQUARE_SIZE;
-                // var y = row * SQUARE_SIZE;
-                // var center_x = x + (SQUARE_SIZE / 2);
-                // var center_y = y + (SQUARE_SIZE / 2);
-
-                // board.ctx.beginPath();
-                // board.ctx.arc(center_x, center_y, radius, 0, 2 * Math.PI, false);
-                // board.ctx.fillStyle = pieces[checker].color;
-                // board.ctx.fill();
-                // board.ctx.lineWidth = pieces[checker].border.width;
-                // board.ctx.strokeStyle = pieces[checker].border.color;
-                // board.ctx.stroke();
             }
         }
     }
@@ -741,35 +718,7 @@ Board.prototype.draw_checkers = function() {
 
 Board.prototype.animate_move = function(src, des) {
     var board = this;
-    // board.screen_locked = true;
     board.checker_objects[src.row][src.col].move(src, des);
-    // src = board.translatePosToCoords(src);
-    // des = board.translatePosToCoords(des);
-    
-
-    // // lock screen
-    // board.ctx.fillStyle = 'green';
-    // // board.ctx.fillRect(des.x, des.y, 10, 10);
-    // var duration = 200;
-    // var end_time = start_time + duration;
-    // var delta = {};
-    // delta.x = des.x - src.x;
-    // delta.y = des.y - src.y;
-    // var distance = Math.sqrt((delta.x * delta.x) + (delta.y * delta.y));
-    // // 2 squares/200ms
-    // var speed = distance / duration;
-
-    // var time = new Date().getTime();
-    // var elapsed = time - start_time;
-    // var loc = {};
-    // loc.x = src.x + (speed * elapsed);
-    // loc.y = src.y - (speed * elapsed);
-    // if (loc.x < des.x && loc.y > des.y) {
-    //     board.ctx.fillRect(loc.x, loc.y, 10, 10);
-    // }
-
-    // // translate pos to coords
-    // // speed = distance / time
 };
 
 function initCanvas() {
