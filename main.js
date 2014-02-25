@@ -67,11 +67,13 @@ var SQUARE_COLORS = {0: '#ccc', 1: '#fff', 2: 'steelblue'};
 var teams = {
     1: {name: 'RED', 
         score: 0,
-        color: 'firebrick'
+        color: 'firebrick',
+        anti: 2
     }, 
     2: {name: 'BLACK', 
         score: 0,
-        color: '#313131'
+        color: '#313131',
+        anti: 1
     }
 };
 
@@ -121,20 +123,6 @@ var pieces = {
         team: 2
     }
 };
-
-/*
-*                   *
-*   Utils           *  
-*                   *
-*/
-Utils = {};
-Utils.deep_copy = function(array) {
-    var out = Array(array.length);
-    for (var i = 0; i < array.length; i++) {
-        out[i] = array[i].slice();
-    }
-    return out;
-}
 
 /*
 *                   *
@@ -599,7 +587,7 @@ Board.prototype.move = function(pos) {
     // make the move
     board.animate_move(src, des);
 
-    if (board.jumped_piece(src, des, pieces[src.team].anti)) {
+    if (board.jumped_piece(src, des, teams[board.who_to_play].anti)) {
         // if jumping rm intermediate checker
         board.updateScore(board.selected_pos.team);
         board.remove_intermediate_piece(src, des);
