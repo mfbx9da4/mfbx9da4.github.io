@@ -1,5 +1,6 @@
 ---
 layout: post
+comments: true
 title:  "Welcome to this!"
 date:   2014-03-19 15:30:27
 categories: jekyll update
@@ -22,3 +23,6 @@ Check out the [Jekyll docs][jekyll] for more info on how to get the most out of 
 
 [jekyll-gh]: https://github.com/mojombo/jekyll
 [jekyll]:    http://jekyllrb.com
+
+{% if page.comments %}
+{% endif %}
