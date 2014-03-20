@@ -38,7 +38,7 @@ module.exports = function(grunt) {
             }
         },
         watch: {
-            files: ['<%= src.posts %>'],
+            files: ['<%= src.posts %>', '<%= src.other %>', '<%= src.html %>', 'Gruntfile.js'],
             tasks: ['jade'],
             options: {
                 livereload: {
@@ -54,6 +54,7 @@ module.exports = function(grunt) {
                     }
                 },
                 files: {
+                    "projects/index.html": "projects/index.jade",
                     "_layouts/default.html": "_layouts/jade/default.jade",
                     "_layouts/post.html": "_layouts/jade/post.jade"
                 }
