@@ -768,12 +768,13 @@ Board.prototype.animate_move = function(src, des) {
 function initCanvas() {
     // container
     var container = document.getElementById('checkers-game-container');
-    container.style.width = (BOARD_WIDTH + INFO_WIDTH + 4) + 'px';
+    container.style.width = BOARD_WIDTH + 'px';
     container.style.height = BOARD_HEIGHT + 'px';
     container.style.margin = '30px auto';
     container.style.boxShadow = '0px 0px 30px 2px #888';
     container.style.border = '1px solid #888';
     container.style.backgroundColor = 'rgb(153, 153, 153)';
+    container.classList.add('animated');
 
     // canvas
     var canvas = document.createElement('canvas');
@@ -787,6 +788,12 @@ function initCanvas() {
 
 function initInfoDiv() {
     var container = document.getElementById('checkers-game-container');
+    container.style.width = (BOARD_WIDTH + INFO_WIDTH + 4) + 'px';
+    
+    // wait for anim to finish
+    setTimeout(function () {
+        info_div.style.opacity = 1;
+    }, 500);
 
     // info div
     var info_div = document.createElement('div');
@@ -799,6 +806,7 @@ function initInfoDiv() {
     info_div.style.height = BOARD_HEIGHT + 'px';
     info_div.style.float = 'left';
     info_div.style.color = 'white';
+    info_div.style.opacity = 0;
 
     // whos turn to play
     var whos_turn_to_play = document.createElement('div');
@@ -809,6 +817,7 @@ function initInfoDiv() {
     whos_turn_to_play.style.borderRadius = '8px';
     whos_turn_to_play.style.opacity = '1';
     whos_turn_to_play.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+    whos_turn_to_play.classList.add('animated');
 
     // score
     var score = document.createElement('div');

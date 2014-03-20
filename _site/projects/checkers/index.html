@@ -15,13 +15,30 @@
 		background-color: transparent;
 		color: currentcolor;
 	}
+	.animated {
+		-webkit-transition: all 0.3s ease-in-out;
+		-moz-transition: all 0.3s ease-in-out;
+		-o-transition: all 0.3s ease-in-out;
+		transition: all 0.3s ease-in-out;
+	}
 	</style>
+
 </head>
 <body> 
+	<div id="fb-root"></div>
+	<script>(function(d, s, id) {
+	  var js, fjs = d.getElementsByTagName(s)[0];
+	  if (d.getElementById(id)) return;
+	  js = d.createElement(s); js.id = id;
+	  js.src = "//connect.facebook.net/en_GB/all.js#xfbml=1&appId=588719381195628";
+	  fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));</script>
+	<div style="position: absolute; right: 0px;" class="fb-like" data-href="http://mfbx9da4.github.io/projects/checkers/" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
 	<h1>Dear Chaordic,</h1>
 	<h2>Here is my checkers game.</h2>
 	<div id="checkers-game-container"></div>
-	<footer>
+	<br/>
+	<footer style="position:absolute;">
 		<p>Abracos,</p>
 		<p>David Adler</p>
 	</footer>
