@@ -5,6 +5,7 @@ module.exports = function(grunt) {
         pkg: grunt.file.readJSON('package.json'),
         src: {
             html: [
+                '_layouts/jade/*.jade',
                 '_layouts/*.html',
                 'index.html'
             ],
