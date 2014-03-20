@@ -40,7 +40,7 @@ var INIT_SQUARES = [
 *   Dimensions config              *  
 *                                  *
 */
-var SQUARE_SIZE = 50;
+var SQUARE_SIZE = 55;
 var BOARD_DIM = INIT_SQUARES.length;
 var BOARD_WIDTH = SQUARE_SIZE * BOARD_DIM;
 var BOARD_HEIGHT = SQUARE_SIZE * BOARD_DIM;
