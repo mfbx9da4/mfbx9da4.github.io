@@ -5,7 +5,6 @@ module.exports = function(grunt) {
         pkg: grunt.file.readJSON('package.json'),
         src: {
             html: [
-                '_layouts/jade/*.jade',
                 '_layouts/*.html',
                 'index.html'
             ],
@@ -13,7 +12,9 @@ module.exports = function(grunt) {
                 'css/*'
             ],
             other: [
-                'projects/*'
+                '_layouts/jade/*.jade',
+                'projects/*.jade',
+                'cv/pt/index.jade'
             ],
             posts: [
                 '_posts/*',
@@ -21,26 +22,31 @@ module.exports = function(grunt) {
                 '_drafts/*'
             ]
         },
-        jekyll: { 
-            options: { 
+        jekyll: {
+            options: {
                 bundleExec: true
             },
-            dist: { 
-                options: { 
+            dist: {
+                options: {
                     config: '_config.yml'
                 }
             },
-            serve: { 
+            build: {
+                options: {
+                    drafts: true
+                }
+            },
+            serve: {
                 options: {
                     drafts: true,
                     watch: true,
-                    serve : true
+                    serve: true
                 }
             }
         },
         watch: {
-            files: ['<%= src.posts %>', '<%= src.other %>', '<%= src.html %>', 'Gruntfile.js'],
-            tasks: ['jade'],
+            files: ['<%= src.posts %>', '<%= src.other %>', 'Gruntfile.js'],
+            tasks: ['jade', 'jekyll:build'],
             options: {
                 livereload: {
                     port: 12345
@@ -48,13 +54,14 @@ module.exports = function(grunt) {
             }
         },
         jade: {
-          compile: {
-            options: {
-              data: {
+            compile: {
+                options: {
+                    data: {
                         debug: false
                     }
                 },
                 files: {
+                    "cv/pt/index.html": "cv/pt/index.jade",
                     "projects/index.html": "projects/index.jade",
                     "_layouts/default.html": "_layouts/jade/default.jade",
                     "_layouts/post.html": "_layouts/jade/post.jade"
@@ -68,10 +75,10 @@ module.exports = function(grunt) {
                     logConcurrentOutput: true
                 }
             }
-    }
+        }
 
     });
-       
+
     // Default task(s).
     grunt.registerTask('default', ['jade', 'concurrent:target']);
 
