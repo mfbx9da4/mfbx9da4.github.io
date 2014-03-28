@@ -1,0 +1,39 @@
+<p>Every kind of ajax request
+Post form/upload cross origin</p>
+
+<p>var processResponse = function (data) {
+    var formData = new FormData();<br>
+    formData.append(&#39;key&#39;, data.key);
+    formData.append(&#39;AWSAccessKeyId&#39;, data.AWSAccessKeyId);
+    formData.append(&#39;acl&#39;, &#39;public-read&#39;);
+    formData.append(&#39;policy&#39;, data.policy);
+    formData.append(&#39;signature&#39;, data.signature);
+    formData.append(&#39;success<em>action</em>status&#39;, &quot;201&quot;);
+    formData.append(&#39;Content-Type&#39;, data.contentType);
+    formData.append(&#39;file&#39;, $(&#39;#file&#39;)[0].files[0]);</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$.ajax({
+    url: &quot;http://aedeveloper.s3.amazonaws.com/&quot;,
+    type: &quot;POST&quot;,
+    processData: false,
+    contentType: false,
+    data: formData,
+    dataType: &#39;text&#39;, // must be text if xml is returned
+    success: onPosted,
+    error: function(res, status, error) {
+        throw error;
+    }
+});
+</code></pre></div>
+<p>};
+Simple get</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">$.ajax({
+    url: &quot;/signed&quot;,
+    data: {title: filename },
+    type: &quot;GET&quot;,
+    dataType: &quot;json&quot;,
+    success: processResponse,
+    error: function(res, status, error) {
+        throw error;
+    }
+});
+</code></pre></div>
