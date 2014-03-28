@@ -1,0 +1,1 @@
+- be less selfish. let people live in your heart. no limit on number. empathy is a wonderful thing. they will live in your heart forever.
