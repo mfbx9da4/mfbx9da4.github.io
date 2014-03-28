@@ -4,6 +4,7 @@
 - The good, the bad and the ugly of javascript
 - My `.zshrc`
 - Things to be improved on ubuntu
+- Get pictures in all acrobatic positions and make an animatable me!
 
 ## Things
 - Screen which works in the sun
