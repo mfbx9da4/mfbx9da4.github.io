@@ -1,8 +1,9 @@
 ---
 layout: post
-title:  "Hello blog, hello jekyll, hello world!"
+title:  "How to build a jekyll, jade, disqus and grunt blog!"
 date:   2014-03-19 15:30:27
-categories: jekyll update
+categories: jekyll jade disqus github-pages grunt
+permalink: /how-to-build-a-jekyll-jade-grunt-blog
 ---
 
 Here is my first ever blog post. This blog is powered by: [jekyll](http://jekyllrb.com/), [github pages](http://pages.github.com/), [disqus](http://disqus.com/), [grunt](http://gruntjs.com/) and [jade](http://jade-lang.com/). Why not start this blog with a tutorial of how I made this blog:

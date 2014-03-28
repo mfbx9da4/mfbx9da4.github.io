@@ -33,7 +33,7 @@ module.exports = function(grunt) {
             },
             build: {
                 options: {
-                    drafts: true
+                    drafts: false
                 }
             },
             serve: {
@@ -41,15 +41,6 @@ module.exports = function(grunt) {
                     drafts: true,
                     watch: true,
                     serve: true
-                }
-            }
-        },
-        watch: {
-            files: ['<%= src.posts %>', '<%= src.other %>', 'Gruntfile.js'],
-            tasks: ['jade', 'jekyll:build'],
-            options: {
-                livereload: {
-                    port: 12345
                 }
             }
         },
@@ -73,6 +64,15 @@ module.exports = function(grunt) {
                 tasks: ['jekyll:serve', 'watch'],
                 options: {
                     logConcurrentOutput: true
+                }
+            }
+        },
+        watch: {
+            files: ['<%= src.posts %>', '<%= src.other %>', 'Gruntfile.js'],
+            tasks: ['jade'],
+            options: {
+                livereload: {
+                    port: 12345
                 }
             }
         }
