@@ -5,6 +5,7 @@
 - My `.zshrc`
 - Things to be improved on ubuntu
 - Get pictures in all acrobatic positions and make an animatable me!
+- An introduction to programming by hacking facebook emoticons
 
 ## Things
 - Screen which works in the sun
