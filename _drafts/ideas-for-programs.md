@@ -11,6 +11,7 @@
 - Template duolingo type interface for any type of game to learn anything by example. language, coding, cooking, sing, draw, play guitar, rhythm, dance, drive, garden, meditate, read fast, read music, touch type, neuroscience. Allow anyone to create the game.
 - Make 404 page of [lost surfer in the snow](http://www.enthuzed.com/wp-content/uploads/2012/03/cold_winter_surf_enthuzed.jpg) 
 - Make an open source free easyquarto
+- A mean.io but with customizable things: e.g file upload, lightbox, bootstrap, google oauth, fb oauth
 
 ### Location tracker with phone gap
 - Tracks location, to give heat map
