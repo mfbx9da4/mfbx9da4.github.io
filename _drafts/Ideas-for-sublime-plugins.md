@@ -11,6 +11,7 @@
 - Toggle visualize scopes of braces and brackets in js
 - **Real time:** start by adding websokcet which gets text and sends to server on edit
 - Replace but preserve case
+- HTML block highlighting
 
 
 
