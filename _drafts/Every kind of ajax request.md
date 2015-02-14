@@ -1,7 +1,7 @@
 Every kind of ajax request
 Post form/upload cross origin
 
-var processResponse = function (data) {
+    var processResponse = function (data) {
     var formData = new FormData();    
     formData.append('key', data.key);
     formData.append('AWSAccessKeyId', data.AWSAccessKeyId);
@@ -11,6 +11,7 @@ var processResponse = function (data) {
     formData.append('success_action_status', "201");
     formData.append('Content-Type', data.contentType);
     formData.append('file', $('#file')[0].files[0]);
+
 
     $.ajax({
         url: "http://aedeveloper.s3.amazonaws.com/",
