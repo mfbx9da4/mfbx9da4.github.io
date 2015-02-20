@@ -9,7 +9,7 @@
     "grunt-contrib-concat": "~0.4.0",
     "grunt-contrib-uglify": "~0.3.0",
     "grunt-contrib-handlebars": "~0.6.1",
-    "grunt-jekyll": "^0.4.1",
+    "grunt-jekyll": "*",
     "grunt-contrib-jade": "^0.11.0",
     "grunt-concurrent": "^0.5.0"
   }
