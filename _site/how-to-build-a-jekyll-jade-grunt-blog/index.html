@@ -3,14 +3,14 @@
 <ol>
 <li><strong>To create a github page:</strong> sign in to github, create a repo <code>my_username.github.io</code>. What ever you put in here will be live at <a href="http://my_username.github.io">http://my_username.github.io</a></li>
 <li><p><strong>Install jekyll:</strong> Once cloned in the repo do </p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">gem install bundler
+<div class="highlight"><pre><code class="language-text" data-lang="text">gem install bundler
 printf &quot;source &#39;https://rubygems.org&#39;\ngem &#39;github-pages&#39;&quot; &gt; Gemfile 
 bundle install
 </code></pre></div>
 <p>NB requires <code>ruby 1.9.1</code> or <code>2.0.0</code>, full instructions here</p></li>
 <li><p><strong>Run jekyll:</strong> with <code>bundle exec jekyll serve</code></p></li>
 <li><p><strong>Grunt:</strong> for livereload, jade compiling and in the future much more great stuff. First you need to <em>create</em> a <code>package.json</code> with the following contents:</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">{
+<div class="highlight"><pre><code class="language-text" data-lang="text">{
   &quot;name&quot;: &quot;blog&quot;,
   &quot;version&quot;: &quot;0.0.1&quot;,
   &quot;private&quot;: true,
@@ -24,7 +24,7 @@ bundle install
 }
 </code></pre></div>
 <p>Then create a <code>Gruntfile.js</code> with the following contents:</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">module.exports = function(grunt) {
+<div class="highlight"><pre><code class="language-text" data-lang="text">module.exports = function(grunt) {
 
     // Project configuration.
     grunt.initConfig({
@@ -84,15 +84,15 @@ bundle install
 };
 </code></pre></div>
 <p>Then install grunt with:</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">sudo npm install -g grunt-cli
+<div class="highlight"><pre><code class="language-text" data-lang="text">sudo npm install -g grunt-cli
 sudo npm install
 </code></pre></div>
 <p>Then run grunt with </p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">grunt
+<div class="highlight"><pre><code class="language-text" data-lang="text">grunt
 </code></pre></div></li>
 <li><p><strong>Jade:</strong> I&#39;ve converted the <code>default.html</code> and <code>post.html</code> into <a href="/assets/default.jade"><code>default.jade</code></a> and <a href="/assets/post.jade"><code>post.jade</code></a>. Move these into <code>_layouts/jade</code>.</p></li>
 <li><p><strong>Disqus comments:</strong> Register with disqus and add this to the bottom of <code>post.jade</code>.</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">div#disqus_thread
+<div class="highlight"><pre><code class="language-text" data-lang="text">div#disqus_thread
     script(type=&#39;text/javascript&#39;)
         |  /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
         |  var disqus_shortname = &#39;MY_USERNAME&#39;; // required: replace example with your forum shortname

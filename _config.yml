@@ -1,3 +1,5 @@
 name: David Adler's blog
 markdown: redcarpet
-pygments: true
+highlighter: 'pygments'
+# pygments: true
+
