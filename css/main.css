@@ -49,6 +49,12 @@ a:visited { color: #a0a; }
   font-size: 80%;
 }
 
+.projects span {
+  color: #aaa;
+  font-family: Monaco, "Courier New", monospace;
+  font-size: 80%;
+}
+
 /*****************************************************************************/
 /*
 /* Site
@@ -157,4 +163,15 @@ a:visited { color: #a0a; }
 
 .post pre.terminal code {
   background-color: #333;
+}
+
+/*****************************************************************************/
+/*
+/* Projects
+/*
+/*****************************************************************************/
+
+li > .description {
+  color: #4A4A4A;
+  margin-left: 16px;
 }

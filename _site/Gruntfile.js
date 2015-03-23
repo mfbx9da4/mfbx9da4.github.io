@@ -81,6 +81,7 @@ module.exports = function(grunt) {
 
     // Default task(s).
     grunt.registerTask('default', ['jade', 'jekyll:build', 'concurrent:target']);
+    grunt.registerTask('watch', ['watch']);
 
 
     // Load the plugin that provides the "uglify" task.
