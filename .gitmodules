@@ -1,0 +1,3 @@
+[submodule "projects/angular-slideout"]
+	path = projects/angular-slideout
+	url = https://github.com/mfbx9da4/angular-slideout.git
