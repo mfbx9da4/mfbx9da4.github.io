@@ -1,3 +1,6 @@
 [submodule "projects/angular-slideout"]
 	path = projects/angular-slideout
 	url = https://github.com/mfbx9da4/angular-slideout.git
+[submodule "projects/Word-tree"]
+	path = projects/Word-tree
+	url = https://github.com/mfbx9da4/Word-tree.git
