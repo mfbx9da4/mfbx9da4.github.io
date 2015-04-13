@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "My javascript sublime snippets!"
-date:   2014-03-19 15:30:27
+date:   2015-04-07 15:30:27
 categories: javascript sublime-snippets sublime snippets
 permalink: /javascript-sublime-snippets
 ---

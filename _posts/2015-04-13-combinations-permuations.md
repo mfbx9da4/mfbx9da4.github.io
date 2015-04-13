@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Combinations and permuations!"
-date:   2015-04-07 19:30:27
+date:   2015-04-13 19:30:27
 categories: permutations combinations maths
 permalink: /combinations-and-permuations
 ---
