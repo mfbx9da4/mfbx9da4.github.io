@@ -1,13 +1,13 @@
 ---
 layout: post
-title:  "Combinations and permuations!"
+title:  "Combinations and permuations"
 date:   2015-04-13 19:30:27
 categories: permutations combinations maths
 permalink: /combinations-and-permuations
 ---
 
 
-Mostly for my own reference the distinction between combinations and permuations.
+Mostly for my own reference, this post explains the distinction between combinations and permuations and how to calculate them.
 
 - If order **doesn't** matter it is a **combination** e.g. fruit salad of melon, strawberry and bannanas.
 - If order **does** matter it is a **permuation** e.g. bike lock code.

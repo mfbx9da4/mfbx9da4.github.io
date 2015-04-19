@@ -59,6 +59,13 @@ module.exports = function(grunt) {
                 }
             }
         },
+        sass: {
+          dist: {
+            files: {
+              'css/main.css': 'scss/main.scss'
+            }
+          }
+        },
         concurrent: {
             target: {
                 tasks: ['jekyll:serve', 'watch'],
@@ -68,8 +75,8 @@ module.exports = function(grunt) {
             }
         },
         watch: {
-            files: ['<%= src.posts %>', '<%= src.other %>', 'Gruntfile.js'],
-            tasks: ['jade'],
+            files: ['scss/*', '<%= src.other %>', '<%= src.posts %>', 'Gruntfile.js'],
+            tasks: ['jade', 'sass'],
             options: {
                 livereload: {
                     port: 12345
@@ -80,7 +87,7 @@ module.exports = function(grunt) {
     });
 
     // Default task(s).
-    grunt.registerTask('default', ['jade', 'jekyll:build', 'concurrent:target']);
+    grunt.registerTask('default', ['jade', 'sass', 'watch']);
     grunt.registerTask('watch', ['watch']);
 
 
@@ -89,6 +96,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-concurrent');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-jade');
+    grunt.loadNpmTasks('grunt-contrib-sass');
     // grunt.loadNpmTasks('grunt-contrib-concat');
     // grunt.loadNpmTasks('grunt-contrib-uglify');
     // grunt.loadNpmTasks('grunt-contrib-jshint');
