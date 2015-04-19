@@ -1,4 +1,27 @@
 @charset "UTF-8";
+/* Clearfix */
+.row {
+  *zoom: 1; }
+
+.row:before, .row:after {
+  display: table;
+  content: "";
+  line-height: 0; }
+
+.row:after {
+  clear: both; }
+
+/* Nested grid */
+.row > .row {
+  clear: none;
+  float: left;
+  margin: 0 !important; }
+
+/* Default block */
+.col {
+  float: left;
+  width: 100%; }
+
 /*****************************************************************************/
 /*
 /* Common
@@ -45,6 +68,14 @@ a:visited {
   margin: 3em auto 2em;
   line-height: 1.5em; }
 
+@media (max-width: 640px) {
+  .site {
+    width: 80%; }
+
+  header {
+    margin-bottom: 2em; }
+    header .title {
+      margin-bottom: 0em; } }
 .header a {
   font-size: 1.2rem;
   font-weight: bold;
@@ -188,6 +219,9 @@ h5, h6 {
 /* Projects
 /*
 /*****************************************************************************/
+ul.projects > li {
+  list-style: none; }
+
 li > .description {
   color: #4A4A4A;
   margin-left: 16px; }

@@ -7,7 +7,7 @@
 Run
 
 	grunt watch
-	jekyll serve --watch
+	jekyll serve --watch --host 0.0.0.0
 
 Generates to `_site`.
 

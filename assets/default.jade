@@ -12,15 +12,17 @@ html(lang="en")
     //
        Custom CSS
     link(rel='stylesheet', href='/css/main.css')
+    link(rel="shortcut icon" href="/assets/img/favicon.ico" type="image/x-icon")
   body
     .site
-      .header
+      header.header.row
         h1.title
           a(href='/') {{ site.name }}
         a.extra(href='/') home
         a.extra(href='/projects') projects
         a.extra(href='#') cv
-      | {{ content }}
+      main.content
+        {{ content }}
       .footer
         .contact
           p

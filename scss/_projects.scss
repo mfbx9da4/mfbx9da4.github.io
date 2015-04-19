@@ -4,6 +4,10 @@
 /*
 /*****************************************************************************/
 
+ul.projects > li {
+	list-style: none;
+}
+
 li > .description {
   color: #4A4A4A;
   margin-left: 16px;

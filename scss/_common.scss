@@ -42,6 +42,19 @@ a:visited { color: #a0a; }
   line-height: 1.5em;
 }
 
+@media (max-width: 640px) {
+	.site {
+		width: 80%;
+	}
+	header {
+		margin-bottom: 2em;
+
+		.title {
+			margin-bottom: 0em;
+		}
+	}
+}
+
 .header a {
   font-size: 1.2rem;
   font-weight: bold;
