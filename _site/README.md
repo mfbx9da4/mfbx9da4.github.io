@@ -6,7 +6,7 @@
 #### Build
 Run
 
-	grunt
+	grunt watch
 	jekyll serve --watch
 
 Generates to `_site`.
@@ -16,6 +16,10 @@ Generates to `_site`.
 
 ### Todo
 
-Styles:
-- [ ] Modular scale mixinse
-- [ ]
+Frontend:
+- [ ] Responsive
+- [ ] Prettier projects page
+- [ ] Angular
+- [ ] Animations
+- [ ] Toggleable sidebar
+- [ ] Remove title "blog posts"
