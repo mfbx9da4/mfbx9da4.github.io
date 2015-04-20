@@ -53,6 +53,9 @@ a:visited { color: #a0a; }
 			margin-bottom: 0em;
 		}
 	}
+	.posts li > a {
+		display: block;
+	}
 }
 
 .header a {

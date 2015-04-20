@@ -1,6 +1,6 @@
-## Desc
+## Description
 
-- My personal site
+My personal site
 
 
 #### Build
@@ -17,20 +17,23 @@ Generates to `_site`.
 ### Todo
 
 Frontend:
+- [ ] Redesign!
 - [ ] Responsive
 - [ ] Prettier projects page
 - [ ] Angular
 - [ ] Animations
 - [ ] Toggleable sidebar
-- [ ] Remove title "blog posts"
-- [ ] Redesign!
 - [ ] Use flexbox
 
 Blog :
+- [ ] Prototypical inheritance (in angular)
+- [ ] Design for programmers
+- [ ] Angular transclude
+- [ ] Web performance
+- [ ] Mobile web
 - [ ] Hardware software
 - [ ] Docker
 - [ ] Functional programming
 - [ ] Algorithms
-- [ ] Design
-- [ ] Prototypical inheritance (in angular)
-- [ ] Angular transclude
+- [ ] Javascript design patterns
+- [ ] Genetic algorithms

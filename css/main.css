@@ -75,7 +75,10 @@ a:visited {
   header {
     margin-bottom: 2em; }
     header .title {
-      margin-bottom: 0em; } }
+      margin-bottom: 0em; }
+
+  .posts li > a {
+    display: block; } }
 .header a {
   font-size: 1.2rem;
   font-weight: bold;
