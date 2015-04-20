@@ -23,3 +23,14 @@ Frontend:
 - [ ] Animations
 - [ ] Toggleable sidebar
 - [ ] Remove title "blog posts"
+- [ ] Redesign!
+- [ ] Use flexbox
+
+Blog :
+- [ ] Hardware software
+- [ ] Docker
+- [ ] Functional programming
+- [ ] Algorithms
+- [ ] Design
+- [ ] Prototypical inheritance (in angular)
+- [ ] Angular transclude
