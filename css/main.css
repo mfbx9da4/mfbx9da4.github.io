@@ -101,6 +101,10 @@ a:visited {
 .header a.extra:hover {
   color: #000; }
 
+main.content {
+  z-index: 1;
+  position: relative; }
+
 .meta {
   color: #aaa; }
 
@@ -113,17 +117,15 @@ a:visited {
 .footer .contact {
   float: left;
   margin-right: 3em; }
-
-.footer .contact a {
-  color: #8085C1; }
-
-.footer .rss {
-  margin-top: 1.1em;
-  margin-right: -.2em;
-  float: right; }
-
-.footer .rss img {
-  border: 0; }
+  .footer .contact a {
+    color: #8085C1; }
+  .footer .contact .profile-img {
+    width: 130px;
+    height: 130px;
+    background-image: url(/assets/img/me/chaordic-hover-profile.jpg);
+    background-size: 100%; }
+    .footer .contact .profile-img:hover {
+      background-position-y: 100%; }
 
 /*--- HEADINGS ---*/
 h1, h2, h3, h4, h5, h6 {

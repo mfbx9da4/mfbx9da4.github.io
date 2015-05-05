@@ -36,6 +36,7 @@ Frontend:
 	- typed http://www.mattboldt.com/demos/typed-js/
 	- do flash of face on hover like on chaordic site https://www.chaordic.com.br/wp-content/uploads/2014/09/77davidadler.jpg
 	- viewing tab http://stackoverflow.com/a/1760268/1376627
+	- big picture with side text http://brad.ly/
 - [ ] Prettier projects page
 - [ ] loaded with browserfy, webpack and/or http://dustindiaz.com/scriptjs
 - [ ] Responsive
