@@ -33,6 +33,7 @@ Frontend:
 	- minimalist: http://www.charlieisslander.com/
 	- do flash of face on hover like on chaordic site https://www.chaordic.com.br/wp-content/uploads/2014/09/77davidadler.jpg
 - [ ] Landing page
+	- generate several pngs and load device specific size
 	- background video: http://www.villafeltrinelli.com/
 	- centered using: https://css-tricks.com/perfect-full-page-background-image/
 	- viewing tab http://stackoverflow.com/a/1760268/1376627

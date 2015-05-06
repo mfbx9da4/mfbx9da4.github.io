@@ -26,21 +26,28 @@
 	<body>
  		<video autobuffer autoplay loop poster preload>
 			<source src="/assets/img/vini-photos-lagoa-abi-dave/4417.m4v">
-			<!-- <source src="https://pdlvimeocdn-a.akamaihd.net/86257/236/364134586.mp4?token2=1430914712_746ef3af0622537030542eec941c7de6&amp;aksessionid=75504750a31f00a5"> -->
 			<!-- <source src="https://dl-web.dropbox.com/get/sem5/slacklineSoc/Slackline%20WorldCup%202011%20%40%20Freakwave%20-%20Official%20Version%20(1).mp4?_subject_uid=52486749&w=AABVRMZssefX13lM38hony2DRE0fZYJvTqPMt_Hngy-jtw&dl=1"> -->
+			<!-- <source src="https://pdlvimeocdn-a.akamaihd.net/86257/236/364134586.mp4?token2=1430914712_746ef3af0622537030542eec941c7de6&amp;aksessionid=75504750a31f00a5"> -->
 		</video>
 
  <!--
  		<video id="big-video-vid_html5_api" class="vjs-tech" preload="auto" data-setup="{}" webkit-playsinline="" autoplay="" src="http://player.vimeo.com/external/94029996.hd.mp4?s=9c3c936845bedc7737e5fab58fc3cd87"></video> -->
 		<script>
 			function restartVideo(){
-			vid.currentTime = 0.1; //setting to zero breaks iOS 3.2, the value won't update, values smaller than 0.1 was causing bug as well.
-			vid.play();
+				console.log('restart');
+				vid.load();
+				vid.currentTime = 0.1; //setting to zero breaks iOS 3.2, the value won't update, values smaller than 0.1 was causing bug as well.
+				vid.play();
 			}
 
 			//loop video
 			vid = document.querySelector('video');
-			vid.addEventListener('ended', restartVideo, false);
+			// vid.addEventListener('ended', restartVideo, false);
+			vid.addEventListener('timeupdate', function (ev) {
+				if (vid.currentTime > 1) {
+					restartVideo();
+				}
+			});
 		</script>
 		<script>
 		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
