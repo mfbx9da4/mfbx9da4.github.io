@@ -1,0 +1,16 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg">
+<metadata>Copyright (C) 2015 by original authors @ fontello.com</metadata>
+<defs>
+<font id="fontello" horiz-adv-x="1000" >
+<font-face font-family="fontello" font-weight="400" font-stretch="normal" units-per-em="1000" ascent="850" descent="-150" />
+<missing-glyph horiz-adv-x="1000" />
+<glyph glyph-name="graduation-cap" unicode="&#xe800;" d="m990 383l10-176q2-38-46-71t-131-52-180-20-180 20-131 52-46 71l10 176 320-101q12-3 27-3t27 3z m296 181q0-13-13-17l-625-196q-2-1-5-1t-6 1l-364 115q-24-19-39-63t-19-99q35-20 35-61 0-39-32-60l32-241q1-8-4-14-5-7-14-7h-107q-8 0-13 7-6 6-5 14l33 241q-33 21-33 60 0 41 36 62 7 115 55 184l-186 58q-12 4-12 17t12 18l625 196q3 1 6 1t5-1l625-196q13-5 13-18z" horiz-adv-x="1285.7" />
+<glyph glyph-name="ellipsis-vert" unicode="&#xe801;" d="m214 154v-108q0-22-15-37t-38-16h-107q-23 0-38 16t-16 37v108q0 22 16 38t38 15h107q22 0 38-15t15-38z m0 285v-107q0-22-15-38t-38-15h-107q-23 0-38 15t-16 38v107q0 23 16 38t38 16h107q22 0 38-16t15-38z m0 286v-107q0-22-15-38t-38-16h-107q-23 0-38 16t-16 38v107q0 22 16 38t38 16h107q22 0 38-16t15-38z" horiz-adv-x="214.3" />
+<glyph glyph-name="beaker" unicode="&#xe802;" d="m852 42q31-50 12-85t-78-36h-643q-59 0-79 36t12 85l281 442v223h-36q-14 0-25 11t-10 25 10 25 25 11h286q15 0 25-11t11-25-11-25-25-11h-36v-223z m-435 405l-151-240h397l-152 240-11 17v243h-71v-243z" horiz-adv-x="928.6" />
+<glyph glyph-name="align-left" unicode="&#xe803;" d="m1000 100v-71q0-15-11-25t-25-11h-928q-15 0-25 11t-11 25v71q0 15 11 25t25 11h928q15 0 25-11t11-25z m-214 214v-71q0-15-11-25t-25-11h-714q-15 0-25 11t-11 25v71q0 15 11 25t25 11h714q15 0 25-11t11-25z m143 215v-72q0-14-11-25t-25-11h-857q-15 0-25 11t-11 25v72q0 14 11 25t25 10h857q14 0 25-10t11-25z m-215 214v-72q0-14-10-25t-25-10h-643q-15 0-25 10t-11 25v72q0 14 11 25t25 11h643q14 0 25-11t10-25z" horiz-adv-x="1000" />
+<glyph glyph-name="mobile" unicode="&#xe804;" d="m480 840q42 0 71-29t29-71l0-780q0-40-29-70t-71-30l-380 0q-40 0-70 30t-30 70l0 780q0 42 30 71t70 29l380 0z m-190-940q30 0 50 15t20 35q0 22-20 36t-50 14q-28 0-49-15t-21-35 21-35 49-15z m210 150l0 660-420 0 0-660 420 0z" horiz-adv-x="580" />
+</font>
+</defs>
+</svg>

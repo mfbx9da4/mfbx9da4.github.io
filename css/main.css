@@ -34,7 +34,6 @@
   box-sizing: border-box; }
 
 html, body {
-  height: 100%;
   widows: 100%; }
 
 body {
@@ -89,7 +88,8 @@ a:visited {
   margin-bottom: 2em; }
 
 .title a {
-  color: #d80800; }
+  color: #d80800;
+  font-family: 'Bitter', 'Ubuntu Mono', Helvetica, Arial, sans-serif; }
 
 .title a:hover {
   color: #a50600; }
@@ -126,6 +126,16 @@ main.content {
     background-size: 100%; }
     .footer .contact .profile-img:hover {
       background-position-y: 100%; }
+  .footer .contact .hand-img {
+    position: fixed;
+    bottom: 90px;
+    right: -19px;
+    z-index: 0;
+    width: 86px;
+    height: 83px;
+    background-image: url(/assets/img/hand-hold-bw.png);
+    background-size: 100%;
+    background-repeat: no-repeat; }
 
 /*--- HEADINGS ---*/
 h1, h2, h3, h4, h5, h6 {
@@ -136,13 +146,15 @@ h1 {
   font-size: 1.5em;
   /* 24px --> 24 ÷ 16 = 1.5 */
   line-height: 1em;
-  /* 24px --> 24 ÷ 24 = 1 */ }
+  /* 24px --> 24 ÷ 24 = 1 */
+  font-family: 'Bitter', 'Ubuntu Mono', Helvetica, Arial, sans-serif; }
 
 h2 {
   font-size: 1.375em;
   /* 22px --> 22 ÷ 16 = 1.375 */
   line-height: 1.0909em;
-  /* 24px --> 24 ÷ 22 = 1.090909(09) */ }
+  /* 24px --> 24 ÷ 22 = 1.090909(09) */
+  font-family: 'Bitter', 'Ubuntu Mono', Helvetica, Arial, sans-serif; }
 
 h3 {
   font-size: 1.25em;

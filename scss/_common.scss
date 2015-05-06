@@ -12,7 +12,6 @@
 }
 
 html, body {
-	height: 100%;
 	widows: 100%;
 }
 
@@ -22,7 +21,9 @@ body {
   text-align: center;
 }
 
-h1 { margin-bottom: 1em; }
+h1 {
+  margin-bottom: 1em;
+}
 p { margin: 1em 0; }
 
 a         { color: #00a; }
@@ -71,6 +72,7 @@ a:visited { color: #a0a; }
 
 .title a {
   color: #d80800;
+  font-family: 'Bitter', 'Ubuntu Mono', Helvetica, Arial, sans-serif;
 }
 
 .title a:hover {
@@ -126,6 +128,20 @@ main.content {
     &:hover {
       background-position-y: 100%;
     }
+  }
+
+  .hand-img {
+    position: fixed;
+    bottom: 90px;
+    right: -19px;
+    z-index: 0;
+
+    width: 86px;
+    height: 83px;
+
+    background-image: url(/assets/img/hand-hold-bw.png);
+    background-size: 100%;
+    background-repeat: no-repeat;
   }
 }
 
