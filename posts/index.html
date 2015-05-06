@@ -35,7 +35,7 @@
 		<script>
 			function restartVideo(){
 				console.log('restart');
-				vid.load();
+				// vid.load();
 				vid.currentTime = 0.1; //setting to zero breaks iOS 3.2, the value won't update, values smaller than 0.1 was causing bug as well.
 				vid.play();
 			}
@@ -43,11 +43,11 @@
 			//loop video
 			vid = document.querySelector('video');
 			// vid.addEventListener('ended', restartVideo, false);
-			vid.addEventListener('timeupdate', function (ev) {
-				if (vid.currentTime > 1) {
-					restartVideo();
-				}
-			});
+			// vid.addEventListener('timeupdate', function (ev) {
+			// 	if (vid.currentTime > 8) {
+			// 		restartVideo();
+			// 	}
+			// });
 		</script>
 		<script>
 		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
