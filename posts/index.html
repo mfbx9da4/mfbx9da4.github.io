@@ -25,7 +25,7 @@
 	</head>
 	<body>
  		<video autoplay loop poster preload>
-			<source src="http://mfbx9da4.github.io/assets/img/vini-photos-lagoa-abi-dave/4415.m4v">
+			<source src="http://mfbx9da4.github.io/assets/img/vini-photos-lagoa-abi-dave/4415-1.m4v">
 			<!-- <source src="https://dl-web.dropbox.com/get/sem5/slacklineSoc/Slackline%20WorldCup%202011%20%40%20Freakwave%20-%20Official%20Version%20(1).mp4?_subject_uid=52486749&w=AABVRMZssefX13lM38hony2DRE0fZYJvTqPMt_Hngy-jtw&dl=1"> -->
 			<!-- <source src="https://pdlvimeocdn-a.akamaihd.net/86257/236/364134586.mp4?token2=1430914712_746ef3af0622537030542eec941c7de6&amp;aksessionid=75504750a31f00a5"> -->
 		</video>
@@ -41,15 +41,18 @@
 			}
 
 			//loop video
-			vid = document.querySelector('video');
+			var vid = document.querySelector('video');
 			// vid.addEventListener('ended', restartVideo, false);
 			// vid.addEventListener('timeupdate', function (ev) {
 			// 	if (vid.currentTime > 8) {
 			// 		restartVideo();
 			// 	}
 			// });
-			vid.addEventListener('seeking', function (ev) {
-				// console.log(ev);
+			vid.addEventListener('progress', function (ev) {
+				console.log(ev);
+			});
+			vid.addEventListener('load', function (ev) {
+				console.log(ev);
 			});
 		</script>
 		<script>
