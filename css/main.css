@@ -120,6 +120,10 @@ main.content {
   .footer .contact a {
     color: #8085C1; }
   .footer .contact .profile-img {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    z-index: 0;
     width: 130px;
     height: 130px;
     background-image: url(/assets/img/me/chaordic-hover-profile.jpg);
