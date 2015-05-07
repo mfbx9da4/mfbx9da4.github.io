@@ -74,6 +74,15 @@ module.exports = function(grunt) {
                 }
             }
         },
+        concat: {
+            options: {
+                separator: ';',
+            },
+            dist: {
+                src: ['assets/js/jquery-1.9.1.min.js', 'assets/js/typed.js'],
+                dest: 'assets/js/landing-page-libs.min.js',
+            },
+        },
         watch: {
             files: ['scss/*', '<%= src.other %>', '<%= src.posts %>', 'Gruntfile.js'],
             tasks: ['jade', 'sass'],
@@ -87,7 +96,7 @@ module.exports = function(grunt) {
     });
 
     // Default task(s).
-    grunt.registerTask('default', ['jade', 'sass', 'watch']);
+    grunt.registerTask('default', ['jade', 'sass', 'concat', 'watch']);
     grunt.registerTask('watch', ['watch']);
 
 
@@ -97,7 +106,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-jade');
     grunt.loadNpmTasks('grunt-contrib-sass');
-    // grunt.loadNpmTasks('grunt-contrib-concat');
+    grunt.loadNpmTasks('grunt-contrib-concat');
     // grunt.loadNpmTasks('grunt-contrib-uglify');
     // grunt.loadNpmTasks('grunt-contrib-jshint');
 
