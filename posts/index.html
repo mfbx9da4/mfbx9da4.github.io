@@ -21,39 +21,56 @@
 				height: 100%;
 				object-fit: cover;
 			}
+			.element {
+				position: relative;
+				z-index: 99;
+			}
 		</style>
 	</head>
 	<body>
  		<video autoplay loop poster preload>
-			<source src="http://mfbx9da4.github.io/assets/img/vini-photos-lagoa-abi-dave/4415-1.m4v">
-			<!-- <source src="https://dl-web.dropbox.com/get/sem5/slacklineSoc/Slackline%20WorldCup%202011%20%40%20Freakwave%20-%20Official%20Version%20(1).mp4?_subject_uid=52486749&w=AABVRMZssefX13lM38hony2DRE0fZYJvTqPMt_Hngy-jtw&dl=1"> -->
-			<!-- <source src="https://pdlvimeocdn-a.akamaihd.net/86257/236/364134586.mp4?token2=1430914712_746ef3af0622537030542eec941c7de6&amp;aksessionid=75504750a31f00a5"> -->
+			<source src="http://mfbx9da4.github.io	/assets/img/vini-photos-lagoa-abi-dave/4415-1.m4v">
 		</video>
+		<div class="element"></div>
 
- <!--
- 		<video id="big-video-vid_html5_api" class="vjs-tech" preload="auto" data-setup="{}" webkit-playsinline="" autoplay="" src="http://player.vimeo.com/external/94029996.hd.mp4?s=9c3c936845bedc7737e5fab58fc3cd87"></video> -->
+ 		<script>
+ 			/*!
+			  * $script.js JS loader & dependency manager
+			  * https://github.com/ded/script.js
+			  * (c) Dustin Diaz 2014 | License MIT
+			  */
+			(function(e,t){typeof module!="undefined"&&module.exports?module.exports=t():typeof define=="function"&&define.amd?define(t):this[e]=t()})("$script",function(){function p(e,t){for(var n=0,i=e.length;n<i;++n)if(!t(e[n]))return r;return 1}function d(e,t){p(e,function(e){return!t(e)})}function v(e,t,n){function g(e){return e.call?e():u[e]}function y(){if(!--h){u[o]=1,s&&s();for(var e in f)p(e.split("|"),g)&&!d(f[e],g)&&(f[e]=[])}}e=e[i]?e:[e];var r=t&&t.call,s=r?t:n,o=r?e.join(""):t,h=e.length;return setTimeout(function(){d(e,function t(e,n){if(e===null)return y();e=!n&&e.indexOf(".js")===-1&&!/^https?:\/\//.test(e)&&c?c+e+".js":e;if(l[e])return o&&(a[o]=1),l[e]==2?y():setTimeout(function(){t(e,!0)},0);l[e]=1,o&&(a[o]=1),m(e,y)})},0),v}function m(n,r){var i=e.createElement("script"),u;i.onload=i.onerror=i[o]=function(){if(i[s]&&!/^c|loade/.test(i[s])||u)return;i.onload=i[o]=null,u=1,l[n]=2,r()},i.async=1,i.src=h?n+(n.indexOf("?")===-1?"?":"&")+h:n,t.insertBefore(i,t.lastChild)}var e=document,t=e.getElementsByTagName("head")[0],n="string",r=!1,i="push",s="readyState",o="onreadystatechange",u={},a={},f={},l={},c,h;return v.get=m,v.order=function(e,t,n){(function r(i){i=e.shift(),e.length?v(i,r):v(i,t,n)})()},v.path=function(e){c=e},v.urlArgs=function(e){h=e},v.ready=function(e,t,n){e=e[i]?e:[e];var r=[];return!d(e,function(e){u[e]||r[i](e)})&&p(e,function(e){return u[e]})?t():!function(e){f[e]=f[e]||[],f[e][i](t),n&&n(r)}(e.join("|")),v},v.done=function(e){v([null],e)},v})
+		</script>
 		<script>
-			function restartVideo(){
-				console.log('restart');
-				// vid.load();
-				vid.currentTime = 0.1; //setting to zero breaks iOS 3.2, the value won't update, values smaller than 0.1 was causing bug as well.
-				vid.play();
-			}
-
-			//loop video
 			var vid = document.querySelector('video');
-			// vid.addEventListener('ended', restartVideo, false);
-			// vid.addEventListener('timeupdate', function (ev) {
-			// 	if (vid.currentTime > 8) {
-			// 		restartVideo();
-			// 	}
-			// });
 			vid.addEventListener('progress', function (ev) {
+				console.log('progress');
+				console.log(ev.target.buffered);
+			});
+			vid.addEventListener('loadeddata', function (ev) {
+				console.log('loaded');
 				console.log(ev);
 			});
-			vid.addEventListener('load', function (ev) {
-				console.log(ev);
+
+			$script('/assets/js/jquery-1.9.1.min.js', 'jquery');
+			$script('/assets/js/typed.custom.js', 'typed');
+
+			$script.ready('jquery', function () {
+				console.log('loaded jquery');
 			});
+
+			$script.ready('typed', function() {
+			  console.log('loaded typed');
+			});
+
+			$script.ready(['jquery', 'typed'], function() {
+			  $(function(){
+			      $(".element").typed({
+			          strings: ["Loaded jquery", "Loaded typed.js"]
+			      });
+			  });
+			});
+
 		</script>
 		<script>
 		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
