@@ -117,13 +117,14 @@ main.content {
     position: fixed;
     bottom: 0;
     right: 0;
-    z-index: 0;
+    z-index: 1;
 
     width: 130px;
     height: 130px;
 
-    background-image: url(/assets/img/me/chaordic-hover-profile.jpg);
+    background-image: url(/assets/img/me/chaordic-hover-profile.png);
     background-size: 100%;
+    cursor: pointer;
 
     &:hover {
       background-position-y: 100%;
