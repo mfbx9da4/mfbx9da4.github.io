@@ -1,0 +1,75 @@
+@font-face	{font-family: humor; src: url(/projects/checkers/fonts/Humor-Sans.ttf); }
+*, *:before, *:after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+	font-family: courier;
+}
+video {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+main {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	z-index: 99;
+	display: table;
+}
+.hide {
+	display: none !important;
+}
+.inline {
+	display: inline;
+}
+.print {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 390px;
+	font-weight: bold;
+}
+.result {
+	color: green;
+}
+section.intro {
+	position: absolute;
+
+	width: 100%;
+	height: 100%;
+	display: table;
+
+	color: white;
+	font-weight: bold;
+	font-size: 30px;
+	font-family: 'Dancing Script', cursive, courier;
+
+	-webkit-text-stroke-width: 1px;
+	-webkit-text-stroke-color: #ccc;
+	text-shadow: 0px 0px 4px #000;
+}
+
+.v-centered {
+  display: table-cell;
+  vertical-align: middle;
+  // text-align: center;
+}
+
+section.intro div {
+	@extend .v-centered;
+	padding-left: 30px;
+	a {
+		color: white;
+	}
+}
+
+.loader-container {
+	@extend .v-centered;
+}
