@@ -15,6 +15,7 @@
     "grunt-contrib-sass": "~0.9.2",
     "webpack": "~1.8.11",
     "webpack-dev-server": "~1.8.2",
-    "grunt-webpack": "~1.0.8"
+    "grunt-webpack": "~1.0.8",
+    "grunt-includes": "~0.5.1"
   }
 }
