@@ -62,7 +62,8 @@ module.exports = function(grunt) {
         sass: {
           dist: {
             files: {
-              'css/main.css': 'scss/main.scss'
+              'css/main.css': 'scss/main.scss',
+              'landing-page-src/styles.css': 'landing-page-src/scss/styles.scss'
             }
           }
         },
@@ -83,8 +84,23 @@ module.exports = function(grunt) {
                 dest: 'assets/js/landing-page-libs.min.js',
             },
         },
+        includes: {
+          files: {
+            src: [
+                'landing-page-src/index.html',
+                'landing-page-src/styles.html',
+                'landing-page-src/main.js'
+            ],
+            dest: 'land', // Destination directory
+            flatten: true,
+            cwd: '.',
+            options: {
+              silent: false
+            }
+          }
+        },
         watch: {
-            files: ['scss/*', '<%= src.other %>', '<%= src.posts %>', 'Gruntfile.js'],
+            files: ['scss/*', '<%= src.other %>', '<%= src.posts %>', 'landing-page-src/*'],
             tasks: ['jade', 'sass'],
             options: {
                 livereload: {
@@ -96,8 +112,9 @@ module.exports = function(grunt) {
     });
 
     // Default task(s).
-    grunt.registerTask('default', ['jade', 'sass', 'concat', 'watch']);
+    grunt.registerTask('default', ['jade', 'sass', 'concat', 'includes', 'watch']);
     grunt.registerTask('watch', ['watch']);
+    grunt.registerTask('include', ['includes']);
 
 
     // Load the plugin that provides the "uglify" task.
@@ -107,6 +124,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-jade');
     grunt.loadNpmTasks('grunt-contrib-sass');
     grunt.loadNpmTasks('grunt-contrib-concat');
+    grunt.loadNpmTasks('grunt-includes');
     // grunt.loadNpmTasks('grunt-contrib-uglify');
     // grunt.loadNpmTasks('grunt-contrib-jshint');
 
