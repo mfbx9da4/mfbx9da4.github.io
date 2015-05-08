@@ -22,6 +22,7 @@ main {
 	height: 100%;
 	z-index: 99;
 	display: table;
+	overflow: hidden;
 }
 .hide {
 	display: none !important;

@@ -121,8 +121,8 @@ var resources = [
 			vid.addEventListener('loadeddata', function(ev) {
 				console.log('loaded video');
 				setTimeout(function () {
-					// $(vid).removeClass('hide');
-					// $('.loader').addClass('hide');
+					$(vid).removeClass('hide');
+					$('.loader').addClass('hide');
 					$('.intro').removeClass('hide');
 					$('.intro div').typed({
 						strings:["Hey, ^500 I'm Dave the dev. ^500<br>This is where I live. ^500<br>This is my <a href='/'>site</a>. ^500"],
