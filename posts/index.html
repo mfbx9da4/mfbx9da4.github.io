@@ -5,8 +5,7 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
-		<link rel="shortcut icon" href="assets/img/favicon.ico" type="image/x-icon">
+		<link rel="shortcut icon" href="/assets/img/favicon.ico"/>
 		<style type="text/css" media="screen">
 			body {
 				font-family: courier;
@@ -29,6 +28,12 @@
 			.inline {
 				display: inline;
 			}
+			.print {
+				position: fixed;
+				bottom: 0;
+				right: 0;
+				width: 390px;
+			}
 		</style>
 	</head>
 	<body>
@@ -36,7 +41,8 @@
 			<source src="http://mfbx9da4.github.io	/assets/img/vini-photos-lagoa-abi-dave/4415-1.m4v">
 		</video>
 		<main>
-			<div>Hey give me a sec,</div>
+			<div class="print">
+			</div>
 		</main>
 
  		<script>
@@ -48,61 +54,146 @@
 			(function(e,t){typeof module!="undefined"&&module.exports?module.exports=t():typeof define=="function"&&define.amd?define(t):this[e]=t()})("$script",function(){function p(e,t){for(var n=0,i=e.length;n<i;++n)if(!t(e[n]))return r;return 1}function d(e,t){p(e,function(e){return!t(e)})}function v(e,t,n){function g(e){return e.call?e():u[e]}function y(){if(!--h){u[o]=1,s&&s();for(var e in f)p(e.split("|"),g)&&!d(f[e],g)&&(f[e]=[])}}e=e[i]?e:[e];var r=t&&t.call,s=r?t:n,o=r?e.join(""):t,h=e.length;return setTimeout(function(){d(e,function t(e,n){if(e===null)return y();e=!n&&e.indexOf(".js")===-1&&!/^https?:\/\//.test(e)&&c?c+e+".js":e;if(l[e])return o&&(a[o]=1),l[e]==2?y():setTimeout(function(){t(e,!0)},0);l[e]=1,o&&(a[o]=1),m(e,y)})},0),v}function m(n,r){var i=e.createElement("script"),u;i.onload=i.onerror=i[o]=function(){if(i[s]&&!/^c|loade/.test(i[s])||u)return;i.onload=i[o]=null,u=1,l[n]=2,r()},i.async=1,i.src=h?n+(n.indexOf("?")===-1?"?":"&")+h:n,t.insertBefore(i,t.lastChild)}var e=document,t=e.getElementsByTagName("head")[0],n="string",r=!1,i="push",s="readyState",o="onreadystatechange",u={},a={},f={},l={},c,h;return v.get=m,v.order=function(e,t,n){(function r(i){i=e.shift(),e.length?v(i,r):v(i,t,n)})()},v.path=function(e){c=e},v.urlArgs=function(e){h=e},v.ready=function(e,t,n){e=e[i]?e:[e];var r=[];return!d(e,function(e){u[e]||r[i](e)})&&p(e,function(e){return u[e]})?t():!function(e){f[e]=f[e]||[],f[e][i](t),n&&n(r)}(e.join("|")),v},v.done=function(e){v([null],e)},v})
 		</script>
 		<script>
-			var loadingModel = {
-				messages: {
-					libs: {
-						strings: [
-							"I am just loading the stuff :-)<br>" +
-							"Loading javascript <br>" +
-							"Loaded javascript in %delay seconds <br>" +
-							"Loading video"
-						]
-					}
-				}
+			function LoadPrinter(config, rootElement) {
+				this.name = config.name;
+				this.customLoadingFn = config.load;
+				this.rootElement = rootElement;
+				this.load();
 			};
 
-			var loadingView = {
-				render: function() {
-					this.type();
+			LoadPrinter.prototype = {
+				load: function () {
+					var self = this;
+					this.printStartLoading();
+					this.customLoadingFn(function() {
+						self.printEndLoading();
+					})
 				},
-				type: function(config, inline) {
-					var div = $('<div/>');
-					inline && div.addClass('inline');
-					$("main").append(div);
-					var default_config = {
-						showCursor: false,
-						typeSpeed: -1000000
-					};
-					for (var key in default_config) {
-						config[key] = config[key] || default_config[key];
-					}
-					div.typed(config);
-				}
-			};
 
-			var loadingCtrl = {
-				init: function () {
-					var ctrl = this;
-					ctrl.start = new Date().getTime();
-					$script('/assets/js/landing-page-libs.min.js', 'libs');
-
-					$script.ready(['libs'], function () {
-						var message = ctrl.getMessage('libs')
-						loadingView.type(message)
-					});
+				printStartLoading: function() {
+					this.element = document.createElement('div');
+					this.rootElement.appendChild(this.element);
+					this.type('Loading ' + this.name);
 				},
-				getMessage: function (type) {
-					var message = loadingModel.messages[type];
-					var strings = [];
-					for (var i = 0; i < message.strings.length; i ++) {
-						var string = message.strings[i];
-						string.replace('%delay', (new Date().getTime() - this.start) / 1000);
+
+				printEndLoading: function() {
+					this.type('Loaded ' + this.name);
+				},
+
+				type: function (string) {
+					if (window.jQuery) {
+						this.$element = this.$element || $(this.element);
+						this.$element.typed({
+							strings: [string],
+							typeSpeed: 0,
+							showCursor: false
+						});
+					} else {
+						this.typer = this.typer || new Typer(this.element);
+						this.typer.type(string);
+						this.element.innerText = string;
 					}
-					message.strings = strings;
-					return message
 				}
 			};
-			loadingCtrl.init();
+
+			function Typer(element, config) {
+				config = config || {};
+				this.element = element;
+				this.charPause = config.charPause || 10;
+				this.callback = config.callback || function () {};
+			}
+
+			Typer.prototype = {
+				type: function (string, strPos) {
+					var self = this;
+					strPos = strPos || 0;
+
+					if (strPos === string.length) {
+						console.log('here');
+						return self.callback();
+					}
+
+					var humanize = Math.round(Math.random() * (100 - 30)) + self.charPause;
+
+					setTimeout(function () {
+						self.element.innerText = string.substr(0, strPos + 1);
+						strPos ++;
+						self.type(string, strPos)
+					}, humanize);
+				}
+			};
+
+
+			var resources = [
+				{
+					name: 'libs',
+					load: function(fn) {
+						$script('/assets/js/landing-page-libs.min.js', 'libs');
+						$script.ready(['libs'], fn);
+					}
+				}, {
+					name: 'vid',
+					load: function(fn) {
+						var vid = document.querySelector('video');
+						vid.addEventListener('progress', function(ev) {
+							console.log('progress');
+						});
+						vid.addEventListener('loadeddata', function(ev) {
+							console.log('loaded video');
+							$(vid).removeClass('hide');
+							fn();
+						});
+					}
+				}
+			];
+
+			var printHello = function (printElement, fn) {
+				var div = document.createElement('div');
+				printElement.appendChild(div);
+				var typer = new Typer(div, {callback: fn});
+				typer.type('Hey give me a sec! Just loading some stuff :-) !');
+			}
+
+			var printElement = document.querySelector('main .print');
+			printHello(printElement, function () {
+				console.log('called');
+			});
+			for (var i = 0; i < resources.length; i ++) {
+				var resource = resources[i];
+				var loader = new LoadPrinter(resource, printElement);
+			}
+
+		</script>
+		<script type="text/draft">
+			var type = function(config, inline) {
+				var div = $('<div/>');
+				inline && div.addClass('inline');
+				$("main").append(div);
+				var default_config = {
+					showCursor: false,
+					typeSpeed: -1000000
+				};
+				for (var key in default_config) {
+					config[key] = config[key] || default_config[key];
+				}
+				div.typed(config);
+			}
+			var start = new Date().getTime();
+			$script('/assets/js/landing-page-libs.min.js', 'libs');
+
+			$script.ready(['libs'], function() {
+				type({
+					strings: [
+						"I am just loading the stuff <br>" +
+						"Loading javascript <br>" +
+						"Loaded javascript in " + (new Date().getTime() - start) / 1000 + ' seconds <br>' +
+						"Loading video"
+					]
+				});
+				var loadingVidDots = setInterval(function () {
+
+				})
+			});
 
 			var vid = document.querySelector('video');
 			vid.addEventListener('progress', function(ev) {
@@ -111,7 +202,7 @@
 			});
 			vid.addEventListener('loadeddata', function(ev) {
 				console.log('loaded video');
-				loadingView.type({
+				type({
 					strings: ["Loaded background video " + (new Date().getTime() - start) / 1000 + ' seconds ^500'],
 					callback: function() {
 						$(vid).removeClass('hide');
