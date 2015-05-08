@@ -87,11 +87,10 @@ module.exports = function(grunt) {
         includes: {
           files: {
             src: [
-                'landing-page-src/main.js',
                 'landing-page-src/index.html',
                 'landing-page-src/styles.html'
             ],
-            dest: 'land', // Destination directory
+            dest: 'hi', // Destination directory
             flatten: true,
             cwd: '.',
             options: {
@@ -100,7 +99,7 @@ module.exports = function(grunt) {
           }
         },
         watch: {
-            files: ['scss/*', '<%= src.other %>', '<%= src.posts %>', 'landing-page-src/*'],
+            files: ['scss/*', '<%= src.other %>', '<%= src.posts %>', 'landing-page-src/**'],
             tasks: ['jade', 'sass', 'includes'],
             options: {
                 livereload: {

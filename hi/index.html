@@ -69,10 +69,6 @@
 			  section.intro div a {
 			    color: white; }
 
-			/*# sourceMappingURL=styles.css.map */
-
-		</style>
-		<style id="loader-styles">
 			.loader {
 			  margin: 6em auto;
 			  font-size: 10px;
@@ -86,35 +82,33 @@
 			  -ms-transform: translateZ(0);
 			  transform: translateZ(0);
 			  -webkit-animation: load8 1.1s infinite linear;
-			  animation: load8 1.1s infinite linear;
-			}
+			  animation: load8 1.1s infinite linear; }
+
 			.loader,
 			.loader:after {
 			  border-radius: 50%;
 			  width: 10em;
-			  height: 10em;
-			}
+			  height: 10em; }
+
 			@-webkit-keyframes load8 {
 			  0% {
 			    -webkit-transform: rotate(0deg);
-			    transform: rotate(0deg);
-			  }
+			    transform: rotate(0deg); }
 			  100% {
 			    -webkit-transform: rotate(360deg);
-			    transform: rotate(360deg);
-			  }
-			}
+			    transform: rotate(360deg); } }
 			@keyframes load8 {
 			  0% {
 			    -webkit-transform: rotate(0deg);
-			    transform: rotate(0deg);
-			  }
+			    transform: rotate(0deg); }
 			  100% {
 			    -webkit-transform: rotate(360deg);
-			    transform: rotate(360deg);
-			  }
-			}
+			    transform: rotate(360deg); } }
+
+			/*# sourceMappingURL=styles.css.map */
+
 		</style>
+
 	</head>
 	<body>
 		<main>
@@ -138,7 +132,115 @@
  			  */
  			(function(e,t){typeof module!="undefined"&&module.exports?module.exports=t():typeof define=="function"&&define.amd?define(t):this[e]=t()})("$script",function(){function p(e,t){for(var n=0,i=e.length;n<i;++n)if(!t(e[n]))return r;return 1}function d(e,t){p(e,function(e){return!t(e)})}function v(e,t,n){function g(e){return e.call?e():u[e]}function y(){if(!--h){u[o]=1,s&&s();for(var e in f)p(e.split("|"),g)&&!d(f[e],g)&&(f[e]=[])}}e=e[i]?e:[e];var r=t&&t.call,s=r?t:n,o=r?e.join(""):t,h=e.length;return setTimeout(function(){d(e,function t(e,n){if(e===null)return y();e=!n&&e.indexOf(".js")===-1&&!/^https?:\/\//.test(e)&&c?c+e+".js":e;if(l[e])return o&&(a[o]=1),l[e]==2?y():setTimeout(function(){t(e,!0)},0);l[e]=1,o&&(a[o]=1),m(e,y)})},0),v}function m(n,r){var i=e.createElement("script"),u;i.onload=i.onerror=i[o]=function(){if(i[s]&&!/^c|loade/.test(i[s])||u)return;i.onload=i[o]=null,u=1,l[n]=2,r()},i.async=1,i.src=h?n+(n.indexOf("?")===-1?"?":"&")+h:n,t.insertBefore(i,t.lastChild)}var e=document,t=e.getElementsByTagName("head")[0],n="string",r=!1,i="push",s="readyState",o="onreadystatechange",u={},a={},f={},l={},c,h;return v.get=m,v.order=function(e,t,n){(function r(i){i=e.shift(),e.length?v(i,r):v(i,t,n)})()},v.path=function(e){c=e},v.urlArgs=function(e){h=e},v.ready=function(e,t,n){e=e[i]?e:[e];var r=[];return!d(e,function(e){u[e]||r[i](e)})&&p(e,function(e){return u[e]})?t():!function(e){f[e]=f[e]||[],f[e][i](t),n&&n(r)}(e.join("|")),v},v.done=function(e){v([null],e)},v})
 		</script>
-		<script id="main.js">
+		<script>
+			function LoadPrinter(config, rootElement) {
+				this.name = config.name;
+				this.customLoadingFn = config.load;
+				this.rootElement = rootElement;
+				this.element = document.createElement('div');
+				this.element.innerHTML = '<div class="load-printer">' +
+					'<span class="title"></span>' +
+					'<span class="dots"></span>' +
+					'<span class="result"></span>' +
+					'</div>';
+				this.rootElement.appendChild(this.element);
+				this.load();
+			};
+
+			LoadPrinter.prototype = {
+				load: function () {
+					var self = this;
+					this.startTime = new Date().getTime();
+					this.printStartLoading();
+					this.customLoadingFn(function() {
+						self.printEndLoading();
+					});
+				},
+
+				printStartLoading: function() {
+					this.type('Loading ' + this.name + ' ', this.element.querySelector('.title'));
+				},
+
+				printEndLoading: function() {
+					this.type('DONE in ' + (new Date().getTime() - this.startTime) / 1000 + ' seconds', this.element.querySelector('.result'));
+				},
+
+				type: function (string, element, config) {
+					var config = config || {};
+					var default_config = {
+						strings: [string],
+						showCursor: false,
+						typeSpeed: 0
+					};
+					for (var key in default_config) {
+						config[key] = config[key] || default_config[key];
+					}
+
+					if (window.jQuery) {
+						// stop any animation on that element
+						this.typer && this.typer.complete();
+						$(element).typed({
+							strings: [string],
+							typeSpeed: 0,
+							showCursor: false
+						});
+					} else {
+						this.typer = new Typer(element, config);
+						this.typer.type(string);
+					}
+				}
+			};
+
+		</script>
+		<script>
+			function Typer(element, config) {
+				config = config || {};
+				this.element = element;
+				this.charPause = config.charPause || 1;
+				this.callback = config.callback || function () {};
+			}
+
+			Typer.prototype = {
+				type: function (string, strPos) {
+					var self = this;
+					strPos = strPos || 0;
+					self.isTyping = true;
+
+					if (self._stop) {
+						return;
+					}
+
+					if (self._complete) {
+						self.element.innerText = string;
+						return;
+					}
+
+					if (strPos === string.length) {
+						self.isTyping = false;
+						return self.callback();
+					}
+
+					var charPause = self.charPause * 30;
+					var humanize = Math.round(Math.random() * (charPause * 3 - charPause));
+
+					setTimeout(function () {
+						self.element.innerText = string.substr(0, strPos + 1);
+						strPos ++;
+						self.type(string, strPos)
+					}, humanize);
+				},
+
+				stop: function () {
+					this._stop = true;
+				},
+
+				complete: function () {
+					this._complete = true;
+				}
+			};
+
+		</script>
+		<script>
 			function LoadPrinter(config, rootElement) {
 				this.name = config.name;
 				this.customLoadingFn = config.load;
@@ -267,7 +369,7 @@
 								$('.loader').addClass('hide');
 								$('.intro').removeClass('hide');
 								$('.intro div').typed({
-									strings:["Hey, ^500 I'm Dave the dev. ^500<br>That's me on the right. ^500<br>That is where I live. ^500<br>This is my <a href='/'>site</a>. ^500"],
+									strings:["^500 Hey, ^500 I'm Dave the dev. ^500<br>That's me on the right. ^200<br>That's where I live. ^300<br>Nice to meet you. ^500<br>Welcome to my <a href='/'>site</a>. ^500"],
 									showCursor: false,
 									typeSpeed: 20
 								});
