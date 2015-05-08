@@ -65,7 +65,8 @@
 			section.intro div, .loader-container {
 			  display: table-cell;
 			  vertical-align: middle;
-			  text-align: center;
+			  padding-left: 30px;
+			  /*text-align: center;*/
 			}
 			section.intro div a {
 				color: white;
@@ -264,9 +265,9 @@
 								$('.loader').addClass('hide');
 								$('.intro').removeClass('hide');
 								$('.intro div').typed({
-									strings:["Hey, I'm Dave the dev. <br>This is where I live.<br>This is my girlfriend.<br>This is my <a href='/'>site</a>."],
+									strings:["Hey, ^500 I'm Dave the dev. ^500<br>This is where I live. ^500<br>This is my girlfriend. ^500<br>This is my <a href='/'>site</a>. ^500"],
 									showCursor: false,
-									typeSpeed: 100
+									typeSpeed: 20
 								});
 								$('.print').empty();
 							}, 1000);
@@ -280,7 +281,7 @@
 				var div = document.createElement('div');
 				printElement.appendChild(div);
 				var typer = new Typer(div, {callback: fn});
-				typer.type('Hey give me a sec! Just loading some stuff :-) !');
+				typer.type('Hey give me a sec :-)');
 			}
 
 			var printElement = document.querySelector('main .print');
