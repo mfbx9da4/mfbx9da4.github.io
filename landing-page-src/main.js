@@ -18,19 +18,32 @@ var resources = [
 			});
 			vid.addEventListener('loadeddata', function(ev) {
 				console.log('loaded video');
+				fn();
 				setTimeout(function () {
 					$(vid).removeClass('hide');
 					$('.loader').addClass('hide');
 					$('.intro').removeClass('hide');
 					$('.intro div').typed({
-						strings:["Hey, ^500 I'm Dave the dev. ^500<br>This is where I live. ^500<br>This is my <a href='/'>site</a>. ^500"],
+						strings:["Hey, ^500 I'm Dave the dev. ^500<br>That's me on the right. ^500<br>That is where I live. ^500<br>This is my <a href='/'>site</a>. ^500"],
 						showCursor: false,
 						typeSpeed: 20
 					});
-					$('.print').empty();
+					$('.print').addClass('hide');
 				}, 1000);
-				fn();
 			});
+		}
+	}, {
+		name: 'fonts',
+		load: function (fn) {
+			var start = new Date().getTime();
+			WebFontConfig = {
+			  google: { families: ['Dancing+Script::latin'] },
+			  fontactive: function(familyName, fvd) {
+			  	console.log('loaded font');
+				fn()
+			  },
+			};
+			getGoogleFonts();
 		}
 	}
 ];
@@ -50,3 +63,13 @@ for (var i = 0; i < resources.length; i ++) {
 	var resource = resources[i];
 	var loader = new LoadPrinter(resource, printElement);
 }
+
+function getGoogleFonts() {
+  var wf = document.createElement('script');
+  wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+    '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+  wf.type = 'text/javascript';
+  wf.async = 'true';
+  var s = document.getElementsByTagName('script')[0];
+  s.parentNode.insertBefore(wf, s);
+};

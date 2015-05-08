@@ -22,10 +22,13 @@ Todo:
 
 - [x] Loop video
 - [x] Load javascript dependcies
-- [ ] SASS
+- [x] SASS
+- [x] Basic loader
+- [x] Small description
+- [x] Load fonts
 - [ ] Animations
-- [ ] Basic loader
-- [ ] Small description
+- [ ] Move landing page / of site
+- [ ] remove sass map
 
 
 Description:
