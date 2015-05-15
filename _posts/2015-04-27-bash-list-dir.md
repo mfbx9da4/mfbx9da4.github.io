@@ -1,12 +1,12 @@
 ---
 layout: post
-title:  "Listing a directory in bash"
+title:  "Iterating files in a directory in bash"
 date:   2015-04-20 19:30:27
 categories: bash
 permalink: /list-dir-bash
 ---
 
-A simple enough problem right?
+Many people might jump to
 
     ls
 
