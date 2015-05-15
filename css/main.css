@@ -67,17 +67,6 @@ a:visited {
   margin: 3em auto 2em;
   line-height: 1.5em; }
 
-@media (max-width: 640px) {
-  .site {
-    width: 80%; }
-
-  header {
-    margin-bottom: 2em; }
-    header .title {
-      margin-bottom: 0em; }
-
-  .posts li > a {
-    display: block; } }
 .header a {
   font-size: 1.2rem;
   font-weight: bold;
@@ -142,6 +131,24 @@ main.content {
     background-size: 100%;
     background-repeat: no-repeat; }
 
+/*=========================================
+=            Responsive styles            =
+=========================================*/
+@media (max-width: 640px) {
+  .site {
+    width: 80%; }
+
+  header.header {
+    margin-bottom: 2em; }
+    header.header .title {
+      margin-bottom: 0.4em; }
+    header.header a.extra {
+      margin-right: 1em;
+      margin-left: 0em; }
+
+  .posts li > a {
+    display: block; } }
+/*-----  End of Responsive styles  ------*/
 /*--- HEADINGS ---*/
 h1, h2, h3, h4, h5, h6 {
   margin-bottom: 24px;
