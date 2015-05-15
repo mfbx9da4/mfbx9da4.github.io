@@ -13,8 +13,13 @@ var resources = [
 		name: 'vid',
 		load: function(fn) {
 			var vid = document.querySelector('video');
+			vid.addEventListener('ended', function(ev) {
+				vid.currentTime = 0.1;
+				vid.play();
+			});
 			vid.addEventListener('loadeddata', function(ev) {
 				console.log('loaded video');
+				vid.play();
 				fn();
 				setTimeout(function () {
 					$(vid).removeClass('hide');
