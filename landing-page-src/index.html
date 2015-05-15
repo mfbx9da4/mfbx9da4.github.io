@@ -6,14 +6,21 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="shortcut icon" href="/assets/img/favicon.ico"/>
+		<!-- <link rel="stylesheet" href="/css/animate.css"/> -->
 		include "styles.html"
+		<style>
+		</style>
 	</head>
 	<body>
 		<main>
-	 		<video class="hide" autoplay loop poster="/assets/img/vini-photos-lagoa-abi-dave/IMG_4418.jpg" preload>
+ 	 		<video class="hide animated initial-vid" poster="/assets/img/vini-photos-lagoa-abi-dave/IMG_4418.jpg" autobuffer preload autoplay="autoplay">
 				<source src="/assets/img/vini-photos-lagoa-abi-dave/4415-1.m4v">
+				<!--
+						<source src="../media/BigBuck.webm" type="video/webm">
+						<source src="../media/BigBuck.theora.ogv" type="video/ogg">
+				-->
 			</video>
-			<section class="intro hide">
+			<section onclick="document.querySelector('video').play();" class="intro hide">
 				<div class=""></div>
 			</section>
 			<section class="print"></section>
@@ -21,6 +28,7 @@
 				<div class="loader">Loading...</div>
 			</div>
 		</main>
+
 
  		<script>
  			include "js/$script.js"

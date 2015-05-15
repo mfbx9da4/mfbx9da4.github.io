@@ -49,9 +49,17 @@ Ideas:
 - on focus tab http://stackoverflow.com/a/1760268/1376627
 - big picture with side text http://brad.ly/
 - typed http://www.mattboldt.com/demos/typed-js/
+- http://tympanus.net/Development/ButtonComponentMorph/index7.html
 
 
-Frontend:
+**Main site:**
+
+Todo:
+
+- [ ] Mobile menu
+- [ ] Shortcuts
+
+Ideas:
 
 - [ ] Inspiration!
 	- nice sidebar http://jimhoskins.com/2012/12/14/nested-scopes-in-angularjs.html
@@ -67,19 +75,15 @@ Frontend:
 	- speech bubble http://ilikepixels.co.uk/drop/bubbler/
 	- tiny menu http://ashobiz.asia/boot-extended14/ui/ui-194.html http://ashobiz.asia/boot-extended14/ui/ui-243.html
 	- And for mobile
+	- button morph http://tympanus.net/Development/ButtonComponentMorph/index7.html#
 - [ ] loaded with browserfy, webpack and/or http://dustindiaz.com/scriptjs
 - [ ] Responsive
 - [ ] Angular
 - [ ] shortcuts http://chieffancypants.github.io/angular-hotkeys/
 - [ ] Animations http://julian.com/research/velocity/ https://visionmedia.github.io/move.js/
-- [ ] Toggleable sidebar
-- [ ] Use flexbox
-- [ ] Something silly like this arrow toggle http://dustindiaz.com/scriptjs
 - [ ] CSS spinner gallery http://codegeekz.com/best-css-svg-loaders-and-spinners/
 - [ ] Code highlighting https://asciinema.org/ prism.css
-- [ ] Secondary font type http://fonts.googleapis.com/css?family=Bitter:400,700,400italic
-- [x] Choose font type
-- [ ] Landing page
+- [ ] Letters vortex into my mouth
 
 Blog :
 

@@ -13,14 +13,12 @@ var resources = [
 		name: 'vid',
 		load: function(fn) {
 			var vid = document.querySelector('video');
-			vid.addEventListener('progress', function(ev) {
-				console.log('progress');
-			});
 			vid.addEventListener('loadeddata', function(ev) {
 				console.log('loaded video');
 				fn();
 				setTimeout(function () {
 					$(vid).removeClass('hide');
+					$(vid).addClass('fadeIn');
 					$('.loader').addClass('hide');
 					$('.intro').removeClass('hide');
 					$('.intro div').typed({
