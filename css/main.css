@@ -218,7 +218,8 @@ h5, h6 {
   border: 1px solid #ddd;
   background-color: #eef;
   padding: 0 .4em;
-  margin-bottom: 1.5em; }
+  margin-bottom: 1.5em;
+  overflow-x: scroll; }
 
 .post ul {
   margin-bottom: 1.5em; }
