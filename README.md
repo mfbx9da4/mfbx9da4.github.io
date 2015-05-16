@@ -88,6 +88,7 @@ Ideas:
 Blog :
 
 - [ ] Advantages of promises to callbacks
+- [ ] Writing modules in javascript
 - [ ] Prototypical inheritance (in angular)
 - [ ] Chrome dev tools advantages
 - [ ] File permissions in linux
