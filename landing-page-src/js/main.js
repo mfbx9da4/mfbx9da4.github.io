@@ -26,7 +26,7 @@ var resources = [
 					$(vid).addClass('fadeIn');
 					$('.loader').addClass('hide');
 					$('.intro').removeClass('hide');
-					$('.intro div').typed({
+					$('.intro div > div').typed({
 						strings:["^500 Hey, ^500 I'm Dave the dev. ^500<br>That's me on the right. ^200<br>That's where I live. ^300<br>Nice to meet you. ^500<br>Welcome to my <a href='/'>site</a>. ^500"],
 						showCursor: false,
 						typeSpeed: 20
@@ -40,7 +40,7 @@ var resources = [
 		load: function (fn) {
 			var start = new Date().getTime();
 			WebFontConfig = {
-			  google: { families: ['Dancing+Script::latin'] },
+			  google: { families: ['Architects+Daughter::latin'] },
 			  fontactive: function(familyName, fvd) {
 			  	console.log('loaded font');
 				fn()

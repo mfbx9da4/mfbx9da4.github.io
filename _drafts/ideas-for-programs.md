@@ -9,7 +9,7 @@
 - Turn omnibox into command line, allow navigating files and scripting of say facebook
 - Coding algorithms for duolingo type interface: classic algorithms
 - Template duolingo type interface for any type of game to learn anything by example. language, coding, cooking, sing, draw, play guitar, rhythm, dance, drive, garden, meditate, read fast, read music, touch type, neuroscience. Allow anyone to create the game.
-- Make 404 page of [lost surfer in the snow](http://www.enthuzed.com/wp-content/uploads/2012/03/cold_winter_surf_enthuzed.jpg) 
+- Make 404 page of [lost surfer in the snow](http://www.enthuzed.com/wp-content/uploads/2012/03/cold_winter_surf_enthuzed.jpg)
 - Make an open source free easyquarto
 - A mean.io but with customizable things: e.g file upload, lightbox, bootstrap, google oauth, fb oauth
 
@@ -35,11 +35,11 @@ qq to quit
 
 ### Better omnibox
 - Available in full screen
-- Calculator 
+- Calculator
 - Translations, with did you means
 - Aliasing and searching
 - Switch to any tab
-- History completion by title 
+- History completion by title
     - `hist .....` and also `histr` for regex
 
 # Chrome plugins
@@ -50,3 +50,15 @@ qq to quit
 - password to view passwords
 - require password to decrypt them client side?
 - allow storage of arbitrary passwords
+
+### Better gmail!
+- Treat more like notifications
+- Aggregate into updates
+
+### Javascript compatibility linter
+
+### Markdown chat
+
+### webkit window manager
+
+https://www.googleapis.com/youtube/v3/videos?id=7lCDEYXw3mM&key=AIzaSyB_6zNNxZSfSQNgPrtR6wos7txvZfzL230&part=snippet

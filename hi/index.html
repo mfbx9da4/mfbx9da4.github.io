@@ -57,12 +57,12 @@
 			  font-weight: bold;
 			  font-size: 30px;
 			  line-height: 45px;
-			  font-family: 'Dancing Script', cursive, courier;
+			  font-family: 'Architects Daughter', cursive, courier;
 			  -webkit-text-stroke-width: 1px;
 			  -webkit-text-stroke-color: #ccc;
 			  text-shadow: 0px 0px 4px #000; }
 
-			.v-centered, section.intro div, .loader-container {
+			.v-centered, section.intro div, .loader-container, .spinner {
 			  display: table-cell;
 			  vertical-align: middle; }
 
@@ -106,6 +106,10 @@
 			  100% {
 			    -webkit-transform: rotate(360deg);
 			    transform: rotate(360deg); } }
+			.spinner {
+			  margin: 100px auto 0;
+			  width: 70px;
+			  text-align: center; }
 
 			/*# sourceMappingURL=styles.css.map */
 
@@ -123,8 +127,14 @@
 						<source src="../media/BigBuck.theora.ogv" type="video/ogg">
 				-->
 			</video>
+
+			<!-- <div class="spinner"><div class="bounce1"></div> <div class="bounce2"></div> <div class="bounce3"></div></div> -->
+
 			<section onclick="document.querySelector('video').play();" class="intro hide">
-				<div class=""></div>
+				<div>
+					<div>
+					</div>
+				</div>
 			</section>
 			<section class="print"></section>
 			<div class="loader-container">
@@ -378,7 +388,7 @@
 								$(vid).addClass('fadeIn');
 								$('.loader').addClass('hide');
 								$('.intro').removeClass('hide');
-								$('.intro div').typed({
+								$('.intro div > div').typed({
 									strings:["^500 Hey, ^500 I'm Dave the dev. ^500<br>That's me on the right. ^200<br>That's where I live. ^300<br>Nice to meet you. ^500<br>Welcome to my <a href='/'>site</a>. ^500"],
 									showCursor: false,
 									typeSpeed: 20
@@ -392,7 +402,7 @@
 					load: function (fn) {
 						var start = new Date().getTime();
 						WebFontConfig = {
-						  google: { families: ['Dancing+Script::latin'] },
+						  google: { families: ['Architects+Daughter::latin'] },
 						  fontactive: function(familyName, fvd) {
 						  	console.log('loaded font');
 							fn()

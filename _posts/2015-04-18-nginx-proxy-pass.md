@@ -1,12 +1,12 @@
 ---
 layout: post
-title:  "Nginx proxy pass"
+title:  "Redirecting resources of remote host"
 date:   2015-04-18 19:30:27
 categories: nginx proxy
 permalink: /nginx-proxy-pass
 ---
 
-A common problem when debugging a client site is being able to load a specific javascript file locally and leave other scripts from that remote host to be loaded from the remote address.
+A common problem I have when debugging a client site is being able to load a specific javascript file locally and leave other scripts from that remote host to be loaded from the remote address.
 
 For example:
 
@@ -36,3 +36,5 @@ For example:
                      proxy_set_header X-Real-IP $remote_addr;
              }
         }
+
+Perhaps there are simpler solutions, suggestions welcome!
