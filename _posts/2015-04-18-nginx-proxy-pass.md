@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Redirecting resources of remote host"
+title:  "Load script from website locally"
 date:   2015-04-18 19:30:27
 categories: nginx proxy
 permalink: /nginx-proxy-pass
