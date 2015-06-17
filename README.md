@@ -1,4 +1,4 @@
-## Description
+### Description
 
 My personal site
 
@@ -51,7 +51,7 @@ Blog :
 
 - [ ] Advantages of promises to callbacks
 - [ ] Writing modules in javascript
-- [ ] Prototypical inheritance (in angular)
+- [ ] Prototypical inheritance (in angular) http://adamzerner.github.io/articles/scope_inheritance/
 - [ ] Chrome dev tools advantages
 - [ ] File permissions in linux
 - [ ] BdB script
@@ -67,3 +67,8 @@ Blog :
 - [ ] Javascript design patterns
 - [ ] Genetic algorithms
 - [x] Bash list file
+
+
+
+- http://lifehacker.com/5873909/five-best-goal-tracking-services
+- https://www.udacity.com/wiki/ud189
