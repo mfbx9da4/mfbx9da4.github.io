@@ -2,6 +2,12 @@
 
 My personal site
 
+#### Install 
+
+
+	bundle install
+	npm install
+	sudo npm install -g grunt
 
 #### Build
 Run

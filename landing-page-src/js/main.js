@@ -40,7 +40,7 @@ var resources = [
 		load: function (fn) {
 			var start = new Date().getTime();
 			WebFontConfig = {
-			  google: { families: ['Bitter::latin'] },
+			  google: { families: ['Architects+Daughter::latin'] },
 			  fontactive: function(familyName, fvd) {
 			  	console.log('loaded font');
 				fn()
