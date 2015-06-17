@@ -6,7 +6,7 @@ html(lang="en")
     meta(name='viewport', content='width=device-width, initial-scale=1')
     title {{ page.title }}
     link(rel='stylesheet', href='/css/main.css')
-    link(rel="shortcut icon" href="assets/img/favicon.ico" type="image/x-icon")
+    link(rel="shortcut icon" href="/assets/img/favicon.ico" type="image/x-icon")
   body
     .site
       header.header.row
@@ -14,8 +14,7 @@ html(lang="en")
           a(href='/') {{ site.name }}
         a.extra(href='/') posts
         a.extra(href='/projects') projects
-        a.extra(href='/assets/cv.pdf') cv
-        a.extra(href='/cv/pt') curriculo
+        a.extra(href='/about') about
       main.content
         {{ content }}
       .footer
