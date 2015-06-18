@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Iterating files in bash"
+title:  "Iterating files in bash, the right way"
 date:   2015-04-20 19:30:27
 categories: bash
 permalink: /list-dir-bash

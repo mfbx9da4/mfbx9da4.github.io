@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Load script from website locally"
+title:  "Load a websites's remote script as a local script"
 date:   2015-04-18 19:30:27
 categories: nginx proxy
 permalink: /nginx-proxy-pass
