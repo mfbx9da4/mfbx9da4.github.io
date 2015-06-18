@@ -9,7 +9,7 @@ permalink: /twos-complement
 [Two's-complement](https://en.wikipedia.org/wiki/Two's_complement) is the most common binary way of encoding positive and negative integers in computers. In this post I will prove that the maximum integer encoded by $n$ bits using two's complement encoding is:
 
 $$
-MaxInt(n)=2n−1 
+MaxInt(n)=2^{n-1}−1 
 $$
 
 The two's complement encoding ($TC$), implements the normal binary system except the most significant bit has a negative weight. Here are some examples with 4 bits:
