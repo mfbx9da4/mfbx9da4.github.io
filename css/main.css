@@ -48,7 +48,8 @@ p {
   margin: 1em 0; }
 
 a {
-  color: #00a; }
+  color: #00a;
+  cursor: pointer; }
 
 a:hover {
   color: #000; }
