@@ -27,7 +27,7 @@ var resources = [
 					$('.loader').addClass('hide');
 					$('.intro').removeClass('hide');
 					$('.intro div > div').typed({
-						strings:["^500 Hey, ^500 I'm Dave the dev. ^500<br>That's me on the right. ^200<br>That's where I live. ^500<br>Welcome to my <a href='/'>site</a>. ^500"],
+						strings:["^500 Hey, ^500 I'm Dave the dev. ^500<br>That's me on the right. ^200<br>This is where I live. ^500<br>Welcome to my <a href='/'>site</a>. ^500"],
 						showCursor: false,
 						typeSpeed: 20
 					});
