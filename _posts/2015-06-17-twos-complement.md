@@ -30,7 +30,7 @@ Therefore the maximum integer encodable with 4 bits is 7:
 
 ![two's complement]({{ site.url }}/assets/img/twos-complement.png)
 
-Therefore for $n$ bits:
+Therefore for $n$ bits, the largest number encodable is the sum of the base 2 bits excluding the last bit:
 $$
 MaxInt(n) = \sum_{i=0}^{n-2} 2^i = (2^0 + 2^1 + ... + 2^{n-3} + 2^{n-2} )
 $$
