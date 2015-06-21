@@ -1,7 +1,3 @@
-include "loadPrinter.js"
-
-include "typer.js"
-
 var resources = [
 	{
 		name: 'javascript',
