@@ -20,7 +20,7 @@ For example, given a directory structure as follows:
 
 Running the following:
 
-    for file in $(find . -iname '*.py'); do
+    for file in $(find . -iname '*.py'); do     # wrong
     	echo "$file"
     	touch "$file"
 	done
