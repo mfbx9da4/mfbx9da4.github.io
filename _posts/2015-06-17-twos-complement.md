@@ -12,36 +12,36 @@ $$
 MaxInt(n)=2^{n-1}−1 
 $$
 
-The two's complement encoding ($TC$), implements the normal binary system except the most significant bit has a negative weight. Here are some examples with 4 bits:
+The two's complement encoding ($TC$), implements the [normal binary system](https://en.wikipedia.org/wiki/Binary_number#/media/File:Binary_counter.gif) except the most significant bit has a negative weight. Here are some examples with 4 bits:
 
 $$
-TC([{\color{#2323D9} {0001} }]) = −{\color{#2323D9} {0} } \cdot 2^3 + {\color{#2323D9} {0} } \cdot 2^2 + {\color{#2323D9} {0} } \cdot 2^1 + {\color{#2323D9} {1} } \cdot 2^0 = 0 + 0 + 0 + 1 = 1
+TC([{\color{#F22613} {0001} }]) = −{\color{#F22613} {0} } \cdot 2^3 + {\color{#F22613} {0} } \cdot 2^2 + {\color{#F22613} {0} } \cdot 2^1 + {\color{#F22613} {1} } \cdot 2^0 = 0 + 0 + 0 + 1 = 1
 $$
 $$
-TC([{\color{#2323D9} {0101} }]) = −{\color{#2323D9} {0} } \cdot 2^3 + {\color{#2323D9} {1} } \cdot 2^2 + {\color{#2323D9} {0} } \cdot 2^1 + {\color{#2323D9} {1} } \cdot 2^0 = 0 + 4 + 0 + 1 = 5
+TC([{\color{#F22613} {0101} }]) = −{\color{#F22613} {0} } \cdot 2^3 + {\color{#F22613} {1} } \cdot 2^2 + {\color{#F22613} {0} } \cdot 2^1 + {\color{#F22613} {1} } \cdot 2^0 = 0 + 4 + 0 + 1 = 5
 $$
 $$
-TC([{\color{#2323D9} {1011} }]) = −{\color{#2323D9} {1} } \cdot 2^3 + {\color{#2323D9} {0} } \cdot 2^2 + {\color{#2323D9} {1} } \cdot 2^1 + {\color{#2323D9} {1} } \cdot 2^0 = −8 + 0 + 2 + 1 = −5
+TC([{\color{#F22613} {1011} }]) = −{\color{#F22613} {1} } \cdot 2^3 + {\color{#F22613} {0} } \cdot 2^2 + {\color{#F22613} {1} } \cdot 2^1 + {\color{#F22613} {1} } \cdot 2^0 = −8 + 0 + 2 + 1 = −5
 $$
 $$
-TC([{\color{#2323D9} {1111} }]) = −{\color{#2323D9} {1} } \cdot 2^3 + {\color{#2323D9} {1} } \cdot 2^2 + {\color{#2323D9} {1} } \cdot 2^1 + {\color{#2323D9} {1} } \cdot 2^0 = −8 + 4 + 2 + 1 = −1
+TC([{\color{#F22613} {1111} }]) = −{\color{#F22613} {1} } \cdot 2^3 + {\color{#F22613} {1} } \cdot 2^2 + {\color{#F22613} {1} } \cdot 2^1 + {\color{#F22613} {1} } \cdot 2^0 = −8 + 4 + 2 + 1 = −1
 $$
 Therefore the maximum integer encodable with 4 bits is 7:
 
 ![two's complement]({{ site.url }}/assets/img/twos-complement.png)
 
-Therefore for $n$ bits, the largest number encodable is the sum of the base 2 bits excluding the last bit:
+Therefore for $n$ bits, the largest number encodable $MaxInt(n)$ is the sum of the base 2 bits excluding the left most bit:
 $$
 MaxInt(n) = \sum_{i=0}^{n-2} 2^i = (2^0 + 2^1 + ... + 2^{n-3} + 2^{n-2} )
 $$
 
-Applying the proof of the geometric series to this particular case:
+For brevity, let us refer to the $MaxInt(n)$ sum as $S(n)$ for now: 
 
 $$
-MaxInt(n) = S(n) = \sum_{i=0}^{n-2} 2^i = 2^0 + 2^1 ... + 2^{n-3} + 2^{n-2}
+S(n) = MaxInt(n)
 $$
 
-Adding up each term in the series:
+Applying the proof of the geometric series to this particular case, lets double the geometric series and add  up each term in the series for $2S(n)$:
 
 $$
 2S(n) = (2^0 + 2^0) + (2^1 + 2^1) ... + (2^{n-3} + 2^{n-3}) + (2^{n-2} + 2^{n-2})
@@ -61,7 +61,7 @@ $$
 2S(n) = {\color{#2323D9} {2^1 + 2^2 ... + 2^{n-2}} } + 2^{n-1}
 $$
 
-Notice what is in blue is actually $S(n)$ except it is missing the first term, lets call this part in blue $y$:
+Notice what is in <span style="color: #2323D9">blue</span> is actually $S(n)$ except it is missing the first term ($2^0$), lets call this part in <span style="color: #2323D9">blue</span> $y$:
 
 $$
 2S(n) = {\color{#2323D9} {y} } + 2^{n-1}
