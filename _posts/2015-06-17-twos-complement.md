@@ -15,16 +15,16 @@ $$
 The two's complement encoding ($TC$), implements the normal binary system except the most significant bit has a negative weight. Here are some examples with 4 bits:
 
 $$
-TC([0001]) = −0 \cdot 2^3 + 0 \cdot 2^2 + 0 \cdot 2^1 + 1 \cdot 2^0 = 0 + 0 + 0 + 1 = 1
+TC([{\color{#2323D9} {0001} }]) = −{\color{#2323D9} {0} } \cdot 2^3 + {\color{#2323D9} {0} } \cdot 2^2 + {\color{#2323D9} {0} } \cdot 2^1 + {\color{#2323D9} {1} } \cdot 2^0 = 0 + 0 + 0 + 1 = 1
 $$
 $$
-TC([0101]) = −0 \cdot 2^3 + 1 \cdot 2^2 + 0 \cdot 2^1 + 1 \cdot 2^0 = 0 + 4 + 0 + 1 = 5
+TC([{\color{#2323D9} {0101} }]) = −{\color{#2323D9} {0} } \cdot 2^3 + {\color{#2323D9} {1} } \cdot 2^2 + {\color{#2323D9} {0} } \cdot 2^1 + {\color{#2323D9} {1} } \cdot 2^0 = 0 + 4 + 0 + 1 = 5
 $$
 $$
-TC([1011]) = −1 \cdot 2^3 + 0 \cdot 2^2 + 1 \cdot 2^1 + 1 \cdot 2^0 = −8 + 0 + 2 + 1 = −5
+TC([{\color{#2323D9} {1011} }]) = −{\color{#2323D9} {1} } \cdot 2^3 + {\color{#2323D9} {0} } \cdot 2^2 + {\color{#2323D9} {1} } \cdot 2^1 + {\color{#2323D9} {1} } \cdot 2^0 = −8 + 0 + 2 + 1 = −5
 $$
 $$
-TC([1111]) = −1 \cdot 2^3 + 1 \cdot 2^2 + 1 \cdot 2^1 + 1 \cdot 2^0 = −8 + 4 + 2 + 1 = −1
+TC([{\color{#2323D9} {1111} }]) = −{\color{#2323D9} {1} } \cdot 2^3 + {\color{#2323D9} {1} } \cdot 2^2 + {\color{#2323D9} {1} } \cdot 2^1 + {\color{#2323D9} {1} } \cdot 2^0 = −8 + 4 + 2 + 1 = −1
 $$
 Therefore the maximum integer encodable with 4 bits is 7:
 
@@ -58,23 +58,23 @@ $$
 $$
 
 $$
-2S(n) = {\color{Blue} {2^1 + 2^2 ... + 2^{n-2}} } + 2^{n-1}
+2S(n) = {\color{#2323D9} {2^1 + 2^2 ... + 2^{n-2}} } + 2^{n-1}
 $$
 
 Notice what is in blue is actually $S(n)$ except it is missing the first term, lets call this part in blue $y$:
 
 $$
-2S(n) = {\color{Blue} {y} } + 2^{n-1}
+2S(n) = {\color{#2323D9} {y} } + 2^{n-1}
 $$
 
 $$
-{\color{Blue} {y} } = S(n) - 2^0
+{\color{#2323D9} {y} } = S(n) - 2^0
 $$
 
 Substituting in:
 
 $$
-2S(n) = {\color{Blue} {S(n) -2^0} } + 2^{n-1}
+2S(n) = {\color{#2323D9} {S(n) -2^0} } + 2^{n-1}
 $$
 
 $$

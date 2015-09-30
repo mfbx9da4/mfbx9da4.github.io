@@ -5,15 +5,16 @@ My personal site
 #### Install 
 
 
+	bundle update
 	bundle install
 	npm install
-	sudo npm install -g grunt
+	sudo npm install -g grunt grunt-cli
 
 #### Build
 Run
 
 	grunt watch
-	jekyll serve --watch --host 0.0.0.0
+	bundle exec jekyll serve --watch --host 0.0.0.0
 
 Generates to `_site`.
 
