@@ -15,16 +15,16 @@ $$
 The two's complement encoding ($TC$), implements the [normal binary system](https://en.wikipedia.org/wiki/Binary_number#/media/File:Binary_counter.gif) except the most significant bit has a negative weight. Here are some examples with 4 bits:
 
 $$
-TC([{\color{#F22613} {0001} }]) = −{\color{#F22613} {0} } \cdot 2^3 + {\color{#F22613} {0} } \cdot 2^2 + {\color{#F22613} {0} } \cdot 2^1 + {\color{#F22613} {1} } \cdot 2^0 = 0 + 0 + 0 + 1 = 1
+TC([{\color{#CC0000} {0001} }]) = −{\color{#CC0000} {0} } \cdot 2^3 + {\color{#CC0000} {0} } \cdot 2^2 + {\color{#CC0000} {0} } \cdot 2^1 + {\color{#CC0000} {1} } \cdot 2^0 = 0 + 0 + 0 + 1 = 1
 $$
 $$
-TC([{\color{#F22613} {0101} }]) = −{\color{#F22613} {0} } \cdot 2^3 + {\color{#F22613} {1} } \cdot 2^2 + {\color{#F22613} {0} } \cdot 2^1 + {\color{#F22613} {1} } \cdot 2^0 = 0 + 4 + 0 + 1 = 5
+TC([{\color{#CC0000} {0101} }]) = −{\color{#CC0000} {0} } \cdot 2^3 + {\color{#CC0000} {1} } \cdot 2^2 + {\color{#CC0000} {0} } \cdot 2^1 + {\color{#CC0000} {1} } \cdot 2^0 = 0 + 4 + 0 + 1 = 5
 $$
 $$
-TC([{\color{#F22613} {1011} }]) = −{\color{#F22613} {1} } \cdot 2^3 + {\color{#F22613} {0} } \cdot 2^2 + {\color{#F22613} {1} } \cdot 2^1 + {\color{#F22613} {1} } \cdot 2^0 = −8 + 0 + 2 + 1 = −5
+TC([{\color{#CC0000} {1011} }]) = −{\color{#CC0000} {1} } \cdot 2^3 + {\color{#CC0000} {0} } \cdot 2^2 + {\color{#CC0000} {1} } \cdot 2^1 + {\color{#CC0000} {1} } \cdot 2^0 = −8 + 0 + 2 + 1 = −5
 $$
 $$
-TC([{\color{#F22613} {1111} }]) = −{\color{#F22613} {1} } \cdot 2^3 + {\color{#F22613} {1} } \cdot 2^2 + {\color{#F22613} {1} } \cdot 2^1 + {\color{#F22613} {1} } \cdot 2^0 = −8 + 4 + 2 + 1 = −1
+TC([{\color{#CC0000} {1111} }]) = −{\color{#CC0000} {1} } \cdot 2^3 + {\color{#CC0000} {1} } \cdot 2^2 + {\color{#CC0000} {1} } \cdot 2^1 + {\color{#CC0000} {1} } \cdot 2^0 = −8 + 4 + 2 + 1 = −1
 $$
 Therefore the maximum integer encodable with 4 bits is 7:
 
@@ -58,23 +58,23 @@ $$
 $$
 
 $$
-2S(n) = {\color{#2323D9} {2^1 + 2^2 ... + 2^{n-2}} } + 2^{n-1}
+2S(n) = {\color{#CC0000} {2^1 + 2^2 ... + 2^{n-2}} } + 2^{n-1}
 $$
 
-Notice what is in <span style="color: #2323D9">blue</span> is actually $S(n)$ except it is missing the first term ($2^0$), lets call this part in <span style="color: #2323D9">blue</span> $y$:
+Notice what is in <span style="color: #CC0000">red</span> is actually $S(n)$ except it is missing the first term ($2^0$), lets call this part in <span style="color: #CC0000">red</span> $y$:
 
 $$
-2S(n) = {\color{#2323D9} {y} } + 2^{n-1}
+2S(n) = {\color{#CC0000} {y} } + 2^{n-1}
 $$
 
 $$
-{\color{#2323D9} {y} } = S(n) - 2^0
+{\color{#CC0000} {y} } = S(n) - 2^0
 $$
 
 Substituting in:
 
 $$
-2S(n) = {\color{#2323D9} {S(n) -2^0} } + 2^{n-1}
+2S(n) = {\color{#CC0000} {S(n) -2^0} } + 2^{n-1}
 $$
 
 $$

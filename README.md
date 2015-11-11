@@ -75,6 +75,9 @@ Blog :
 - [ ] Genetic algorithms
 - [x] Bash list file
 
+Algorithms blogs:
+- [ ] Proof of best, worst avg of quick sort, heap sort and merge sort
+
 
 
 - http://lifehacker.com/5873909/five-best-goal-tracking-services
