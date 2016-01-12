@@ -56,12 +56,13 @@ Ideas:
 
 Blog :
 
+- [ ] The only two css tricks you need to know: overflow width auto
 - [ ] Advantages of promises to callbacks
 - [ ] Writing modules in javascript
 - [ ] Prototypical inheritance (in angular) http://adamzerner.github.io/articles/scope_inheritance/
 - [ ] Chrome dev tools advantages
 - [ ] File permissions in linux
-- [ ] BdB script
+- [ ] Banco do brasil script
 - [ ] Design for programmers
 - [ ] Angular transclude
 - [ ] Angular debugging in the console
