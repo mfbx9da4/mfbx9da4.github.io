@@ -14,17 +14,9 @@
  };
  var startLoadUbuntu = new Date().getTime();
  WebFontConfig = {
-   google: { families: [ 'Ubuntu+Mono::latin'] },
+   google: { families: [ 'Ubuntu+Mono::latin', 'Bitter::latin'] },
    fontactive: function(familyName, fvd) {
       console.log(familyName, 'font loaded in', (new Date().getTime() - startLoadUbuntu) / 1000, 'seconds');
-   },
- };
- getGoogleFonts();
- var startLoadBitter = new Date().getTime();
- WebFontConfig = {
-   google: { families: [ 'Bitter::latin' ] },
-   fontactive: function(familyName, fvd) {
-      console.log(familyName, 'font loaded in', (new Date().getTime() - startLoadBitter) / 1000, 'seconds');
    },
  };
  getGoogleFonts();</script></body></html>
