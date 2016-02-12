@@ -17,18 +17,16 @@ var resources = [
 				console.log('loaded video');
 				vid.play();
 				fn();
-				setTimeout(function () {
-					$(vid).removeClass('hide');
-					$(vid).addClass('fadeIn');
-					$('.loader').addClass('hide');
-					$('.intro').removeClass('hide');
-					$('.intro div > div').typed({
-						strings:["^500 Hey, ^500 I'm Dave the dev. ^500<br>That's me on the right. ^200<br>This is where I live. ^500<br>Welcome to my <a href='/'>site</a>. ^500"],
-						showCursor: false,
-						typeSpeed: 20
-					});
-					$('.print').addClass('hide');
-				}, 1000);
+				$(vid).removeClass('hide');
+				$(vid).addClass('fadeIn');
+				$('.loader').addClass('hide');
+				$('.intro').removeClass('hide');
+				$('.intro-text-content span').typed({
+					strings:["^500 Hey", "^500 I'm Dave the dev. ^500<br>That's me on the right. ^200<br>This is where I live. ^500<br>Welcome to my <a href='/'>site</a>. ^500"],
+					showCursor: true,
+					typeSpeed: 20
+				});
+				$('.print').addClass('hide');
 			});
 		}
 	}, {
@@ -36,7 +34,7 @@ var resources = [
 		load: function (fn) {
 			var start = new Date().getTime();
 			WebFontConfig = {
-			  google: { families: ['Architects+Daughter::latin'] },
+			  google: { families: ['Bitter::latin'] },
 			  fontactive: function(familyName, fvd) {
 			  	console.log('loaded font');
 				fn()

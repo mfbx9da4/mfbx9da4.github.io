@@ -78,6 +78,7 @@ Blog :
 
 Algorithms blogs:
 - [ ] Proof of best, worst avg of quick sort, heap sort and merge sort
+- [ ] Best way to learn algorithms is to implement them. Implement an interface for visualizing javascript 
 
 
 

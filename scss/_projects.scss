@@ -3,12 +3,22 @@
 /* Projects
 /*
 /*****************************************************************************/
+.project {
+	margin-top: 24px;
 
-ul.projects > li {
-	list-style: none;
-}
+	.image {
+		// height: 200px;
+		// width: 200px;
+		background-color: #EAEAEA;
+	}
 
-li > .description {
-  color: #4A4A4A;
-  margin-left: 16px;
+	.title {
+		margin-bottom: 8px;
+	}
+
+	.description {
+		color: #4A4A4A;
+		text-decoration: none;
+		margin: 0;
+	}
 }

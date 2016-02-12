@@ -250,11 +250,15 @@ h5, h6 {
 /* Projects
 /*
 /*****************************************************************************/
-ul.projects > li {
-  list-style: none; }
-
-li > .description {
-  color: #4A4A4A;
-  margin-left: 16px; }
+.project {
+  margin-top: 24px; }
+  .project .image {
+    background-color: #EAEAEA; }
+  .project .title {
+    margin-bottom: 8px; }
+  .project .description {
+    color: #4A4A4A;
+    text-decoration: none;
+    margin: 0; }
 
 /*# sourceMappingURL=main.css.map */

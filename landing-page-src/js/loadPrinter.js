@@ -16,9 +16,9 @@ LoadPrinter.prototype = {
 	load: function () {
 		var self = this;
 		this.startTime = new Date().getTime();
-		this.printStartLoading();
+		// this.printStartLoading();
 		this.customLoadingFn(function() {
-			self.printEndLoading();
+			// self.printEndLoading();
 		});
 	},
 
