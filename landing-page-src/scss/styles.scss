@@ -15,7 +15,6 @@ video, .mask {
 
 .mask {
 	background: rgba(255, 255, 255, 0.25);
-	// background-image: url("/assets/img/bg.png");
 }
 
 .first {
@@ -75,14 +74,14 @@ section.intro {
 
 section.intro div.vertically-centered-wrapper {
 	padding-left: 16px;
-	width: 360px;
+	width: 325px;
 	margin: 0 auto;
 
 	.intro-text-content {
 		color: #333;
 		max-width: 350px;
-		padding: 20px;
-		font-size: 21px;
+		padding: 25px;
+		font-size: 25px;
 		font-weight: lighter;
 		opacity: 0.90;
 		min-height: 85px;
