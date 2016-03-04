@@ -3,3 +3,4 @@ _site
 .sass-cache
 npm-debug.log
 assets/img/vini-photos-lagoa-abi-dave/vini-photos-lagoa-abi-dave-cp/
+.DS_Store

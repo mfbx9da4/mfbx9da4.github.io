@@ -6,17 +6,15 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="shortcut icon" href="/assets/img/favicon.ico"/>
-        <!-- <link rel="stylesheet" href="/css/animate.css"/> -->
+        <link rel="stylesheet" href="/assets/fonts/fontello-3df8a4cd/css/fontello.css"/>
+        <!-- <link rel="style sheet" href="/css/animate.css"/> -->
         <style type="text/css" media="screen">
         	*, *:before, *:after {
         	  margin: 0;
         	  padding: 0;
         	  box-sizing: border-box; }
 
-        	body {
-        	  font-family: courier; }
-
-        	video {
+        	video, .mask {
         	  position: absolute;
         	  top: 0;
         	  left: 0;
@@ -24,13 +22,22 @@
         	  height: 100%;
         	  object-fit: cover; }
 
-        	main {
-        	  position: absolute;
-        	  width: 100%;
-        	  height: 100%;
-        	  z-index: 99;
-        	  display: table;
-        	  overflow: hidden; }
+        	.mask {
+        	  background: rgba(255, 255, 255, 0.25); }
+
+        	.first {
+        	  padding-top: 50px;
+        	  padding-bottom: 0; }
+        	  .first article {
+        	    position: relative;
+        	    height: 700px; }
+        	    .first article main {
+        	      position: absolute;
+        	      width: 100%;
+        	      height: 100%;
+        	      z-index: 99;
+        	      display: table;
+        	      overflow: hidden; }
 
         	.hide {
         	  display: none !important; }
@@ -57,16 +64,17 @@
         	  font-weight: bold;
         	  font-size: 30px;
         	  line-height: 45px;
-        	  font-family: courier, 'Bitter', cursive; }
+        	  font-family: 'Ubuntu', courier, 'Bitter', cursive; }
 
-        	.v-centered, section.intro div.vertically-centered-wrapper, .loader-container, .spinner {
+        	.v-centered, .loader-container, .spinner {
         	  display: table-cell;
         	  vertical-align: middle; }
 
         	section.intro div.vertically-centered-wrapper {
-        	  padding-left: 16px; }
+        	  padding-left: 16px;
+        	  width: 360px;
+        	  margin: 0 auto; }
         	  section.intro div.vertically-centered-wrapper .intro-text-content {
-        	    background: white;
         	    color: #333;
         	    max-width: 350px;
         	    padding: 20px;
@@ -144,6 +152,41 @@
         	    opacity: 0; }
         	  100% {
         	    opacity: 1; } }
+        	.posts {
+        	  text-align: left; }
+
+        	ul.posts li {
+        	  position: relative;
+        	  border-top: solid 1px #ddd;
+        	  padding: 1.3em 0 1.3em 6.75em; }
+        	ul.posts .date {
+        	  display: block;
+        	  position: absolute;
+        	  left: 0;
+        	  top: 1.3em;
+        	  background-color: #d52349;
+        	  height: 3.5em;
+        	  text-align: center;
+        	  color: #fff;
+        	  line-height: 1em;
+        	  border-top-left-radius: 5px;
+        	  border-bottom-left-radius: 5px;
+        	  padding: 0.5em 0.75em 0 0.7em;
+        	  width: 60px; }
+        	  ul.posts .date:after {
+        	    content: '';
+        	    position: absolute;
+        	    bottom: 0;
+        	    right: -1.2em;
+        	    border-left: solid 1.25em #d52349;
+        	    border-top: solid 1.8em transparent;
+        	    border-bottom: solid 1.8em transparent; }
+        	  ul.posts .date strong {
+        	    display: block;
+        	    font-size: 0.7em;
+        	    padding-top: 0.15em;
+        	    font-weight: normal;
+        	    color: white; }
 
         	/*# sourceMappingURL=styles.css.map */
 
@@ -152,9 +195,11 @@
     </head>
     <body>
         <main>
-            <video class="hide animated initial-vid" poster="/assets/img/vini-photos-lagoa-abi-dave/IMG_4418.jpg" autobuffer preload autoplay="autoplay">
+            <video class="hide animated initial-vid" poster="/assets/img/vini-photos-lagoa-abi-dave/4415.png" autobuffer preload autoplay="autoplay">
                 <source src="/assets/img/vini-photos-lagoa-abi-dave/4415-1.m4v">
             </video>
+
+            <div class="mask"></div>
 
             <section onclick="document.querySelector('video').play();" class="intro hide">
                 <div class="vertically-centered-wrapper">
@@ -166,14 +211,7 @@
             <section class="print"></section>
         </main>
 
-        <script>
-            	/*!
-              * $script.js JS loader & dependency manager
-              * https://github.com/ded/script.js
-              * (c) Dustin Diaz 2014 | License MIT
-              */
-            (function(e,t){typeof module!="undefined"&&module.exports?module.exports=t():typeof define=="function"&&define.amd?define(t):this[e]=t()})("$script",function(){function p(e,t){for(var n=0,i=e.length;n<i;++n)if(!t(e[n]))return r;return 1}function d(e,t){p(e,function(e){return!t(e)})}function v(e,t,n){function g(e){return e.call?e():u[e]}function y(){if(!--h){u[o]=1,s&&s();for(var e in f)p(e.split("|"),g)&&!d(f[e],g)&&(f[e]=[])}}e=e[i]?e:[e];var r=t&&t.call,s=r?t:n,o=r?e.join(""):t,h=e.length;return setTimeout(function(){d(e,function t(e,n){if(e===null)return y();e=!n&&e.indexOf(".js")===-1&&!/^https?:\/\//.test(e)&&c?c+e+".js":e;if(l[e])return o&&(a[o]=1),l[e]==2?y():setTimeout(function(){t(e,!0)},0);l[e]=1,o&&(a[o]=1),m(e,y)})},0),v}function m(n,r){var i=e.createElement("script"),u;i.onload=i.onerror=i[o]=function(){if(i[s]&&!/^c|loade/.test(i[s])||u)return;i.onload=i[o]=null,u=1,l[n]=2,r()},i.async=1,i.src=h?n+(n.indexOf("?")===-1?"?":"&")+h:n,t.insertBefore(i,t.lastChild)}var e=document,t=e.getElementsByTagName("head")[0],n="string",r=!1,i="push",s="readyState",o="onreadystatechange",u={},a={},f={},l={},c,h;return v.get=m,v.order=function(e,t,n){(function r(i){i=e.shift(),e.length?v(i,r):v(i,t,n)})()},v.path=function(e){c=e},v.urlArgs=function(e){h=e},v.ready=function(e,t,n){e=e[i]?e:[e];var r=[];return!d(e,function(e){u[e]||r[i](e)})&&p(e,function(e){return u[e]})?t():!function(e){f[e]=f[e]||[],f[e][i](t),n&&n(r)}(e.join("|")),v},v.done=function(e){v([null],e)},v})
-        </script>
+        <script src="/assets/js/landing-page-libs.min.js"></script>
         <script>
             function LoadPrinter(config, rootElement) {
             	this.name = config.name;
@@ -283,14 +321,7 @@
 
         </script>
         <script>
-            var resources = [
-            	{
-            		name: 'javascript',
-            		load: function(fn) {
-            			$script('/assets/js/landing-page-libs.min.js', 'libs');
-            			$script.ready(['libs'], fn);
-            		}
-            	}, {
+            var resources = [{
             		name: 'vid',
             		load: function(fn) {
             			var vid = document.querySelector('video');
@@ -304,10 +335,11 @@
             				fn();
             				$(vid).removeClass('hide');
             				$(vid).addClass('fadeIn');
-            				$('.loader').addClass('hide');
             				$('.intro').removeClass('hide');
+            				var message = "^500 I'm Dave the dev. ^500<br>That's me on the right. ^200" +
+            					"<br/>Welcome to my <a href='/'>site</a>. ^500";
             				$('.intro-text-content span').typed({
-            					strings:["^500 Hey", "^500 I'm Dave the dev. ^500<br>That's me on the right. ^200<br>This is where I live. ^500<br>Welcome to my <a href='/'>site</a>. ^500"],
+            					strings:["^500 Hey", message],
             					showCursor: true,
             					typeSpeed: 20
             				});
@@ -319,7 +351,7 @@
             		load: function (fn) {
             			var start = new Date().getTime();
             			WebFontConfig = {
-            			  google: { families: ['Bitter::latin'] },
+            			  google: { families: ['Ubuntu:300:latin'] },
             			  fontactive: function(familyName, fvd) {
             			  	console.log('loaded font');
             				fn()

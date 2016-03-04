@@ -3,10 +3,7 @@
   padding: 0;
   box-sizing: border-box; }
 
-body {
-  font-family: courier; }
-
-video {
+video, .mask {
   position: absolute;
   top: 0;
   left: 0;
@@ -14,13 +11,22 @@ video {
   height: 100%;
   object-fit: cover; }
 
-main {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  z-index: 99;
-  display: table;
-  overflow: hidden; }
+.mask {
+  background: rgba(255, 255, 255, 0.25); }
+
+.first {
+  padding-top: 50px;
+  padding-bottom: 0; }
+  .first article {
+    position: relative;
+    height: 700px; }
+    .first article main {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      z-index: 99;
+      display: table;
+      overflow: hidden; }
 
 .hide {
   display: none !important; }
@@ -47,16 +53,17 @@ section.intro {
   font-weight: bold;
   font-size: 30px;
   line-height: 45px;
-  font-family: courier, 'Bitter', cursive; }
+  font-family: 'Ubuntu', courier, 'Bitter', cursive; }
 
-.v-centered, section.intro div.vertically-centered-wrapper, .loader-container, .spinner {
+.v-centered, .loader-container, .spinner {
   display: table-cell;
   vertical-align: middle; }
 
 section.intro div.vertically-centered-wrapper {
-  padding-left: 16px; }
+  padding-left: 16px;
+  width: 360px;
+  margin: 0 auto; }
   section.intro div.vertically-centered-wrapper .intro-text-content {
-    background: white;
     color: #333;
     max-width: 350px;
     padding: 20px;
@@ -134,5 +141,40 @@ section.intro div.vertically-centered-wrapper {
     opacity: 0; }
   100% {
     opacity: 1; } }
+.posts {
+  text-align: left; }
+
+ul.posts li {
+  position: relative;
+  border-top: solid 1px #ddd;
+  padding: 1.3em 0 1.3em 6.75em; }
+ul.posts .date {
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 1.3em;
+  background-color: #d52349;
+  height: 3.5em;
+  text-align: center;
+  color: #fff;
+  line-height: 1em;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  padding: 0.5em 0.75em 0 0.7em;
+  width: 60px; }
+  ul.posts .date:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: -1.2em;
+    border-left: solid 1.25em #d52349;
+    border-top: solid 1.8em transparent;
+    border-bottom: solid 1.8em transparent; }
+  ul.posts .date strong {
+    display: block;
+    font-size: 0.7em;
+    padding-top: 0.15em;
+    font-weight: normal;
+    color: white; }
 
 /*# sourceMappingURL=styles.css.map */

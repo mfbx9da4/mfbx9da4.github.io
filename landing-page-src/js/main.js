@@ -1,11 +1,4 @@
-var resources = [
-	{
-		name: 'javascript',
-		load: function(fn) {
-			$script('/assets/js/landing-page-libs.min.js', 'libs');
-			$script.ready(['libs'], fn);
-		}
-	}, {
+var resources = [{
 		name: 'vid',
 		load: function(fn) {
 			var vid = document.querySelector('video');
@@ -19,10 +12,11 @@ var resources = [
 				fn();
 				$(vid).removeClass('hide');
 				$(vid).addClass('fadeIn');
-				$('.loader').addClass('hide');
 				$('.intro').removeClass('hide');
+				var message = "^500 I'm Dave the dev. ^500<br>That's me on the right. ^200" +
+					"<br/>Welcome to my <a href='/'>site</a>. ^500";
 				$('.intro-text-content span').typed({
-					strings:["^500 Hey", "^500 I'm Dave the dev. ^500<br>That's me on the right. ^200<br>This is where I live. ^500<br>Welcome to my <a href='/'>site</a>. ^500"],
+					strings:["^500 Hey", message],
 					showCursor: true,
 					typeSpeed: 20
 				});
@@ -34,7 +28,7 @@ var resources = [
 		load: function (fn) {
 			var start = new Date().getTime();
 			WebFontConfig = {
-			  google: { families: ['Bitter::latin'] },
+			  google: { families: ['Ubuntu:300:latin'] },
 			  fontactive: function(familyName, fvd) {
 			  	console.log('loaded font');
 				fn()
