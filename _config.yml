@@ -1,6 +1,6 @@
 name: David Adler's blog
 markdown: redcarpet
-highlighter: 'pygments'
+highlighter: 'rouge'
 # pygments: true
 gems:
   - jekyll-sitemap
