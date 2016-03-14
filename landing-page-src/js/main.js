@@ -14,7 +14,7 @@ var resources = [{
 				$(vid).addClass('fadeIn');
 				$('.intro').removeClass('hide');
 				var message = "^500 I'm Dave the dev. ^500<br>That's me on the right. ^200" +
-					"<br/>Welcome to my <a href='/'>site</a>. ^500";
+					"<br/>Welcome to my <a href='/'>site</a> ^500";
 				$('.intro-text-content span').typed({
 					strings:["^500 Hey", message],
 					showCursor: true,
