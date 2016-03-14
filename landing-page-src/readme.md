@@ -2,16 +2,8 @@
 
 Todo:
 
-- [x] Loop video
-- [x] Load javascript dependcies
-- [x] SASS
-- [x] Basic loader
-- [x] Small description
-- [x] Load fonts
-- [ ] Animations
-- [ ] Move landing page / of site
-- [ ] remove sass map
-
+- [ ] Move index.html to /blog
+- [ ] Move hi/index.html to index.html
 
 Aim:
 

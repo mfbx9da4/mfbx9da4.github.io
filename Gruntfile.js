@@ -91,7 +91,7 @@ module.exports = function(grunt) {
                 'landing-page-src/html5up.html',
                 'landing-page-src/styles.html'
             ],
-            dest: 'hi', // Destination directory
+            dest: '_layouts', // Destination directory
             flatten: true,
             cwd: '.',
             options: {
