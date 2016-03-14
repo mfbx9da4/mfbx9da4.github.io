@@ -110,23 +110,19 @@ main.content {
     background-size: 100%;
     cursor: pointer;
 
-    &:hover {
+    &:hover, &.hover {
       background-position: 0 100%;
     }
   }
 
-  .hand-img {
+  .hover-message {
     position: fixed;
-    bottom: 90px;
-    right: -19px;
-    z-index: 0;
-
-    width: 86px;
-    height: 83px;
-
-    background-image: url(/assets/img/hand-hold-bw.png);
-    background-size: 100%;
-    background-repeat: no-repeat;
+    bottom: 40px;
+    right: 121px;
+    z-index: 2;
+    display: none;
+    -webkit-animation-duration: 0.5s;
+    animation-duration: 0.5s;
   }
 }
 
