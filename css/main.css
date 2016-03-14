@@ -120,7 +120,7 @@ main.content {
     background-size: 100%;
     cursor: pointer; }
     .footer .contact .profile-img:hover {
-      background-position-y: 100%; }
+      background-position: 0 100%; }
   .footer .contact .hand-img {
     position: fixed;
     bottom: 90px;
