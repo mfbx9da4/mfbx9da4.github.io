@@ -63,9 +63,6 @@ module.exports = function(grunt) {
           dist: {
             files: {
               'css/main.css': 'scss/main.scss',
-              'css/html5up/main.css': 'landing-page-src/scss/main.scss',
-              'css/html5up/ie8.css': 'landing-page-src/scss/ie8.scss',
-              'css/html5up/ie9.css': 'landing-page-src/scss/ie9.scss',
               'landing-page-src/styles.css': 'landing-page-src/scss/styles.scss'
             }
           }
