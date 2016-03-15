@@ -63,7 +63,7 @@ module.exports = function(grunt) {
           dist: {
             files: {
               'css/main.css': 'scss/main.scss',
-              'landing-page-src/styles.css': 'landing-page-src/scss/styles.scss'
+              'css/landing-page.css': 'landing-page-src/scss/styles.scss'
             }
           }
         },
@@ -87,9 +87,7 @@ module.exports = function(grunt) {
         includes: {
           files: {
             src: [
-                'landing-page-src/index.html',
-                'landing-page-src/html5up.html',
-                'landing-page-src/styles.html'
+                'landing-page-src/index.html'
             ],
             dest: '_layouts', // Destination directory
             flatten: true,

@@ -2,8 +2,20 @@
 
 Todo:
 
-- [ ] Move index.html to /blog
-- [ ] Move hi/index.html to index.html
+- [x] Move index.html to /blog
+- [x] Move hi/index.html to index.html
+- [ ] Create header for default
+- [ ] Export image
+- [ ] Share HTML and styles for nav
+- [ ] Compile nav.jade into landing-page-src/nav.html and include in landing-page-src/index.html OR convert landing page index.html into index.jade
+    - [ ] Import styles rather than concat, compile to css folder
+    - [ ] Manually convert video and nav html to jade
+    - [ ] Import google analytics jade
+    - [ ] Speed up jekyll/jade
+        - [ ] make cv, assets, landing-page, scss private
+    - [ ] Move main.js to assets/js/landing-page.js
+- [ ] SCSS
+    - [ ] Either move landing-page-src scss out or do a long import?
 
 Aim:
 

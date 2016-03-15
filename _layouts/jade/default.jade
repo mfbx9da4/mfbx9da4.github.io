@@ -5,20 +5,16 @@ html(lang="en")
     meta(http-equiv='X-UA-Compatible', content='IE=edge,chrome=1')
     meta(name='viewport', content='width=device-width, initial-scale=1')
     title {{ page.title }}
+    link(rel='stylesheet', href='/assets/fonts/font-awesome-4.5.0/css/font-awesome.min.css')
     link(rel='stylesheet', href='/css/main.css')
     link(rel="shortcut icon" href="/assets/img/favicon.ico" type="image/x-icon")
   body
+    header
+      img.cover(src="/assets/img/vini-photos-lagoa-abi-dave/header.png", alt="Cover")
+      include nav
     .site
-      header.header.row
-        h1.title
-          a(href='/') David Alberto Adler
-        a.extra(href='/posts') posts
-        a.extra(href='/projects') projects
-        a.extra(href='/about') about
-        a.extra(href='/assets/cv.pdf') cv
-      main.content
-        {{ content }}
-      .footer
+      main.content {{ content }}
+      footer.footer
         .contact
           p
             a(href='https://github.com/mfbx9da4') github.com/mfbx9da4
