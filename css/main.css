@@ -302,7 +302,9 @@ nav {
     font-weight: 100;
     font-size: 38px;
     -webkit-animation-delay: 0.5s;
-    animation-delay: 0.5s; }
+    animation-delay: 0.5s;
+    line-height: normal;
+    margin: 0; }
     nav h1.small-title {
       display: none; }
   nav .links {
