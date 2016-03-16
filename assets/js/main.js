@@ -11,10 +11,11 @@ $(document).ready(function() {
 	$('.profile-img').hover(function() {
 		$('.hover-message').show();
 		$('.hover-message').addClass('bounceInRight');
-	})
+	});
 
 	$('.profile-img').mouseleave(function() {
 		$('.hover-message').hide();
 		$('.hover-message').removeClass('bounceInRight');
-	})
+	});
+
 });

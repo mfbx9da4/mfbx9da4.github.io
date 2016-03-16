@@ -13,9 +13,10 @@
         <main>
             <div class="video-container">
 
-                <video class="animated" poster="/assets/img/vini-photos-lagoa-abi-dave/4415-blurred.png" autobuffer preload autoplay="autoplay">
-                    <source src="/assets/img/vini-photos-lagoa-abi-dave/4415-1.m4v">
-                    <source src="/assets/img/vini-photos-lagoa-abi-dave/4415-1.ogg" >
+                <video class="animated"
+                    poster="/assets/img/vini-photos-lagoa-abi-dave/4415-blurred.png" autobuffer preload autoplay="autoplay">
+                    <source type="video/mp4" src="/assets/img/vini-photos-lagoa-abi-dave/4415-1.m4v">
+                    <source type="video/ogg" src="/assets/img/vini-photos-lagoa-abi-dave/4415-1.ogg" >
                 </video>
 
                 <img src="/assets/img/vini-photos-lagoa-abi-dave/4415-blurred.png"
@@ -23,30 +24,12 @@
 
                 <div class="mask"></div>
 
-                <nav>
-                    <h1 class="animated fadeInDown full-title">David Alberto Adler</h1>
-                    <h1 class="animated fadeInDown small-title">David Adler</h1>
-                    <div class="links animated fadeInDown">
-                        <div class="link"> <a href="/posts">BLOG</a> </div>
-                        <div class="link"> <a target="_blank" href="/assets/cv.pdf">CV</a> </div>
-                        <div class="link"> <a href="/about">ABOUT</a> </div>
-                        <div class="link"> <a href="/projects">WORK</a> </div>
-                    </div>
-                    <div class="icons">
-                        <a target="_blank" href="https://github.com/mfbx9da4">
-                        <i class="animated zoomIn fa fa-lg fa-github-square"></i></a>
-                        <a target="_blank" href="http://br.linkedin.com/pub/david-adler/71/566/710/">
-                        <i class="animated zoomIn fa fa-lg fa-linkedin-square"></i></a>
-                        <a href="mailto:dalberto.adler@gmail.com">
-                        <i class="animated zoomIn fa fa-lg fa-envelope"></i></a>
-                        <a target="_blank" href="http://stackoverflow.com/users/1376627/david-adler">
-                        <i class="animated zoomIn fa fa-lg fa-stack-overflow"></i></a>
-                    </div>
-                </nav>
+                include "landing-page-nav.html"
             </div>
         </main>
 
         <script src="/assets/js/jquery-1.9.1.min.js"></script>
+        <script src="/assets/js/modernizr.custom.js"></script>
         <script>
             include "js/main.js"
         </script>

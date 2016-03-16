@@ -13,9 +13,10 @@
         <main>
             <div class="video-container">
 
-                <video class="animated" poster="/assets/img/vini-photos-lagoa-abi-dave/4415-blurred.png" autobuffer preload autoplay="autoplay">
-                    <source src="/assets/img/vini-photos-lagoa-abi-dave/4415-1.m4v">
-                    <source src="/assets/img/vini-photos-lagoa-abi-dave/4415-1.ogg" >
+                <video class="animated"
+                    poster="/assets/img/vini-photos-lagoa-abi-dave/4415-blurred.png" autobuffer preload autoplay="autoplay">
+                    <source type="video/mp4" src="/assets/img/vini-photos-lagoa-abi-dave/4415-1.m4v">
+                    <source type="video/ogg" src="/assets/img/vini-photos-lagoa-abi-dave/4415-1.ogg" >
                 </video>
 
                 <img src="/assets/img/vini-photos-lagoa-abi-dave/4415-blurred.png"
@@ -24,8 +25,8 @@
                 <div class="mask"></div>
 
                 <nav>
-                    <h1 class="animated fadeInDown full-title">David Alberto Adler</h1>
-                    <h1 class="animated fadeInDown small-title">David Adler</h1>
+                    <h1 class="animated title fadeInDown full-title">David Alberto Adler</h1>
+                    <h1 class="animated title fadeInDown small-title">David Adler</h1>
                     <div class="links animated fadeInDown">
                         <div class="link"> <a href="/posts">BLOG</a> </div>
                         <div class="link"> <a target="_blank" href="/assets/cv.pdf">CV</a> </div>
@@ -43,23 +44,49 @@
                         <i class="animated zoomIn fa fa-lg fa-stack-overflow"></i></a>
                     </div>
                 </nav>
+
             </div>
         </main>
 
         <script src="/assets/js/jquery-1.9.1.min.js"></script>
+        <script src="/assets/js/modernizr.custom.js"></script>
         <script>
             $(document).ready(function() {
-            	var vid = document.querySelector('video');
-            	vid.addEventListener('ended', function(ev) {
-            		vid.currentTime = 0.1;
-            		vid.play();
-            	});
-            	vid.load();
-            	vid.addEventListener('loadeddata', function(ev) {
-            		vid.play();
-            		$('img.poster').addClass('fadeOut');
-            		$('video').addClass('fadeIn');
-            	});
+
+                var shouldPlayVideo = false;
+                // Provided we have autoplay or no touch events
+                // (ie desktop) play the video
+                Modernizr.on('videoautoplay', function(result) {
+                    shouldPlayVideo = !!result;
+                    if (result) {
+                        console.log('supported videoautoplay');
+                    } else {
+                        console.log('not supported videoautoplay');
+                    }
+
+                    if (!shouldPlayVideo && !Modernizr.touchevents) {
+                        console.log('No touch events');
+                        shouldPlayVideo = true;
+                    }
+
+                    if (shouldPlayVideo) {
+                        playVideo();
+                    }
+                });
+
+                function playVideo() {
+                    var vid = document.querySelector('video');
+                    vid.addEventListener('ended', function(ev) {
+                        vid.currentTime = 0.1;
+                        vid.play();
+                    });
+                    vid.load();
+                    vid.addEventListener('loadeddata', function(ev) {
+                        vid.play();
+                        $('img.poster').addClass('fadeOut');
+                        $('video').addClass('fadeIn');
+                    });
+                }
             })
 
         </script>
