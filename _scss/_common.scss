@@ -1,0 +1,127 @@
+/*****************************************************************************/
+/*
+/* Common
+/*
+/*****************************************************************************/
+
+/* Global Reset */
+*, *:before, *:after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+	widows: 100%;
+}
+
+body {
+  background-color: #FFF;
+  font: 16px 'Ubuntu Mono', Helvetica, Arial, sans-serif;
+  text-align: center;
+}
+
+h1 {
+  margin-bottom: 1em;
+}
+p { margin: 1em 0; }
+
+a         { color: #00a; cursor: pointer;}
+a:hover   { color: #000; }
+a:visited { color: #a0a; }
+
+/*****************************************************************************/
+/*
+/* Site
+/*
+/*****************************************************************************/
+
+.site {
+  text-align: justify;
+  width: 75%;
+  margin: 3em auto 2em;
+  line-height: 1.5em;
+}
+
+header {
+  position: relative;
+
+  img.cover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+main.content {
+  z-index: 1;
+  position: relative;
+}
+
+.meta {
+  color: #aaa;
+}
+
+
+.footer {
+  color: #666;
+  border-top: 4px solid #eee;
+  margin-top: 2em;
+  overflow: hidden;
+}
+
+.footer .contact {
+  float: left;
+  margin-right: 3em;
+
+  a {
+    color: #8085C1;
+  }
+
+  .profile-img {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    z-index: 1;
+
+    width: 130px;
+    height: 130px;
+
+    background-image: url(/assets/img/chaordic-hover-profile.png);
+    background-size: 100%;
+    cursor: pointer;
+
+    &:hover, &.hover {
+      background-position: 0 100%;
+    }
+  }
+
+  .hover-message {
+    position: fixed;
+    bottom: 40px;
+    right: 121px;
+    z-index: 2;
+    display: none;
+    -webkit-animation-duration: 0.5s;
+    animation-duration: 0.5s;
+  }
+}
+
+/*=========================================
+=            Responsive styles            =
+=========================================*/
+
+@media (max-width: 640px) {
+  .site {
+    width: 80%;
+  }
+
+  .posts li > a {
+    display: block;
+  }
+}
+
+/*-----  End of Responsive styles  ------*/
