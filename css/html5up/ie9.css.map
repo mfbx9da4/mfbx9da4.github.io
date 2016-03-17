@@ -1,7 +1,0 @@
-{
-"version": 3,
-"mappings": ";;;;;;AAWC;;;;OAIQ;EACP,gBAAgB,EAAE,6BAA6B;;;AAO9C,qBAAS;EACN,gBAAgB,EAAE,6BAA6B",
-"sources": ["../../landing-page-src/scss/ie9.scss"],
-"names": [],
-"file": "ie9.css"
-}

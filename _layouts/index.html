@@ -14,19 +14,20 @@
             <div class="video-container">
 
                 <video class="animated"
-                    poster="/assets/img/vini-photos-lagoa-abi-dave/4415-blurred.png" autobuffer preload autoplay="autoplay">
-                    <source type="video/mp4" src="/assets/img/vini-photos-lagoa-abi-dave/4415-1.m4v">
-                    <source type="video/ogg" src="/assets/img/vini-photos-lagoa-abi-dave/4415-1.ogg" >
+                    poster="/assets/img/4415.png" autobuffer preload autoplay="autoplay">
+                    <source type="video/mp4" src="/assets/img/4415-1.m4v">
+                    <source type="video/ogg" src="/assets/img/4415-1.ogg" >
                 </video>
 
-                <img src="/assets/img/vini-photos-lagoa-abi-dave/4415-blurred.png"
-                     alt="David Alberto Adler" class="poster animated">
+                <img alt="David Alberto Adler" class="poster fallback animated">
 
-                <div class="mask"></div>
+                <img src="/assets/img/4415-blurred.png"
+                     alt="David Alberto Adler" class="poster blurred animated">
+
 
                 <nav>
-                    <h1 class="animated title fadeInDown full-title">David Alberto Adler</h1>
-                    <h1 class="animated title fadeInDown small-title">David Adler</h1>
+                    <h1 class="animated title fadeInDown full-title"> <a href="/">David Alberto Adler</a></h1>
+                    <h1 class="animated title fadeInDown small-title"><a href="/">David Adler</a></h1>
                     <div class="links animated fadeInDown">
                         <div class="link"> <a href="/posts">BLOG</a> </div>
                         <div class="link"> <a target="_blank" href="/assets/cv.pdf">CV</a> </div>
@@ -53,7 +54,13 @@
         <script>
             $(document).ready(function() {
 
+                // If view port too short leave blurred
+                if ($(window).height() < 500) {
+                    return;
+                }
+
                 var shouldPlayVideo = false;
+
                 // Provided we have autoplay or no touch events
                 // (ie desktop) play the video
                 Modernizr.on('videoautoplay', function(result) {
@@ -71,8 +78,25 @@
 
                     if (shouldPlayVideo) {
                         playVideo();
+                    } else {
+                        loadImage();
                     }
                 });
+
+                function loadImage() {
+                    var fallback = $('img.poster.fallback');
+                    var source = '/assets/img/4415.png';
+
+                    var img = new Image();
+                    img.onload = function () {
+                        console.log('loaded');
+                        fallback.attr('src', source);
+                        fallback.css({display: 'block'});
+                        $('img.poster.blurred').addClass('fadeOut');
+                        fallback.addClass('fadeIn');
+                    }
+                    img.src = source;
+                }
 
                 function playVideo() {
                     var vid = document.querySelector('video');
@@ -83,7 +107,7 @@
                     vid.load();
                     vid.addEventListener('loadeddata', function(ev) {
                         vid.play();
-                        $('img.poster').addClass('fadeOut');
+                        $('img.poster.blurred').addClass('fadeOut');
                         $('video').addClass('fadeIn');
                     });
                 }

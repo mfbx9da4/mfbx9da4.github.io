@@ -224,7 +224,7 @@ main.content {
     z-index: 1;
     width: 130px;
     height: 130px;
-    background-image: url(/assets/img/me/chaordic-hover-profile.png);
+    background-image: url(/assets/img/chaordic-hover-profile.png);
     background-size: 100%;
     cursor: pointer; }
     .footer .contact .profile-img:hover, .footer .contact .profile-img.hover {
@@ -299,7 +299,7 @@ nav {
     color: black;
     text-decoration: none; }
   nav h1 {
-    font-family: 'Roboto Slab', serif;
+    font-family: 'Roboto Slab', sans-serif;
     font-weight: 100;
     font-size: 38px;
     -webkit-animation-delay: 0.5s;

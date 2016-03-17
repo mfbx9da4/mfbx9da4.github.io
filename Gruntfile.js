@@ -14,7 +14,7 @@ module.exports = function(grunt) {
             other: [
                 '_layouts/jade/*.jade',
                 'projects/*.jade',
-                'cv/pt/index.jade'
+                '_cv/pt/index.jade'
             ],
             posts: [
                 '_posts/*',
@@ -52,7 +52,7 @@ module.exports = function(grunt) {
                     }
                 },
                 files: {
-                    "cv/pt/index.html": "cv/pt/index.jade",
+                    "_cv/pt/index.html": "_cv/pt/index.jade",
                     "projects/index.html": "projects/index.jade",
                     "_layouts/default.html": "_layouts/jade/default.jade",
                     "_layouts/post.html": "_layouts/jade/post.jade"
@@ -62,8 +62,8 @@ module.exports = function(grunt) {
         sass: {
           dist: {
             files: {
-              'css/main.css': 'scss/main.scss',
-              'css/landing-page.css': 'landing-page-src/scss/styles.scss'
+              'css/main.css': '_scss/main.scss',
+              'css/landing-page.css': '_landing-page-src/scss/styles.scss'
             }
           }
         },
@@ -87,7 +87,7 @@ module.exports = function(grunt) {
         includes: {
           files: {
             src: [
-                'landing-page-src/index.html'
+                '_landing-page-src/index.html'
             ],
             dest: '_layouts', // Destination directory
             flatten: true,
@@ -98,7 +98,7 @@ module.exports = function(grunt) {
           }
         },
         watch: {
-            files: ['scss/*', '<%= src.other %>', '<%= src.posts %>', 'landing-page-src/**'],
+            files: ['_scss/*', '<%= src.other %>', '<%= src.posts %>', '_landing-page-src/**'],
             tasks: ['jade', 'sass', 'includes'],
             options: {
                 livereload: {
