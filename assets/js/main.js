@@ -10,12 +10,12 @@ $(document).ready(function() {
 
 	$('.profile-img').hover(function() {
 		$('.hover-message').show();
-		$('.hover-message').addClass('bounceInRight');
+		$('.hover-message').addClass('bounceInUp');
 	});
 
 	$('.profile-img').mouseleave(function() {
 		$('.hover-message').hide();
-		$('.hover-message').removeClass('bounceInRight');
+		$('.hover-message').removeClass('bounceInUp');
 	});
 
 });

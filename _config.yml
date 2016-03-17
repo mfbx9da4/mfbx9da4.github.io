@@ -4,4 +4,4 @@ highlighter: 'rouge'
 # pygments: true
 gems:
   - jekyll-sitemap
-exclude: [node_modules/]
+exclude: [node_modules/, README.md. convert-extracts.sh]
