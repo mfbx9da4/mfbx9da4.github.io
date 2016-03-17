@@ -11,10 +11,6 @@
   box-sizing: border-box;
 }
 
-html, body {
-	widows: 100%;
-}
-
 body {
   background-color: #FFF;
   font: 16px 'Ubuntu Mono', Helvetica, Arial, sans-serif;
@@ -105,8 +101,6 @@ main.content {
     right: 121px;
     z-index: 2;
     display: none;
-    -webkit-animation-duration: 0.5s;
-    animation-duration: 0.5s;
   }
 }
 
