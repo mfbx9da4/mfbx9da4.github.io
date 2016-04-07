@@ -41,3 +41,17 @@
 .post pre.terminal code {
   background-color: #333;
 }
+
+.post img {
+  display: block;
+  margin: 24px auto;
+  max-width: 100%;
+  max-height: 500px;
+}
+
+.post .technology {
+  color: #ccc;
+  border-right: 1px solid #BDBDBD;
+  padding-right: 6px;
+  padding-left: 6px;
+}

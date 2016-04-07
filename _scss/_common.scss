@@ -23,8 +23,6 @@ h1 {
 p { margin: 1em 0; }
 
 a         { color: #00a; cursor: pointer;}
-a:hover   { color: #000; }
-a:visited { color: #a0a; }
 
 /*****************************************************************************/
 /*
@@ -54,7 +52,6 @@ header {
 
 main.content {
   z-index: 1;
-  position: relative;
 }
 
 .meta {

@@ -2,6 +2,8 @@
 
 > If you get a technical interview, ask them to choose one of your ideas as a technical task.
 
+- Make seam carving javscript library release on npm
+- ng-ntp
 - Make a stopwatch, timer and alarm for local use launch on web store
 - Github search repositories which use libraries I want to use
 - Build CV from linkedIn
@@ -9,7 +11,7 @@
 - Turn omnibox into command line, allow navigating files and scripting of say facebook
 - Coding algorithms for duolingo type interface: classic algorithms
 - Template duolingo type interface for any type of game to learn anything by example. language, coding, cooking, sing, draw, play guitar, rhythm, dance, drive, garden, meditate, read fast, read music, touch type, neuroscience. Allow anyone to create the game.
-- Make 404 page of [lost surfer in the snow](http://www.enthuzed.com/wp-content/uploads/2012/03/cold_winter_surf_enthuzed.jpg)
+- Make 404 page of [lost surfer in the snow](http://www.enthuzed.com/wp-content/uploads/2012/03/cold_winter_surf_enthuzed.jpg), make it into a helicopter-like game (space bar to jump waves)
 - Make an open source free easyquarto
 - A mean.io but with customizable things: e.g file upload, lightbox, bootstrap, google oauth, fb oauth
 

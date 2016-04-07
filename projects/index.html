@@ -2,6 +2,34 @@
 layout: default
 title: Projects
 ---
-<!--  --><h1>Projects</h1><p>Below are a selection of some small side projects I have personally built,
-group projects are not listed here.</p><div class="projects"><div class="project"><a href="http://fube.io"><div class="image"></div><h3 class="title">Fube</h3></a><p class="description">Finds new music by crawling facebook for posts with music links.</p></div><div class="project"><a href="/projects/checkers"><div class="image"></div><h3 class="title">Checkers</h3></a><p class="description">HTML5 canvas checkers game.</p></div><div class="project"><a href="http://simple-markdown-chat.herokuapp.com"><div class="image"></div><h3 class="title">Simple markdown chat</h3></a><p class="description">Fed up with chat clients not having markdown for pasting code, so made my own.</p></div><div class="project"><a href="/projects/angular-slideout"><div class="image"></div><h3 class="title">Angularjs slideout directive</h3></a><p class="description">An angularjs directive for slideout menus principally for mobiles.</p></div><div class="project"><a href="/projects/Word-tree/static"><div class="image"></div><h3 class="title">Word tree and anagram solver</h3></a><p class="description">Intended as a tool for diambiguating similarly spelt words.
-I used <code style="  background-color: #eef; padding: 0 .2em; font-family: 'Ubuntu Mono', Helvetica, Arial, sans-serif;">/usr/share/dict/words</code> to generate the tree and for fun I also made an anagram solver.</p></div><div class="project"><a href="https://github.com/mfbx9da4/shit-refresh"><div class="image"></div><h3 class="title">Shit refresh</h3></a><p class="description">A chrome extension for clearing localStorage and cookies cache with refresh.</p></div></div>
+
+<h1>Projects</h1>
+<p>Below are a selection of projects I have personally built.</p>
+
+<div class="projects clearfix">
+    {% assign sorted_projects = site.projects | sort: 'order', 'last' %}
+
+    {% for project in sorted_projects  %}
+
+        <!-- {{project | to_json}} -->
+        <div class="project">
+            <a href="{{project.url}}">
+                <!-- {{project.order }} :: {{project.date | date: "%b %Y" }} -->
+                <div class="image"
+                    {% if project.image %}style="background: url('{{project.image}}') 50% 50% / cover no-repeat;"{% endif %}>
+                    {% if project.github_link %} <i class="badge fa fa-github"></i> {% endif %}
+                </div>
+                <h3 class="title">{{ project.title }}</h3>
+            </a>
+        </div>
+
+    {% endfor %}
+</div>
+
+<div class="project-overlay"></div>
+{% for project in sorted_projects  %}
+    <div data-url="{{project.url}}" class="project-content" type="text/template">
+            {{project['content']}}
+    </div>
+{% endfor %}
+

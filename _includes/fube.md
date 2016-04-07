@@ -1,0 +1,1 @@
+Fube is a social music discovery tool I designed and built. A lot of great music is shared on facebook but there is no easy way to listen to it in a playlist or filtered by genre. Fube aggregates songs posted by you and your friends on facebook.

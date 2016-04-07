@@ -4,18 +4,21 @@
   "private": true,
   "devDependencies": {
     "grunt": "^0.4.4",
-    "grunt-contrib-jshint": "~0.6.3",
-    "grunt-contrib-watch": "^0.6.1",
-    "grunt-contrib-concat": "~0.4.0",
-    "grunt-contrib-uglify": "~0.3.0",
-    "grunt-contrib-handlebars": "~0.6.1",
-    "grunt-jekyll": "*",
-    "grunt-contrib-jade": "^0.11.0",
     "grunt-concurrent": "^0.5.0",
+    "grunt-contrib-concat": "~0.4.0",
+    "grunt-contrib-handlebars": "~0.6.1",
+    "grunt-contrib-jade": "^0.11.0",
+    "grunt-contrib-jshint": "~0.6.3",
     "grunt-contrib-sass": "~0.9.2",
-    "webpack": "~1.8.11",
-    "webpack-dev-server": "~1.8.2",
+    "grunt-contrib-uglify": "~0.3.0",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-includes": "~0.5.1",
+    "grunt-jekyll": "*",
     "grunt-webpack": "~1.0.8",
-    "grunt-includes": "~0.5.1"
+    "gulp": "^3.9.1",
+    "gulp-sass": "^2.2.0",
+    "gulp-sourcemaps": "^1.6.0",
+    "webpack": "~1.8.11",
+    "webpack-dev-server": "~1.8.2"
   }
 }

@@ -22,28 +22,6 @@ module.exports = function(grunt) {
                 '_drafts/*'
             ]
         },
-        jekyll: {
-            options: {
-                bundleExec: true
-            },
-            dist: {
-                options: {
-                    config: '_config.yml'
-                }
-            },
-            build: {
-                options: {
-                    drafts: false
-                }
-            },
-            serve: {
-                options: {
-                    drafts: true,
-                    watch: true,
-                    serve: true
-                }
-            }
-        },
         jade: {
             compile: {
                 options: {
@@ -52,8 +30,6 @@ module.exports = function(grunt) {
                     }
                 },
                 files: {
-                    "_cv/pt/index.html": "_cv/pt/index.jade",
-                    "projects/index.html": "projects/index.jade",
                     "_layouts/default.html": "_layouts/jade/default.jade",
                     "_layouts/post.html": "_layouts/jade/post.jade"
                 }
@@ -66,23 +42,6 @@ module.exports = function(grunt) {
               'css/landing-page.css': '_landing-page-src/scss/styles.scss'
             }
           }
-        },
-        concurrent: {
-            target: {
-                tasks: ['jekyll:serve', 'watch'],
-                options: {
-                    logConcurrentOutput: true
-                }
-            }
-        },
-        concat: {
-            options: {
-                separator: ';',
-            },
-            dist: {
-                src: ['assets/js/jquery-1.9.1.min.js', 'assets/js/typed.js'],
-                dest: 'assets/js/landing-page-libs.min.js',
-            },
         },
         includes: {
           files: {
@@ -110,7 +69,7 @@ module.exports = function(grunt) {
     });
 
     // Default task(s).
-    grunt.registerTask('default', ['jade', 'sass', 'concat', 'includes', 'watch']);
+    grunt.registerTask('default', ['sass', 'includes', 'watch']);
     grunt.registerTask('watch', ['watch']);
     grunt.registerTask('include', ['includes']);
 

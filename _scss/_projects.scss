@@ -3,13 +3,40 @@
 /* Projects
 /*
 /*****************************************************************************/
+.projects {
+	max-width: 750px;
+	margin: 0 auto;
+}
+
 .project {
-	margin-top: 24px;
+	&:nth-child(odd) {
+		clear: left;
+	}
+
+	margin: 24px 24px;
+	width: 315px;
+	float: left;
+	overflow: hidden;
+
+	a {
+		text-decoration: none;
+	}
 
 	.image {
-		// height: 200px;
-		// width: 200px;
+		height: 200px; overflow: hidden;position: relative;    display: block; padding: 4px; margin-bottom: 18px; line-height: 1.42857; background-color: #f9f9f9; border: 1px solid #ddd; border-radius: 2px; -webkit-transition: all .2s ease-in-out; transition: all .2s ease-in-out;
 		background-color: #EAEAEA;
+
+		.badge {
+			position: absolute;
+			bottom: 0;
+			right: 0;
+			color: black !important;
+			font-size: 24px;
+			margin: 4px 4px;
+			padding: 2px;
+			background: rgba(255, 255, 255, 0.7);
+			border-radius: 16%;
+		}
 	}
 
 	.title {
@@ -20,5 +47,27 @@
 		color: #4A4A4A;
 		text-decoration: none;
 		margin: 0;
+	}
+}
+
+.project-content {
+	display:none;
+	position: absolute;
+	width: 600px;
+	margin: auto auto;
+	background: white;
+	z-index: 20;
+	top: 0; left: 0; bottom: 0; right: 0;
+	overflow: auto;
+
+	nav {
+		display: none;
+	}
+}
+
+@media (max-width: (970px)) {
+	.project {
+		float: none;
+		margin: 24px auto;
 	}
 }
