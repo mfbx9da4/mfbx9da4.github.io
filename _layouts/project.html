@@ -13,9 +13,15 @@ comments: true
 
     {{ content }}
 
+
+    {% if page.github_link %}
+		<div>Github source code <a target="_blank" href="{{page.github_link}}">{{page.github_link}}</a></div>
+    {% endif %}
+
+    <div>Live link <a target="_blank" href="{{page.project_link}}">{{page.project_link}}</a></div>
+
     {% assign page.project_link = page.project_link || page.github_link %}
 
-    <div><a target="_blank" href="{{page.project_link}}">{{page.project_link}}</a></div>
 
     <a target="_blank" href="{{page.project_link}}">
         <img class="content-image" src="{{page.image}}" alt="">

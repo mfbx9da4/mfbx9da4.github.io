@@ -1,5 +1,5 @@
 name: David Alberto Adler
-markdown: redcarpet
+markdown: kramdown
 highlighter: 'rouge'
 # pygments: true
 gems:

@@ -73,32 +73,32 @@ main.content {
   a {
     color: #8085C1;
   }
+}
 
-  .profile-img {
-    position: fixed;
-    bottom: 0;
-    right: 0;
-    z-index: 1;
+.profile-img {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  z-index: 2;
 
-    width: 130px;
-    height: 130px;
+  width: 130px;
+  height: 130px;
 
-    background-image: url(/assets/img/chaordic-hover-profile.png);
-    background-size: 100%;
-    cursor: pointer;
+  background-image: url(/assets/img/chaordic-hover-profile.png);
+  background-size: 100%;
+  cursor: pointer;
 
-    &:hover, &.hover {
-      background-position: 0 100%;
-    }
+  &:hover, &.hover {
+    background-position: 0 100%;
   }
+}
 
-  .hover-message {
-    position: fixed;
-    bottom: 40px;
-    right: 121px;
-    z-index: 2;
-    display: none;
-  }
+.hover-message {
+  position: fixed;
+  bottom: 40px;
+  right: 121px;
+  z-index: 2;
+  display: none;
 }
 
 /*=========================================
