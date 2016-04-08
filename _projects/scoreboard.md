@@ -1,7 +1,7 @@
 ---
 layout: project
 title:  "Real Time Scoreboard"
-image:  "/assets/img/projects/scoreboard-screenshot.png"
+image:  "/assets/img/projects/scoreboard.png"
 technologies: [expressjs, angularjs, nodejs, mysql, web-sockets]
 date:   2016-02-01
 categories: project

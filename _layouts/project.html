@@ -18,7 +18,9 @@ comments: true
 		<div>Github source code <a target="_blank" href="{{page.github_link}}">{{page.github_link}}</a></div>
     {% endif %}
 
-    <div>Live link <a target="_blank" href="{{page.project_link}}">{{page.project_link}}</a></div>
+    {% if page.project_link %}
+        <div>Live link <a target="_blank" href="{{page.project_link}}">{{page.project_link}}</a></div>
+    {% endif %}
 
     {% assign page.project_link = page.project_link || page.github_link %}
 
