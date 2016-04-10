@@ -28,4 +28,4 @@ The web stack included node, MySQL, socket.io and angular. I implemented the fol
 7. Some style changes for responsivity.  
 
 
-The code was used intensively for several weeks without any major bugs in a large volleyball competition involving thousands of games.
+The code was successfully used intensively for several weeks in a large national volleyball competition involving thousands of games.

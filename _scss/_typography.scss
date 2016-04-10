@@ -1,14 +1,18 @@
 /*--- HEADINGS ---*/
 // taken from http://www.smashingmagazine.com/2011/03/14/technical-web-typography-guidelines-and-techniques/#tt-rhythm
 h1, h2, h3, h4, h5, h6 {
+  font-family: 'Roboto Slab', 'Ubuntu Mono', Helvetica, Arial, sans-serif;
   margin-bottom: 24px;
   font-weight: bold;
+}
+
+body {
+  font: 16px 'Ubuntu Mono', Helvetica, Arial, sans-serif;
 }
 
 h1 {
   font-size: 1.5em; /* 24px --> 24 ÷ 16 = 1.5 */
   line-height: 1em; /* 24px --> 24 ÷ 24 = 1 */
-  font-family: 'Roboto Slab', 'Ubuntu Mono', Helvetica, Arial, sans-serif;
 }
 
 h2 {
