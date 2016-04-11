@@ -1,7 +1,7 @@
 ---
 layout: project
 title:  "Super Refresh Chrome Extension"
-image:  "/assets/img/projects/chrome.png"
+image:  "/assets/img/projects/shit-refresh.png"
 technologies: [chrome-extension, javascript]
 date:   2015-05-01
 categories: project
