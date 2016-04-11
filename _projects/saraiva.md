@@ -13,6 +13,6 @@ Whilst working at Chaordic I was working on the search team. The search product 
 
 I developed the autocomplete widget which lead to a 50% increase in search usage and 10% increase in ecommerce sales. 
 
-I also made backend and frontend optimizations which were crucial in an AB test win between our search against global leaders in ecommerce search, SLI systems.
+I also made backend and frontend optimizations which were crucial in an AB test win between our product against global leaders in ecommerce search, SLI systems.
 
 Saraiva was one of our clients and is the biggest book shop in Brazil with over 20% of the market. Below is their search which I helped develop.
