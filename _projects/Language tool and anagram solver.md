@@ -15,7 +15,7 @@ This project aims to help people disambiguate similarly spelt words via two main
 
 Firstly, it organizes the dictionary by word prefix and displays it in a tree format. Navigating the tree to a leaf word will fetch the wikipedia page for that particular word.  
 
-Secondly, it efficiently computes all anagrams for any word selected.  
+Secondly, it efficiently computes all anagrams for all words in linear time and space to the number of words.  
 
 The project uses python for the word analysis and angularjs on the frontend.  It was used successfully by my girlfriend in several private english lessons that she taught.  
 

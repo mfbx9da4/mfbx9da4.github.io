@@ -58,7 +58,7 @@ module.exports = function(grunt) {
         },
         watch: {
             files: ['_scss/*', '<%= src.other %>', '<%= src.posts %>', '_landing-page-src/**'],
-            tasks: ['jade', 'sass', 'includes'],
+            tasks: ['includes'],
             options: {
                 livereload: {
                     port: 12345

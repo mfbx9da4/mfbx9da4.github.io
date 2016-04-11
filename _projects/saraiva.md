@@ -9,10 +9,10 @@ project_link: http://busca.saraiva.com.br/?q=livro%20de%20colorir&autocomplete_t
 permalink: /saraiva
 order: "3"
 ---
-Whilst working at Chaordic I was working on the search team. The search product personalizes search results of ecommerce websites to match what the user has clicked or bought in the past. 
+Whilst working at Chaordic I was working on the search team. The search product personalizes search results of any ecommerce website to match what the user has clicked or bought in the past. Chaordic is the biggest ecommerce platform in Brazil, integrated with 60% of Brazil's ecommerce. Chaordic's search platform receives over 1000 rpm.
 
-Saraiva was one of our clients and is the biggest book shop in Brazil with over 20% of the market and our search receives over 1000 rpm.
+I developed the autocomplete widget which lead to a 50% increase in search usage and 10% increase in ecommerce sales. 
 
-I implemented frontend of the search and the autocomplete widget. I also assisted in the backend (python/Flask), infrastructure (linux, docker, ansible, AWS) and elasticsearch queries.
+I also made backend and frontend optimizations which were crucial in an AB test win between our search against global leaders in ecommerce search, SLI systems.
 
-Our search platform won in an AB test against one of the market leaders of search platforms globally (SLI systems).
+Saraiva was one of our clients and is the biggest book shop in Brazil with over 20% of the market. Below is their search which I helped develop.

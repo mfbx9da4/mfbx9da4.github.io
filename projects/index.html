@@ -14,7 +14,7 @@ title: Projects
         <!-- {{project | to_json}} -->
         <div class="project">
             <a href="{{project.url}}">
-                <!-- {{project.order }} :: {{project.date | date: "%b %Y" }} -->
+                {{project.order }} :: {{project.date | date: "%b %Y" }}
                 <div class="image"
                     {% if project.image %}style="background: url('{{project.image}}') 50% 50% / cover no-repeat;"{% endif %}>
                     {% if project.github_link %} <i class="badge fa fa-github"></i> {% endif %}

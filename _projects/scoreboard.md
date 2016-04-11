@@ -7,7 +7,7 @@ date:   2016-02-01
 categories: project
 project_link: http://volleyball-scoreboard.herokuapp.com
 permalink: /scoreboard
-order: "2"
+order: "5.1"
 ---
 
 My client required a real-time scoreboard platform for a volleyball competition. The scoreboard, timer and buzzer were required to be synchronized across several devices in real-time. The web app development had been started and I was required to finish it off. 

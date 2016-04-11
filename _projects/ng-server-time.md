@@ -3,7 +3,7 @@ layout: project
 title:  "Angular Server Time"
 image:  "/assets/img/projects/clock.jpg"
 technologies: [angularjs, socket.io, nodejs]
-date:   2015-05-01
+date:   2016-04-01
 categories: [project]
 project_link: http://ng-server-time.herokuapp.com/
 github_link: https://github.com/mfbx9da4/ng-server-time
