@@ -15,6 +15,7 @@
 
 	margin: 24px 24px;
 	width: 315px;
+	height: 315px;
 	float: left;
 	overflow: hidden;
 
@@ -48,6 +49,15 @@
 		text-decoration: none;
 		margin: 0;
 	}
+
+	img.content-image {
+		width: 100%;
+		margin: 20px 0 0 0;
+	}
+
+	ol {
+		margin-left: 50px;
+	}
 }
 
 .project-content {
@@ -67,12 +77,25 @@
 
 @media (max-width: (970px)) {
 	.project {
-		float: none;
+		float: none !important;
 		margin: 24px auto;
 	}
 }
 @media (max-width: (400px)) {
 	.project {
 		width: 240px;
+
+		.project-title {
+			width: 100%;
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+		}
+
+
+	}
+
+	.morph-button-modal-1.open .morph-content, .morph-button-modal-1.active .morph-content {
+		padding: 5%;
 	}
 }

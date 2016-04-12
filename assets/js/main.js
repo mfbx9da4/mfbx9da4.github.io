@@ -17,25 +17,62 @@ $(document).ready(function() {
 	});
 
 
-	// modal behaviour
-	if (false && $(window).width() > 700) {
-		var urlToId = function(url) {
-			return url.split('/').join('');
-		}
+	/*====================================
+	=            Morph Button            =
+	====================================*/
 
-		$('.project-content').each(function(i,e) {
-			var element = $(e);
-			element.attr('id', urlToId(element.attr('data-url')));
-		})
+    var docElem = window.document.documentElement, didScroll, scrollPosition;
 
-		$('.project > a').click(function(event) {
-			event.preventDefault();
-			var url_split = event.delegateTarget.href.split('/');
-			var last_part = url_split[url_split.length - 1];
-			var content = $("#" + last_part).toggle();
-			console.log(content);
-		});
-	}
+    // trick to prevent scrolling when opening/closing button
+    function noScrollFn() {
+        window.scrollTo( scrollPosition ? scrollPosition.x : 0, scrollPosition ? scrollPosition.y : 0 );
+    }
 
+    function noScroll() {
+        window.removeEventListener( 'scroll', scrollHandler );
+        window.addEventListener( 'scroll', noScrollFn );
+    }
 
+    function scrollFn() {
+        window.addEventListener( 'scroll', scrollHandler );
+    }
+
+    function canScroll() {
+        window.removeEventListener( 'scroll', noScrollFn );
+        scrollFn();
+    }
+
+    function scrollHandler() {
+        if( !didScroll ) {
+            didScroll = true;
+            setTimeout( function() { scrollPage(); }, 60 );
+        }
+    };
+
+    function scrollPage() {
+        scrollPosition = { x : window.pageXOffset || docElem.scrollLeft, y : window.pageYOffset || docElem.scrollTop };
+        didScroll = false;
+    };
+
+    scrollFn();
+
+    $('.morph-button').each(function(i, elem) {
+    	if (Modernizr.csstransitions) {
+		    var UIBtnn = new UIMorphingButton(elem, {
+		        closeEl : '.icon-close',
+		        onBeforeOpen : function() {noScroll();},
+		        onAfterOpen : function() {noScroll();},
+		        onBeforeClose : function() {noScroll();},
+		        onAfterClose : function() {canScroll();}
+		    } );
+    	} else {
+    		$(elem).click(function(ev) {
+    			var target = $(ev.target);
+    			window.target = target;
+    			var href = target.closest('.project').attr('href');
+    			window.location.href = href;
+    		})
+    	}
+    })
+	/*=====  End of Morph Button  ======*/
 });
