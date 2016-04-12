@@ -57,7 +57,7 @@ $(document).ready(function() {
     scrollFn();
 
     $('.morph-button').each(function(i, elem) {
-    	if (Modernizr.csstransitions) {
+    	if (Modernizr.csstransitions || $(window).width() < 400) {
 		    var UIBtnn = new UIMorphingButton(elem, {
 		        closeEl : '.icon-close',
 		        onBeforeOpen : function() {noScroll();},
