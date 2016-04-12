@@ -3,31 +3,8 @@ layout: default
 comments: true
 ---
 
-<h2>{{ page.title }}</h2>
-<p class="meta">{{ page.date | date: "%b %Y" }}</p>
-<div class="post">
+{% assign project = page %}
 
-
-    <b>Technologies:</b>
-    {% for technology in page.technologies %}<span class="technology">{{technology}}</span>{% endfor %}
-
-    {{ content }}
-
-
-    {% if page.github_link %}
-		<div>Github source code <a target="_blank" href="{{page.github_link}}">{{page.github_link}}</a></div>
-    {% endif %}
-
-    {% if page.project_link %}
-        <div>Live link <a target="_blank" href="{{page.project_link}}">{{page.project_link}}</a></div>
-    {% endif %}
-
-    {% assign page.project_link = page.project_link || page.github_link %}
-
-
-    <a target="_blank" href="{{page.project_link}}">
-        <img class="content-image" src="{{page.image}}" alt="">
-    </a>
-</div>
+{% include project.html %}
 
 {% include comments.html %}

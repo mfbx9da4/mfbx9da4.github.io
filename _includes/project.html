@@ -1,0 +1,26 @@
+<h2>{{ project.title }}</h2>
+<p class="meta">{{ project.date | date: "%b %Y" }}</p>
+<div class="post">
+
+
+    <b>Technologies:</b>
+    {% for technology in project.technologies %}<span class="technology">{{technology}}</span>{% endfor %}
+
+    {{ project.content }}
+
+
+    {% if project.github_link %}
+        <div>Github source code <a target="_blank" href="{{project.github_link}}">{{project.github_link}}</a></div>
+    {% endif %}
+
+    {% if project.project_link %}
+        <div>Live link <a target="_blank" href="{{project.project_link}}">{{project.project_link}}</a></div>
+    {% endif %}
+
+    {% assign project.project_link = project.project_link || project.github_link %}
+
+
+    <a target="_blank" href="{{project.project_link}}">
+        <img class="content-image" src="{{project.image}}" alt="">
+    </a>
+</div>
