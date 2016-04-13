@@ -7,7 +7,6 @@ title: Projects
 <p>Below are a selection of projects I have personally built.</p>
 
 <!-- <div class="projects clearfix">
-    {% assign sorted_projects = site.projects | sort: 'order', 'last' %}
 
     {% for project in sorted_projects  %}
 
@@ -25,6 +24,8 @@ title: Projects
 </div>
 -->
 
+{% assign sorted_projects = site.projects | sort: 'order', 'last' %}
+
 <div class="projects clearfix">
     {% for project in sorted_projects %}
         <div href="{{project.url}}" class="project morph-button morph-button-modal morph-button-modal-1 morph-button-fixed">
@@ -38,10 +39,15 @@ title: Projects
             </button>
             <div class="morph-content">
                 <div>
-                    <div class="content-style-text">
+                    <div class="modal-header">
+                        <h2>{{project.title}}</h2>
                         <span class="icon icon-close fr"><i class="fa fa-times"></i> Close</span>
+                    </div>
+                    <!-- <div class="button-prev"><i class="fa fa-angle-left"></i></div> -->
+                    <div class="content-style-text">
                         {% include project.html %}
                     </div>
+                    <!-- <div class="button-next"><i class="fa fa-angle-right"></i></div> -->
                 </div>
             </div>
         </div><!-- morph-button -->

@@ -151,9 +151,9 @@
 .morph-button-modal.open .morph-content {
   top: 50% !important;
   left: 50% !important;
-  margin: -210px 0 0 -300px;
+  margin: -300px 0 0 -300px;
   width: 600px;
-  height: 420px;
+  height: 600px;
   -webkit-transition: width 0.4s 0.1s, height 0.4s 0.1s, top 0.4s 0.1s, left 0.4s 0.1s, margin 0.4s 0.1s;
   transition: width 0.4s 0.1s, height 0.4s 0.1s, top 0.4s 0.1s, left 0.4s 0.1s, margin 0.4s 0.1s;
 }
@@ -165,9 +165,8 @@
 
 .morph-button-modal-1 > button,
 .morph-button-modal-1 .morph-content {
-  // background-color: #71C9E1;
-  background: white;
-  border: 1px solid #333;
+  background-color: white;
+  border: 1px solid #DDD;
 }
 
 
@@ -178,7 +177,6 @@
 .morph-button-modal-1 {
   &.open, &.active {
     .morph-content {
-      padding: 80px;
       overflow-y: scroll;
     }
   }

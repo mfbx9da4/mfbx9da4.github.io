@@ -58,20 +58,46 @@
 	ol {
 		margin-left: 50px;
 	}
-}
 
-.project-content {
-	display:none;
-	position: absolute;
-	width: 600px;
-	margin: auto auto;
-	background: white;
-	z-index: 20;
-	top: 0; left: 0; bottom: 0; right: 0;
-	overflow: auto;
+	.morph-content {
 
-	nav {
-		display: none;
+		h2 {
+			display: none;
+		}
+
+		.modal-header {
+			height: 75px;
+			padding: 25px 30px 25px 40px;
+			border-bottom: none;
+			background: #f9f9f9;
+
+			h2 {
+				display: inline;
+			}
+
+			.icon-close {
+				cursor: pointer;
+			}
+		}
+
+		.button-prev, .button-next {
+			width: 70px;
+			right: -70px;
+			top: 0;
+			bottom: 0;
+			position: absolute;
+			z-index: 1060;
+			cursor: pointer;
+		}
+
+		.button-prev {
+			// right: auto;
+			// left: -70px;
+		}
+
+		.content-style-text {
+			padding: 40px 40px 40px;
+		}
 	}
 }
 

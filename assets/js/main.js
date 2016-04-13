@@ -56,15 +56,17 @@ $(document).ready(function() {
 
     scrollFn();
 
+    var morphButtons = []
+
     $('.morph-button').each(function(i, elem) {
     	if (Modernizr.csstransitions || $(window).width() < 400) {
-		    var UIBtnn = new UIMorphingButton(elem, {
+		    morphButtons.push(new UIMorphingButton(elem, {
 		        closeEl : '.icon-close',
 		        onBeforeOpen : function() {noScroll();},
 		        onAfterOpen : function() {noScroll();},
 		        onBeforeClose : function() {noScroll();},
 		        onAfterClose : function() {canScroll();}
-		    } );
+		    }));
     	} else {
     		$(elem).click(function(ev) {
     			var target = $(ev.target);
@@ -75,4 +77,34 @@ $(document).ready(function() {
     	}
     })
 	/*=====  End of Morph Button  ======*/
+
+    $(document.body).keydown(function(event) {
+        if (event.keyCode == 27) {
+            for (var i = 0; i < morphButtons.length; i ++) {
+                var button = morphButtons[i];
+                var buttonEl = $(morphButtons[i].el);
+                if (buttonEl.hasClass('active')) {
+                    button.toggle();
+                }
+            }
+        } else if (event.keyCode == 37 || event.keyCode == 39) {
+            var goRight = event.keyCode == 39;
+            for (var i = 0; i < morphButtons.length; i ++) {
+                var button = morphButtons[i];
+                var buttonEl = $(morphButtons[i].el);
+                if (buttonEl.hasClass('active')) {
+                    if (goRight) {
+                        var next_i = (i + 1) % morphButtons.length;
+                    } else {
+                        var next_i = (i - 1) % morphButtons.length;
+                    }
+                    var nextButton = morphButtons[next_i];
+                    button.toggle();
+                    setTimeout(function () {nextButton.toggle()}, 800)
+                    break;
+                }
+            }
+        }
+    })
+
 });

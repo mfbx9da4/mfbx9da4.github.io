@@ -48,7 +48,7 @@ Can use `--limit_posts 1` in conjunction with `jekyll serve`.
 
 Blog :
 
-- [ ] The only two css tricks you need to know: overflow width auto
+- [ ] The only two css tricks you need to know: overflow width auto, float
 - [ ] Advantages of promises to callbacks
 - [ ] Writing modules in javascript
 - [ ] Prototypical inheritance (in angular) http://adamzerner.github.io/articles/scope_inheritance/
