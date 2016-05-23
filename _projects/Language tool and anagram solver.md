@@ -1,13 +1,14 @@
 ---
 layout: project
 title:  "Language tool / Anagram solver"
-image:  "/assets/img/projects/language-tool-screenshot.png"
+image:  "/assets/img/projects/trie.png"
 technologies: [angularjs, python]
 date:   2015-05-01
 categories: project
 project_link: http://mfbx9da4.github.io/projects/Word-tree/static/
 github_link:  https://github.com/mfbx9da4/Word-tree
 permalink: /language-tool
+order: "8.1"
 ---
 
 Often people learning a foreign language have problems remembering the difference between similarly spelt or similarly sounding words.
