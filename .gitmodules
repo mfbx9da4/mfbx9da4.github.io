@@ -4,3 +4,6 @@
 [submodule "projects/Word-tree"]
 	path = projects/Word-tree
 	url = https://github.com/mfbx9da4/Word-tree.git
+[submodule "projects/seam-carving-js"]
+	path = projects/seam-carving-js
+	url = /Users/da/code/misc/seam-carving-js/

@@ -39,7 +39,7 @@ module.exports = function(grunt) {
           dist: {
             files: {
               'css/main.css': '_scss/main.scss',
-              'css/landing-page.css': '_landing-page-src/scss/styles.scss'
+              'css/landing-page.css': '_landing-page-src/scss/landing-page.scss'
             }
           }
         },
