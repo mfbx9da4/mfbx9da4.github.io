@@ -729,7 +729,7 @@ nav {
   margin: 0 auto;
   text-align: center; }
   nav a, nav a:visited {
-    color: black;
+    color: rgba(0, 0, 0, 0.9);
     text-decoration: none; }
   nav h1 {
     font-family: 'Roboto Slab', sans-serif;
