@@ -78,15 +78,26 @@ $(document).ready(function() {
     })
 	/*=====  End of Morph Button  ======*/
 
+    $(document.body).click(function(event) {
+        if ($(event.target).parents('.morph-content').length < 1) {
+            closeModal();
+        }
+    });
+
+    function closeModal() {
+        for (var i = 0; i < morphButtons.length; i ++) {
+            var button = morphButtons[i];
+            var buttonEl = $(morphButtons[i].el);
+            if (buttonEl.hasClass('active')) {
+                button.toggle();
+            }
+        }
+    }
+
     $(document.body).keydown(function(event) {
         if (event.keyCode == 27) {
-            for (var i = 0; i < morphButtons.length; i ++) {
-                var button = morphButtons[i];
-                var buttonEl = $(morphButtons[i].el);
-                if (buttonEl.hasClass('active')) {
-                    button.toggle();
-                }
-            }
+            // esc key
+            closeModal();
         } else if (event.keyCode == 37 || event.keyCode == 39) {
             var goRight = event.keyCode == 39;
             for (var i = 0; i < morphButtons.length; i ++) {
