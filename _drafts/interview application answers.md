@@ -29,7 +29,10 @@ However, I have built a bunch of things which are open source and I am proud of 
 3 - I love clevertech. I researched your employees and blog deeply.
 
 ## 6
-At Chaordic I worked on integrating our custom search engine of the ecommerce site Saraiva (http://www.saraiva.com.br/). Saraiva was huge challenge for us as they were by far our biggest client at the time (~6K searches per minute) and we were placed in an A/B test competition against their existing search engine and market leaders at the time (SLI systems). For 2 months we worked on optimizing the search through double blinds and profiling, finally defeating 
+At Chaordic I worked on integrating our custom search engine of the ecommerce site Saraiva (http://www.saraiva.com.br/). Saraiva was huge challenge because:
+1 - They were by far our biggest client (~6K searches per minute). 
+2 - We were placed in an A/B test competition against their existing search engine and market leaders at the time (SLI systems). 
+For 2 months we worked on optimizing the search quality and scalability of the product. Finally defeating SLI systems.
 
   receives about ~6K searches per minute.  which at the time 
 
