@@ -9,6 +9,6 @@
 - Who are your clients?
 - Who are your competitors?
 
-- Tell me more about uses cases for powerglass
+- 20-30k users
 
 
