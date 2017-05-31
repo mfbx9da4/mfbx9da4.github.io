@@ -1,0 +1,93 @@
+
+<html>
+
+    <head>
+        <title>Floripa webcams</title>
+        <script src="https://code.jquery.com/jquery-2.2.4.js"></script>
+        <script src="http://ssl.p.jwpcdn.com/player/v/7.7.0/jwplayer.js"></script>
+
+        <style>
+            * {
+                box-sizing: border-box;
+            }
+            .webcams {
+                display: flex;
+                flex-wrap: wrap;
+            }
+            .webcam {
+                flex: 50% 1 0;
+                height: 50% !important;
+            }
+        </style>
+
+    </head>
+
+    <body>
+        <div class="webcams">
+            <div id="joaquina" class='webcam' data-source='http://caikron.com.br:1935/deolhonomar/joaquina.stream/playlist.m3u8'><div class='jwplayer'></div></div>
+            <div id="joaquina2" class='webcam' data-source='http://streaming60.sitehosting.com.br:1935/inparadise/camera.stream/playlist.m3u8'><div class='jwplayer'></div></div>
+            <div id="mole" class='webcam' data-source='http://caikron.com.br:1935/tempoemar/mole.stream/playlist.m3u8'><div class='jwplayer'></div></div>
+            <div id="barra" class='webcam' data-source='http://streaming59.sitehosting.com.br:1935/inparadise/camera.stream/playlist.m3u8'><div class='jwplayer'></div></div>
+            <div id="armação" class='webcam' data-source='https://d1h84if288zv9w.cloudfront.net/aovivo/0be3_808.stream/playlist.m3u8'><div class='jwplayer'></div></div>
+            <div id="ingleses" class='webcam' data-source='https://d1h84if288zv9w.cloudfront.net/aovivo/0be3_686.stream/playlist.m3u8'><div class='jwplayer'></div></div>
+        </div>
+
+        <script>
+        jwplayer.key = "ftjvkP4Hyf7gB3Y/mnYza01fCLcz36eSFagTl5+SZkk="
+
+        $(function () {
+            initWebcams();
+            setTimeout(initWebcams, 1000 * 60);
+        })
+
+        function initWebcams() {
+            $('.webcam').each(function (i, elem) {
+                console.info('elem', elem, elem.id);
+                $(elem).find('.jwplayer').attr('id', '#' + elem.id + 'jwplayer')
+                initWebcam(elem.id, $(elem).attr('data-source'))
+            });
+        }
+
+
+        function initWebcam(id, source) {
+            jwplayer('#' + id + 'jwplayer').setup({
+
+                title: "Floripa Webcams",
+
+                playlist: {
+
+                    image: "",
+
+                    sources: [
+                        {
+                            file: source
+                        }
+
+                    ],
+
+                },
+
+                autostart: true,
+
+                title: '',
+                width: '100%',
+                height: '100%',
+                aspectratio: '16:9',
+
+                p2pConfig: {
+                    streamrootKey: "YOUR_APP_CLIENTID"
+                },
+
+                hlsjsConfig: {}, // possible hls.js options
+
+                srDashConfig: {} // possible streamroot-dash options
+
+            } );
+        }
+
+
+        </script>
+
+    </body>
+
+</html>
