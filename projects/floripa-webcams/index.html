@@ -5,21 +5,36 @@
         <title>Floripa webcams</title>
         <script src="https://code.jquery.com/jquery-2.2.4.js"></script>
         <script src="http://ssl.p.jwpcdn.com/player/v/7.7.0/jwplayer.js"></script>
-
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <style>
             * {
                 box-sizing: border-box;
             }
+
+            html, body {
+                margin: 0;
+                padding: 0;
+                height: 100%;
+                width: 100%;
+                font-family: sans-serif;
+            }
             .webcams {
-                display: flex;
-                flex-wrap: wrap;
             }
             .webcam {
-                flex: 50% 1 0;
+                position: relative;
+                width: 100%;
+                float: left;
             }
-            @media (max-width: 576px) {
+            .name {
+                position: absolute;
+                padding: 14px;
+                background: rgba(255, 255, 255, 0.8);
+                top: 0;
+                left: 0;
+            }
+            @media only screen and (min-width: 500px) {
                 .webcam {
-                    flex: 100% 1 0;
+                    width: 50%;
                 }
             }
         </style>
@@ -29,11 +44,17 @@
     <body>
         <div class="webcams">
             <div id="joaquina" class='webcam' data-source='http://caikron.com.br:1935/deolhonomar/joaquina.stream/playlist.m3u8'><div class='jwplayer'></div></div>
+
             <div id="joaquina2" class='webcam' data-source='http://streaming60.sitehosting.com.br:1935/inparadise/camera.stream/playlist.m3u8'><div class='jwplayer'></div></div>
+
             <div id="mole" class='webcam' data-source='http://caikron.com.br:1935/tempoemar/mole.stream/playlist.m3u8'><div class='jwplayer'></div></div>
+
             <div id="barra" class='webcam' data-source='http://streaming59.sitehosting.com.br:1935/inparadise/camera.stream/playlist.m3u8'><div class='jwplayer'></div></div>
+
             <div id="armação" class='webcam' data-source='https://d1h84if288zv9w.cloudfront.net/aovivo/0be3_808.stream/playlist.m3u8'><div class='jwplayer'></div></div>
+
             <div id="ingleses" class='webcam' data-source='https://d1h84if288zv9w.cloudfront.net/aovivo/0be3_686.stream/playlist.m3u8'><div class='jwplayer'></div></div>
+
         </div>
 
         <script>
@@ -48,6 +69,8 @@
             $('.webcam').each(function (i, elem) {
                 console.info('elem', elem, elem.id);
                 $(elem).find('.jwplayer').attr('id', '#' + elem.id + 'jwplayer')
+                const name = elem.id[0].toUpperCase() + elem.id.substring(1);
+                $(elem).append($('<div class="name">' + name + '</div>'))
                 initWebcam(elem.id, $(elem).attr('data-source'))
             });
         }
