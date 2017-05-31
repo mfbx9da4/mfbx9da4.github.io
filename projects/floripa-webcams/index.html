@@ -72,6 +72,7 @@
         jwplayer.key = "ftjvkP4Hyf7gB3Y/mnYza01fCLcz36eSFagTl5+SZkk="
 
         $(function () {
+            mixpanel.track('init')
             initWebcams();
             setTimeout(initWebcams, 1000 * 60);
         })
