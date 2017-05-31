@@ -16,7 +16,11 @@
             }
             .webcam {
                 flex: 50% 1 0;
-                height: 50% !important;
+            }
+            @media (max-width: 576px) {
+                .webcam {
+                    flex: 100% 1 0;
+                }
             }
         </style>
 
