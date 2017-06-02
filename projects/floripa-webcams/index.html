@@ -62,6 +62,9 @@
                 position: relative;
                 width: 100%;
                 float: left;
+                min-height: calc(50vw * (9 / 16));
+                background: black;
+                overflow-y: scroll;
             }
             .name {
                 position: absolute;
@@ -69,6 +72,12 @@
                 background: rgba(255, 255, 255, 0.5);
                 top: 0;
                 right: 0;
+                z-index: 2;
+                cursor: pointer;
+            }
+
+            .name:hover {
+                background: rgba(255, 255, 255, 0.8);
             }
             @media only screen and (min-width: 700px) {
                 .tile {
@@ -79,40 +88,97 @@
                 padding: 2em;
                 text-align: center;
                 background: rgba(200,200,200,0.1);
+                line-height: 1.6em;
             }
 
             #info img {
                 border-radius: 50%;
                 margin-bottom: 1em;
+                height: 66%;
+                max-height: 193px;
             }
+
+            /*surf forecast styles */
+            .surf-fc-widget { width: 800px; }
+
+
+            /*flip.css*/
+            /* entire container, keeps perspective */
+            .flip-container {
+                perspective: 1000px;
+                transform-style: preserve-3d;
+            }
+                /*  UPDATED! flip the pane when hovered */
+                .flip-container:hover .back {
+                    transform: rotateY(0deg);
+                }
+                .flip-container:hover .front {
+                    transform: rotateY(180deg);
+                }
+
+            .flip-container, .front, .back {
+                width: 320px;
+                height: 480px;
+            }
+
+            /* flip speed goes here */
+            .flipper {
+                transition: 0.6s;
+                transform-style: preserve-3d;
+
+                position: relative;
+            }
+
+            /* hide back of pane during swap */
+            .front, .back {
+                backface-visibility: hidden;
+                transition: 0.6s;
+                transform-style: preserve-3d;
+
+                position: absolute;
+                top: 0;
+                left: 0;
+            }
+
+            /*  UPDATED! front pane, placed above back */
+            .front {
+                z-index: 2;
+                transform: rotateY(0deg);
+            }
+
+            /* back, initially hidden pane */
+            .back {
+                transform: rotateY(-180deg);
+            }
+            /*end flip.css*/
+
         </style>
 
     </head>
 
     <body>
         <div class="webcams">
-            <div id="joaquina" class='webcam tile' data-source='http://caikron.com.br:1935/deolhonomar/joaquina.stream/playlist.m3u8'><div class='jwplayer'></div></div>
 
-            <div id="joaquina2" class='webcam tile' data-source='http://streaming60.sitehosting.com.br:1935/inparadise/camera.stream/playlist.m3u8'><div class='jwplayer'></div></div>
+            <div id="joaquina" data-spot-id='joaquina' class='webcam tile' data-source='http://caikron.com.br:1935/deolhonomar/joaquina.stream/playlist.m3u8'><div class='jwplayer'></div></div>
 
-            <div id="mole" class='webcam tile' data-source='http://caikron.com.br:1935/tempoemar/mole.stream/playlist.m3u8'><div class='jwplayer'></div></div>
+            <div id="joaquina2" data-spot-id='joaquina' class='webcam tile' data-source='http://streaming60.sitehosting.com.br:1935/inparadise/camera.stream/playlist.m3u8'><div class='jwplayer'></div></div>
 
-            <div id="barra" class='webcam tile' data-source='http://streaming59.sitehosting.com.br:1935/inparadise/camera.stream/playlist.m3u8'><div class='jwplayer'></div></div>
+            <div id="mole" data-spot-id='mole' class='webcam tile' data-source='http://caikron.com.br:1935/tempoemar/mole.stream/playlist.m3u8'><div class='jwplayer'></div></div>
 
-            <div id="armação" class='webcam tile' data-source='https://d1h84if288zv9w.cloudfront.net/aovivo/0be3_808.stream/playlist.m3u8'><div class='jwplayer'></div></div>
+            <div id="barra" data-spot-id='barra' class='webcam tile' data-source='http://streaming59.sitehosting.com.br:1935/inparadise/camera.stream/playlist.m3u8'><div class='jwplayer'></div></div>
 
-            <div id="ingleses" class='webcam tile' data-source='https://d1h84if288zv9w.cloudfront.net/aovivo/0be3_686.stream/playlist.m3u8'><div class='jwplayer'></div></div>
+            <div id="armação" data-spot-id='armacao' class='webcam tile' data-source='https://d1h84if288zv9w.cloudfront.net/aovivo/0be3_808.stream/playlist.m3u8'><div class='jwplayer'></div></div>
+
+            <div id="ingleses" data-spot-id='ingleses' class='webcam tile' data-source='https://d1h84if288zv9w.cloudfront.net/aovivo/0be3_686.stream/playlist.m3u8'><div class='jwplayer'></div></div>
 
             <div id="info" class='tile'>
                 <div class='info'>
                     <div>
                         <a href="https://www.facebook.com/davidadlerfb"><img src="http://mfbx9da4.github.io/assets/img/chaordic-profile.jpg" alt="David Adler"></a>
                     </div>
-                    <small>Created by:</small>
-                    <h2><a href="https://www.facebook.com/davidadlerfb">David Alberto Adler</a></h2>
-                    <p>Surfer and engineer</p>
-                    <p>Surfista e engenheiro</p>
-                    <p class="email">dalberto.adler@gmail.com</p>
+                    <small>Created by: <a href="https://www.facebook.com/davidadlerfb" target="_blank">David Alberto Adler</a>. Surfer and engineer.</small>
+                    <br />
+                    <small>dalberto.adler@gmail.com</small>
                 </div>
             </div>
 
@@ -124,29 +190,102 @@
         $(function () {
             mixpanel.track('init')
             initWebcams();
-            setTimeout(initWebcams, 1000);
+            bindSetTileHeights();
         })
+
+        var surfForecastBreakNames = {
+            'armacao': 'Armacao',
+            'barra': 'Barra-da-Lagoa',
+            'caldeirao': 'Caldeirao',
+            'campeche': 'Campeche',
+            'canasvieiras': 'Canasvieiras',
+            'galheta': 'Galheta',
+            'ingleses': 'Ingleses',
+            'joaquina': 'Joaquina',
+            'lagoinhado-leste': 'Lagoinhado-Leste',
+            'lambe': 'Lambe-Lambe-1',
+            'matadeiro': 'Matadeiro',
+            'mocambique': 'Mocambique',
+            'morrodas': 'Morrodas-Pedras',
+            'naufragados': 'Naufragados',
+            'pantano-do-sul': 'Pantano-do-Sul',
+            'ponta-das-aranhas': 'Ponta-Das-Aranhas',
+            'ponta-do-rapa': 'Ponta-Do-Rapa',
+            'praia-brava': 'Praia-Brava-3',
+            'praia-da-solidao': 'Praia-da-Solidao',
+            'praia-do-forte': 'Praia-do-Forte-2',
+            'praia-dos-acores': 'Praia-Dos-Acores',
+            'mole': 'Praia-Mole',
+            'riozinho': 'Riozinho',
+            'santinho': 'Santinho'
+        }
+
+        function bindSetTileHeights() {
+            function setTileHeights() {
+                var width = $(window).width();
+                if (width >= 700) {
+                    width = width / 2;
+                }
+                var height = (width) * (9 / 16);
+
+                $('.tile').each(function (i, elem) {
+                    $(elem).css('height', height + 'px');
+                })
+            }
+
+            $(window).resize(setTileHeights).trigger('resize');
+        }
 
         function initWebcams() {
             $('.webcam').each(function (i, elem) {
-                const config = {
+                var config = {
                     name: elem.id[0].toUpperCase() + elem.id.substring(1),
                     id: elem.id,
-                    playerId: '#' + elem.id + 'jwplayer',
+                    playerId: elem.id + 'jwplayer',
+                    spotId: $(elem).attr('data-spot-id'),
                     source: $(elem).attr('data-source')
                 }
-                $(elem).find('.jwplayer').attr('id', config.playerId);
-                $(elem).append($('<div class="name">' + config.name + '</div>'));
+                config.surfForecastBreak = surfForecastBreakNames[config.spotId];
+
+                var $back = $('<div class="spot-info-back">');
+                $back.hide();
+                var $jwplayer = $(elem).find('.jwplayer')
+                $jwplayer.attr('id', config.playerId);
+
+                if (config.surfForecastBreak) {
+                    var $forecast = renderSurfForecast(config.surfForecastBreak);
+                    $back.append($forecast);
+                }
+
+
+                $label = $('<div class="name">' + config.name + '</div>');
+                $label.click((function (config) {
+                    return function () {
+                        var $jwplayer = $('#' + config.id).find('.jwplayer');
+                        var $back = $('#' + config.id).find('.spot-info-back');
+                        if ($jwplayer.is(':visible')) {
+                            $jwplayer.hide();
+                            $back.show();
+                        } else {
+                            $jwplayer.show();
+                            $back.hide();
+                            initWebcam(config);
+                        }
+                    }
+                })(config));
+                $(elem).append([$label, $back]);
+
                 initWebcam(config)
             });
+            // setTimeout(initWebcams, 1000);
         }
 
 
         function initWebcam(config) {
             const instance = jwplayer(config.playerId)
-            if (instance.getState() === 'playing') {
-                return;
-            }
+            // if (instance.getState() === 'playing' || instance.getState() === 'buffering') {
+            //     return;
+            // }
             console.info(config.name, 'not playing, so start', new Date().toString());
             instance.setup({
                 playlist: {
@@ -181,6 +320,9 @@
             instance.on('pause', function (event) {
                 console.info('pause', config.name, event);
             });
+            instance.on('play', function (event) {
+                console.info('play', config.name, event);
+            });
             instance.on('buffer', function (event) {
                 console.info('buffer', config.name, event);
             });
@@ -191,6 +333,11 @@
                 console.info('complete', config.name, event);
             });
         }
+
+        function renderSurfForecast(breakName) {
+            return '<link href="//www.surf-forecast.com/stylesheets/widget.css" media="screen" rel="stylesheet" type="text/css" /><div class="wf-width-cont surf-fc-widget"><div class="widget-container"><div class="external-cont"><iframe class="surf-fc-i" allowtransparency="true" src="//www.surf-forecast.com/breaks/' + breakName + '/forecasts/widget/a" scrolling="no" frameborder="0" marginwidth="0" marginheight="0"></iframe><div class="footer"><a class="logo" href="//www.surf-forecast.com/"><img src="//www.surf-forecast.com/images/widget.png" alt="Widget" width="1" height="1" /></a><div class="about" id="cmt">More <a href="//www.surf-forecast.com/breaks/' + breakName + '">Detailed Surf Conditions &amp; Webcams for&nbsp;' + breakName + '</a> <nobr>at&nbsp;<a href="//www.surf-forecast.com/">surf-forecast.com</a></nobr>.</div></div></div></div></div>';
+        }
+
         </script>
     </body>
 
