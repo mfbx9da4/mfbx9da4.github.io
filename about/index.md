@@ -10,6 +10,7 @@ My original interest in code stemmed from an academic background in neuroscience
 
 Currently open to fully remote roles using node/python/angular. Ideally in surfing, neuroscience, sports, clean tech, online education and/or a product that I believe in. Also considering relocation to locations outside the UK.
 
+
 [CV (pdf)](/assets/cv.pdf)
 
 I am originally from London and have dual nationality British-Brazilian.
