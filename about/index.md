@@ -7,4 +7,4 @@ I am a senior full stack web developer with an entreprenurial mindset. I special
 
 [CV (pdf)](/assets/cv.pdf)
 
-I am looking for opportunities with early stage companies with an exciting misison.
+I am looking for opportunities in San Francisco.
