@@ -7,4 +7,4 @@ I am a senior full stack web developer with an entreprenurial mindset. I special
 
 [CV (pdf)](/assets/cv.pdf)
 
-I am looking for opportunities in San Francisco. Schedule a chat with me below or send me an [email](mailto:dalberto.adler@gmail.com)!
+I am looking for opportunities in San Francisco proper near SOMA. Schedule a chat with me below or send me an [email](mailto:dalberto.adler@gmail.com)!
