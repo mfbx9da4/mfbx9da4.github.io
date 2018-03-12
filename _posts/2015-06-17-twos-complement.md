@@ -26,11 +26,14 @@ $$
 $$
 TC([{\color{#CC0000} {1111} }]) = −{\color{#CC0000} {1} } \cdot 2^3 + {\color{#CC0000} {1} } \cdot 2^2 + {\color{#CC0000} {1} } \cdot 2^1 + {\color{#CC0000} {1} } \cdot 2^0 = −8 + 4 + 2 + 1 = −1
 $$
+
+
 Therefore the maximum integer encodable with 4 bits is 7:
 
 ![two's complement]({{ site.url }}/assets/img/twos-complement.png)
 
 Therefore for $n$ bits, the largest number encodable $MaxInt(n)$ is the sum of the base 2 bits excluding the left most bit:
+
 $$
 MaxInt(n) = \sum_{i=0}^{n-2} 2^i = (2^0 + 2^1 + ... + 2^{n-3} + 2^{n-2} )
 $$
@@ -50,15 +53,23 @@ $$
 Simplifying:
 
 $$
-2S(n) = 2^1 + 2^2 ... + (2 \cdot \frac{2^{n}}{2^3}) + (2 \cdot \frac{2^{n}}{2^2})
+2S(n) = 2^1 + 2^2 ... + (2 \cdot 2^{n-3}) + (2 \cdot 2^{n-2})
 $$
 
 $$
-2S(n) = 2^1 + 2^2 ... + \frac{2^{n}}{2^2} + \frac{2^{n}}{2^1}
+= 2^1 + 2^2 ... + (2 \cdot \frac{2^{n}}{2^3}) + (2 \cdot \frac{2^{n}}{2^2})
 $$
 
 $$
-2S(n) = {\color{#CC0000} {2^1 + 2^2 ... + 2^{n-2}} } + 2^{n-1}
+ = 2^1 + 2^2 ... + \frac{2^{n}}{2^2} + \frac{2^{n}}{2^1}
+$$
+
+$$
+ = 2^1 + 2^2 ... + \frac{2^{n}}{2^2} + \frac{2^{n}}{2^1}
+$$
+
+$$
+ = {\color{#CC0000} {2^1 + 2^2 ... + 2^{n-2}} } + 2^{n-1}
 $$
 
 Notice what is in <span style="color: #CC0000">red</span> is actually $S(n)$ except it is missing the first term ($2^0$), lets call this part in <span style="color: #CC0000">red</span> $y$:
@@ -66,6 +77,8 @@ Notice what is in <span style="color: #CC0000">red</span> is actually $S(n)$ exc
 $$
 2S(n) = {\color{#CC0000} {y} } + 2^{n-1}
 $$
+
+where 
 
 $$
 {\color{#CC0000} {y} } = S(n) - 2^0
