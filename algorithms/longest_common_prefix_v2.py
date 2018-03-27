@@ -2,6 +2,28 @@ from timer import Timer
 import matplotlib.pyplot as plt
 
 # https://stackoverflow.com/questions/49353891/why-is-string-comparison-so-fast-in-python
+# https://stackoverflow.com/questions/19916729/how-exactly-is-python-bytecode-run-in-cpython
+
+# Python is compiled to bytecode by the compiled cpython
+# then cpython then reads this byte code in
+# a giant switch statment resulting in execution
+# in https://github.com/python/cpython/blob/master/Python/ceval.c#L4719
+# which calls PyObject_RichCompare
+# 20 COMPARE_OP               2 (==)
+#
+# actual comparison? https://github.com/python/cpython/blob/3.6/Objects/object.c#L691
+# PyObject_RichCompare docs https://docs.python.org/3/c-api/object.html#c.PyObject_RichCompare
+
+# here we see that substring creates a new string object:
+# /* do the equivalent of obj[name] */
+# static PyObject *
+# getitem_str(PyObject *obj, SubString *name)
+# {
+#     PyObject *newobj;
+#     PyObject *str = SubString_new_object(name);
+#     if (str == NULL)
+#         return NULL;
+#     newobj = PyObject_GetItem(obj, str);
 
 
 def longestCommonPrefix(smaller, bigger):
