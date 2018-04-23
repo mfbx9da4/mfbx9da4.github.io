@@ -45,6 +45,25 @@ def longestCommonPrefix(smaller, bigger):
 
   return lo
 
+def longestCommonPrefix3(smaller, bigger):
+  # assumes first arg always smaller
+  lo = 0
+  hi = len(smaller)
+
+  # binary search for prefix
+  while lo < hi:
+    # +1 for even lengths
+    mid = ((hi - lo + 1) // 2) + lo
+
+    if smaller[:mid] != bigger[:mid]:
+      # prefixes not equal
+      hi = mid - 1
+    else:
+      # prefixes equal
+      lo = mid
+
+  return lo
+
 def longestCommonPrefix2(smaller, bigger):
   # assumes first arg always smaller
   for p in range(len(smaller)):
@@ -70,8 +89,11 @@ strings = ['asdf', 'asdf']
 assert longestCommonPrefix(*strings) == 4
 assert longestCommonPrefix2(*strings) == 4
 
-suffix_length = 50
-calc_suffix_length = lambda prefix_length: (200 * prefix_length) - prefix_length
+def calc_suffix_length(prefix_length):
+  # total_length = (2 ** prefix_length)
+  total_length = (200 * prefix_length)
+  suffix_length = total_length - prefix_length
+  return suffix_length
 
 # benchmark predifined prefix_lengthes
 prefix_lengthes = [4, 21, 256]
@@ -86,6 +108,9 @@ for prefix_length in prefix_lengthes:
       assert longestCommonPrefix(*strings) == prefix_length
   with Timer(message + 'compare chars') as t:
     for i in range(100):
+      assert longestCommonPrefix3(*strings) == prefix_length
+  with Timer(message + ' v3') as t:
+    for i in range(100):
       assert longestCommonPrefix2(*strings) == prefix_length
 
 v1 = []
@@ -95,6 +120,8 @@ v4 = []
 
 # benchmark with prefix_range_length
 max_prefix_length = 1000000
+# max_prefix_length = 30
+test_n = 10
 prefix_length_range = range(0, max_prefix_length, max_prefix_length // 10)
 for prefix_length in prefix_length_range:
   if prefix_length % 100 == 0:
@@ -106,13 +133,18 @@ for prefix_length in prefix_length_range:
 
   # as strings
   with Timer(print_message=False) as t:
-    for i in range(10):
+    for i in range(test_n):
       assert longestCommonPrefix(*strings) == prefix_length
   v1.append(t.delta)
   with Timer(print_message=False) as t:
-    for i in range(10):
+    for i in range(test_n):
       assert longestCommonPrefix2(*strings) == prefix_length
   v2.append(t.delta)
+
+  # with Timer(print_message=False) as t:
+  #   for i in range(10):
+  #     assert longestCommonPrefix3(*strings) == prefix_length
+  # v3.append(t.delta)
 
   # as bytes
   # with Timer(print_message=False) as t:
@@ -125,9 +157,9 @@ for prefix_length in prefix_length_range:
   # v4.append(t.delta)
 
 print('now plotting')
-len(v1) and plt.plot(prefix_length_range, v1, label='binary search, native string comparison')
-len(v2) and plt.plot(prefix_length_range, v2, label='compare characters')
-len(v3) and plt.plot(prefix_length_range, v3, label='binary search, bytes')
+len(v1) and plt.plot(prefix_length_range, v1, label='binarySearch')
+len(v2) and plt.plot(prefix_length_range, v2, label='charByChar')
+len(v3) and plt.plot(prefix_length_range, v3, label='binary search, using !=')
 len(v4) and plt.plot(prefix_length_range, v4, label='compare bytes')
 plt.title('')
 plt.ylabel('time (s)')
