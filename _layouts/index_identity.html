@@ -24,78 +24,141 @@
 				color: #ff7496;
 			}
 		</style>
+		<style for-coverr type="text/css">
+			.homepage-hero-module {
+			    border-right: none;
+			    border-left: none;
+			    position: relative;
+			}
+			.no-video .video-container video,
+			.touch .video-container video {
+			    display: none;
+			}
+			.no-video .video-container .poster,
+			.touch .video-container .poster {
+			    display: block !important;
+			}
+			.video-container {
+			    position: absolute;
+			    bottom: 0%;
+			    left: 0%;
+			    height: 100%;
+			    width: 100%;
+			    overflow: hidden;
+			    background-image: url("images/overlay.png"), -moz-linear-gradient(60deg, rgba(255, 165, 150, 0.5) 5%, rgba(0, 228, 255, 0.35));
+			    background-image: url("images/overlay.png"), -webkit-linear-gradient(60deg, rgba(255, 165, 150, 0.5) 5%, rgba(0, 228, 255, 0.35));
+			    background-image: url("images/overlay.png"), -ms-linear-gradient(60deg, rgba(255, 165, 150, 0.5) 5%, rgba(0, 228, 255, 0.35));
+			    background-image: url("images/overlay.png"), linear-gradient(60deg, rgba(255, 165, 150, 0.5) 5%, rgba(0, 228, 255, 0.35));
+			}
+			.video-container .poster img {
+			    width: 100%;
+			    bottom: 0;
+			    top: 0;
+			    position: absolute;
+			}
+			.video-container .filter {
+			    z-index: 100;
+			    position: absolute;
+			    /*background: rgba(0, 0, 0, 0.4);*/
+			    width: 100%;
+			}
+			.video-container video {
+			    position: absolute;
+			    z-index: 0;
+			    /*bottom: 0;*/
+			    /*top: 0;*/
+			    object-fit: cover;
+			}
+			.video-container video.fillWidth {
+			    width: 100%;
+			}
+			.hidden {
+				display: none;
+			}
+			#main, #footer {
+				z-index: 99;
+			}
+		</style>
 	</head>
 	<body class="is-loading">
 
-		<!-- Wrapper -->
-			<div id="wrapper">
+		<div id="wrapper" class=" homepage-hero-module">
+		    <!-- Main -->
+		    	<section id="main">
+		    		<header>
+		    			<span class="avatar"><img src="/assets/img/chaordic-profile.jpg" alt="" /></span>
+		    			<h1>David Alberto Adler</h1>
+		    			<p>
+		    				A people person with tech skills <br>
+		    				dalberto.adler@gmail.com
+		    			</p>
+		    			<!-- <p>dalberto.adler@gmail.com</p> -->
+		    		</header>
+		    		<!--
+		    		<hr />
+		    		<h2>Extra Stuff!</h2>
+		    		<form method="post" action="#">
+		    			<div class="field">
+		    				<input type="text" name="name" id="name" placeholder="Name" />
+		    			</div>
+		    			<div class="field">
+		    				<input type="email" name="email" id="email" placeholder="Email" />
+		    			</div>
+		    			<div class="field">
+		    				<div class="select-wrapper">
+		    					<select name="department" id="department">
+		    						<option value="">Department</option>
+		    						<option value="sales">Sales</option>
+		    						<option value="tech">Tech Support</option>
+		    						<option value="null">/dev/null</option>
+		    					</select>
+		    				</div>
+		    			</div>
+		    			<div class="field">
+		    				<textarea name="message" id="message" placeholder="Message" rows="4"></textarea>
+		    			</div>
+		    			<div class="field">
+		    				<input type="checkbox" id="human" name="human" /><label for="human">I'm a human</label>
+		    			</div>
+		    			<div class="field">
+		    				<label>But are you a robot?</label>
+		    				<input type="radio" id="robot_yes" name="robot" /><label for="robot_yes">Yes</label>
+		    				<input type="radio" id="robot_no" name="robot" /><label for="robot_no">No</label>
+		    			</div>
+		    			<ul class="actions">
+		    				<li><a href="#" class="button">Get Started</a></li>
+		    			</ul>
+		    		</form>
+		    		<hr />
+		    		-->
+		    		<footer>
+		    			<ul class="icons">
+		    				<li><a target="_blank" href="/assets/cv.pdf" class="text-icon">CV</a></li>
+		    				<li><a target="_blank" href="https://github.com/mfbx9da4" class="fa-github">mfbx9da4</a></li>
+		    				<li><a target="_blank" href="http://stackoverflow.com/users/1376627/david-adler" class="fa-stack-overflow">Stack Overflow</a></li>
+		    				<li><a target="_blank" href="http://br.linkedin.com/pub/david-adler/71/566/710/" class="fa-linkedin">LinkedIn</a></li>
+		    			</ul>
+		    		</footer>
+		    	</section>
 
-				<!-- Main -->
-					<section id="main">
-						<header>
-							<span class="avatar"><img src="/assets/img/chaordic-profile.jpg" alt="" /></span>
-							<h1>David Alberto Adler</h1>
-							<p>
-								Senior Full Stack Engineer <br>
-								dalberto.adler@gmail.com
-							</p>
-							<!-- <p>dalberto.adler@gmail.com</p> -->
-						</header>
-						<!--
-						<hr />
-						<h2>Extra Stuff!</h2>
-						<form method="post" action="#">
-							<div class="field">
-								<input type="text" name="name" id="name" placeholder="Name" />
-							</div>
-							<div class="field">
-								<input type="email" name="email" id="email" placeholder="Email" />
-							</div>
-							<div class="field">
-								<div class="select-wrapper">
-									<select name="department" id="department">
-										<option value="">Department</option>
-										<option value="sales">Sales</option>
-										<option value="tech">Tech Support</option>
-										<option value="null">/dev/null</option>
-									</select>
-								</div>
-							</div>
-							<div class="field">
-								<textarea name="message" id="message" placeholder="Message" rows="4"></textarea>
-							</div>
-							<div class="field">
-								<input type="checkbox" id="human" name="human" /><label for="human">I'm a human</label>
-							</div>
-							<div class="field">
-								<label>But are you a robot?</label>
-								<input type="radio" id="robot_yes" name="robot" /><label for="robot_yes">Yes</label>
-								<input type="radio" id="robot_no" name="robot" /><label for="robot_no">No</label>
-							</div>
-							<ul class="actions">
-								<li><a href="#" class="button">Get Started</a></li>
-							</ul>
-						</form>
-						<hr />
-						-->
-						<footer>
-							<ul class="icons">
-								<li><a target="_blank" href="/assets/cv.pdf" class="text-icon">CV</a></li>
-								<li><a target="_blank" href="https://github.com/mfbx9da4" class="fa-github">mfbx9da4</a></li>
-								<li><a target="_blank" href="http://stackoverflow.com/users/1376627/david-adler" class="fa-stack-overflow">Stack Overflow</a></li>
-								<li><a target="_blank" href="http://br.linkedin.com/pub/david-adler/71/566/710/" class="fa-linkedin">LinkedIn</a></li>
-							</ul>
-						</footer>
-					</section>
+		    	<!-- Footer -->
+		    		<footer id="footer">
+		    			<ul class="copyright">
+		    				<li>&copy; David Alberto Adler</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+		    			</ul>
+		    		</footer>
 
-				<!-- Footer -->
-					<footer id="footer">
-						<ul class="copyright">
-							<li>&copy; David Alberto Adler</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-						</ul>
-					</footer>
-
-			</div>
+		    	<div class="video-container">
+		    	    <div class="filter"></div>
+		    	    <video autoplay loop class="fillWidth">
+		    	        <source src="/assets/img/Fish-Tank/MP4/Fish-Tank.mp4" type="video/mp4" />Your browser does not support the video tag. I suggest you upgrade your browser.
+		    	        <source src="/assets/img/Fish-Tank/WEBM/Fish-Tank.webm" type="video/webm" />Your browser does not support the video tag. I suggest you upgrade your browser.
+		    	    </video>
+		    	    <div class="poster hidden">
+		    	        <img src="/assets/img/Fish-Tank/Snapshots/Fish-Tank.jpg" alt="">
+		    	    </div>
+		    	</div>
+		</div>
 
 		<!-- Scripts -->
 			<!--[if lte IE 8]><script src="/assets/html5up-identity/assets/js/respond.min.js"></script><![endif]-->
@@ -105,6 +168,72 @@
 					document.body.className += (navigator.userAgent.match(/(MSIE|rv:11\.0)/) ? ' is-ie' : '');
 				}
 			</script>
+			<script
+			  src="https://code.jquery.com/jquery-2.2.4.min.js"
+			  integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+			  crossorigin="anonymous"></script>
+			<script type="text/javascript">
+				//jQuery is required to run this code
+				$( document ).ready(function() {
 
+				    scaleVideoContainer();
+
+				    initBannerVideoSize('.video-container .poster img');
+				    initBannerVideoSize('.video-container .filter');
+				    initBannerVideoSize('.video-container video');
+
+				    $(window).on('resize', function() {
+				        scaleVideoContainer();
+				        scaleBannerVideoSize('.video-container .poster img');
+				        scaleBannerVideoSize('.video-container .filter');
+				        scaleBannerVideoSize('.video-container video');
+				    });
+
+				});
+
+				function scaleVideoContainer() {
+
+				    var height = $(window).height() + 5;
+				    var unitHeight = parseInt(height) + 'px';
+				    $('.homepage-hero-module').css('height',unitHeight);
+
+				}
+
+				function initBannerVideoSize(element){
+
+				    $(element).each(function(){
+				        $(this).data('height', $(this).height());
+				        $(this).data('width', $(this).width());
+				    });
+
+				    scaleBannerVideoSize(element);
+
+				}
+
+				function scaleBannerVideoSize(element){
+
+				    var windowWidth = $(window).width(),
+				    windowHeight = $(window).height() + 5,
+				    videoWidth,
+				    videoHeight;
+
+				    // console.log(windowHeight);
+
+				    $(element).each(function(){
+				        var videoAspectRatio = $(this).data('height')/$(this).data('width');
+
+				        $(this).width(windowWidth);
+
+			            videoHeight = windowHeight;
+			            videoWidth = videoHeight / videoAspectRatio;
+			            $(this).css({'margin-top' : 0, 'margin-left' : -(videoWidth - windowWidth) / 2 + 'px'});
+
+			            $(this).width(videoWidth).height(videoHeight);
+
+				        $('.homepage-hero-module .video-container video').addClass('fadeIn animated');
+
+				    });
+				}
+			</script>
 	</body>
 </html>
