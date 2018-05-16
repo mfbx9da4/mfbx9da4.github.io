@@ -21,7 +21,7 @@ Can use `--limit_posts 1` in conjunction with `jekyll serve`. Can use `--increme
 
 `grunt-jekyll` no longer works because the latest jekyll is not supported by this grunt plugin.
 
-####Inspiration
+#### Inspiration
 - nice sidebar http://jimhoskins.com/2012/12/14/nested-scopes-in-angularjs.html
 - full screen nav http://codyhouse.co/demo/full-screen-pushing-navigation/index.html#0
 - animaitons http://dadler.herokuapp.com/
@@ -35,7 +35,7 @@ Can use `--limit_posts 1` in conjunction with `jekyll serve`. Can use `--increme
 - And for mobile
 - button morph http://tympanus.net/Development/ButtonComponentMorph/index7.html#
 
-####Ideas:
+#### Ideas:
 
 - [ ] loaded with browserfy, webpack and/or http://dustindiaz.com/scriptjs
 - [ ] Responsive
