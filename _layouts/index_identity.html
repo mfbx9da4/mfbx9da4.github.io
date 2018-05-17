@@ -174,12 +174,9 @@
 
 		    	<div class="video-container">
 		    	    <div class="filter"></div>
-		    	    	<!-- autobuffer preload  -->
 		    	    <video
-		    	    	autoplay="autoplay" autobuffer preload muted loop
+		    	    	autoplay="autoplay" muted loop preload="auto"
 		    	    	class="fillWidth hidden animated">
-		    	        <source src="/assets/img/Fish-Tank/MP4/Fish-Tank.mp4" type="video/mp4">
-		    	        <source src="/assets/img/Fish-Tank/WEBM/Fish-Tank.webm" type="video/webm">
 		    	    </video>
 
 	    	        <img class="poster hidden" src="/assets/img/Fish-Tank/Snapshots/Fish-Tank.jpg" alt="">
@@ -193,22 +190,37 @@
 			if ('addEventListener' in window) {
 				window.addEventListener('load', function onWindowLoad () {
 					document.body.className = document.body.className.replace(/\bis-loading\b/, '');
+					console.log('window loaded')
 					setTimeout(function() {
+						console.log('play')
 						playVideo()
 					}, 500)
 				});
 				document.body.className += (navigator.userAgent.match(/(MSIE|rv:11\.0)/) ? ' is-ie' : '');
 			}
 
+			document.addEventListener('DOMContentLoaded', function onDocumentLoad () {
+				console.log('dom')
+			});
+
 			function playVideo () {
 				var video = document.querySelector('.video-container video')
 				window.video = video;
+				var source1 = document.createElement('source')
+				source1.setAttribute('src', '/assets/img/Fish-Tank/MP4/Fish-Tank.mp4')
+				source1.setAttribute('type', 'video/mp4')
+				var source2 = document.createElement('source')
+				source2.setAttribute('src', '/assets/img/Fish-Tank/WEBM/Fish-Tank.webm')
+				source2.setAttribute('type', 'video/webm')
+				video.appendChild(source1)
+				video.appendChild(source2)
 			    video.addEventListener('ended', function(ev) {
 			        video.currentTime = 0.1;
 			        video.play();
 			    });
 			    video.load();
 			    video.addEventListener('loadeddata', function(ev) {
+			    	console.log('video loadeddata')
 			        video.play()
 			        	.then(function(event) {
 			        		console.log(event)
