@@ -25,59 +25,82 @@
 			}
 		</style>
 		<style for-coverr type="text/css">
-			.homepage-hero-module {
-			    border-right: none;
-			    border-left: none;
-			    position: relative;
-			}
-			.no-video .video-container video,
-			.touch .video-container video {
-			    display: none;
-			}
-			.no-video .video-container .poster,
-			.touch .video-container .poster {
-			    display: block !important;
-			}
-			.video-container {
-			    position: absolute;
-			    bottom: 0%;
-			    left: 0%;
-			    height: 100%;
-			    width: 100%;
-			    overflow: hidden;
-			    background-image: url("images/overlay.png"), -moz-linear-gradient(60deg, rgba(255, 165, 150, 0.5) 5%, rgba(0, 228, 255, 0.35));
-			    background-image: url("images/overlay.png"), -webkit-linear-gradient(60deg, rgba(255, 165, 150, 0.5) 5%, rgba(0, 228, 255, 0.35));
-			    background-image: url("images/overlay.png"), -ms-linear-gradient(60deg, rgba(255, 165, 150, 0.5) 5%, rgba(0, 228, 255, 0.35));
-			    background-image: url("images/overlay.png"), linear-gradient(60deg, rgba(255, 165, 150, 0.5) 5%, rgba(0, 228, 255, 0.35));
-			}
-			.video-container .poster img {
-			    width: 100%;
-			    bottom: 0;
-			    top: 0;
-			    position: absolute;
-			}
-			.video-container .filter {
-			    z-index: 100;
-			    position: absolute;
-			    /*background: rgba(0, 0, 0, 0.4);*/
-			    width: 100%;
-			}
-			.video-container video {
-			    position: absolute;
-			    z-index: 0;
-			    /*bottom: 0;*/
-			    /*top: 0;*/
-			    object-fit: cover;
-			}
-			.video-container video.fillWidth {
-			    width: 100%;
-			}
-			.hidden {
-				display: none;
-			}
 			#main, #footer {
 				z-index: 99;
 			}
+			.video-container, .video-container video, .poster {
+			    position: absolute;
+			    z-index: 0;
+			    bottom: 0;
+			    top: 0;
+			    object-fit: cover;
+			    height: 100%;
+			    width: 100%;
+			    opacity: 1;
+			}
+			.hidden {
+				opacity: 0 !important;
+			}
+
+			/* Animation styles */
+			.animated {
+			  -webkit-animation-duration: 1s;
+			  animation-duration: 1s;
+			  -webkit-animation-fill-mode: both;
+			  animation-fill-mode: both; }
+
+			@-webkit-keyframes fadeOut {
+			  from {
+			    opacity: 1; }
+			  to {
+			    opacity: 0; } }
+			@keyframes fadeOut {
+			  from {
+			    opacity: 1; }
+			  to {
+			    opacity: 0; } }
+			.fadeOut {
+			  -webkit-animation-name: fadeOut;
+			  animation-name: fadeOut;
+			  -webkit-animation-duration: 2s;
+			  animation-duration: 2s; }
+
+			@-webkit-keyframes fadeInDown {
+			  from {
+			    opacity: 0;
+			    -webkit-transform: translate3d(0, -100%, 0);
+			    transform: translate3d(0, -100%, 0); }
+			  to {
+			    opacity: 1;
+			    -webkit-transform: none;
+			    transform: none; } }
+			@keyframes fadeInDown {
+			  from {
+			    opacity: 0;
+			    -webkit-transform: translate3d(0, -100%, 0);
+			    transform: translate3d(0, -100%, 0); }
+			  to {
+			    opacity: 1;
+			    -webkit-transform: none;
+			    transform: none; } }
+			.fadeInDown {
+			  -webkit-animation-name: fadeInDown;
+			  animation-name: fadeInDown; }
+
+			@-webkit-keyframes fadeIn {
+			  from {
+			    opacity: 0; }
+			  to {
+			    opacity: 1; } }
+			@keyframes fadeIn {
+			  from {
+			    opacity: 0; }
+			  to {
+			    opacity: 1; } }
+			.fadeIn {
+			  -webkit-animation-name: fadeIn;
+			  animation-name: fadeIn; }
+
 		</style>
 	</head>
 	<body class="is-loading">
@@ -150,90 +173,57 @@
 
 		    	<div class="video-container">
 		    	    <div class="filter"></div>
-		    	    <video autoplay loop class="fillWidth">
-		    	        <source src="/assets/img/Fish-Tank/MP4/Fish-Tank.mp4" type="video/mp4" />Your browser does not support the video tag. I suggest you upgrade your browser.
-		    	        <source src="/assets/img/Fish-Tank/WEBM/Fish-Tank.webm" type="video/webm" />Your browser does not support the video tag. I suggest you upgrade your browser.
+		    	    	<!-- autobuffer preload  -->
+		    	    <video
+		    	    	autoplay="autoplay" autobuffer preload muted loop
+		    	    	class="fillWidth hidden animated">
+		    	        <source src="/assets/img/Fish-Tank/MP4/Fish-Tank.mp4" type="video/mp4">
+		    	        <source src="/assets/img/Fish-Tank/WEBM/Fish-Tank.webm" type="video/webm">
 		    	    </video>
-		    	    <div class="poster hidden">
-		    	        <img src="/assets/img/Fish-Tank/Snapshots/Fish-Tank.jpg" alt="">
-		    	    </div>
+
+	    	        <img class="poster hidden" src="/assets/img/Fish-Tank/Snapshots/Fish-Tank.jpg" alt="">
 		    	</div>
 		</div>
 
 		<!-- Scripts -->
 			<!--[if lte IE 8]><script src="/assets/html5up-identity/assets/js/respond.min.js"></script><![endif]-->
-			<script>
-				if ('addEventListener' in window) {
-					window.addEventListener('load', function() { document.body.className = document.body.className.replace(/\bis-loading\b/, ''); });
-					document.body.className += (navigator.userAgent.match(/(MSIE|rv:11\.0)/) ? ' is-ie' : '');
-				}
-			</script>
-			<script
-			  src="https://code.jquery.com/jquery-2.2.4.min.js"
-			  integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
-			  crossorigin="anonymous"></script>
-			<script type="text/javascript">
-				//jQuery is required to run this code
-				$( document ).ready(function() {
 
-				    scaleVideoContainer();
-
-				    initBannerVideoSize('.video-container .poster img');
-				    initBannerVideoSize('.video-container .filter');
-				    initBannerVideoSize('.video-container video');
-
-				    $(window).on('resize', function() {
-				        scaleVideoContainer();
-				        scaleBannerVideoSize('.video-container .poster img');
-				        scaleBannerVideoSize('.video-container .filter');
-				        scaleBannerVideoSize('.video-container video');
-				    });
-
+		<script>
+			if ('addEventListener' in window) {
+				window.addEventListener('load', function onWindowLoad () {
+					document.body.className = document.body.className.replace(/\bis-loading\b/, '');
+					setTimeout(function() {
+						playVideo()
+					}, 1000)
 				});
+				document.body.className += (navigator.userAgent.match(/(MSIE|rv:11\.0)/) ? ' is-ie' : '');
+			}
 
-				function scaleVideoContainer() {
+			function playVideo () {
+				var video = document.querySelector('.video-container video')
+				window.video = video;
+			    video.addEventListener('ended', function(ev) {
+			        video.currentTime = 0.1;
+			        video.play();
+			    });
+			    video.load();
+			    video.addEventListener('loadeddata', function(ev) {
+			        video.play()
+			        	.then(function(event) {
+			        		console.log(event)
+			        	})
+			        	.catch(function(event) {
+			        		console.log(event)
+			        	})
+			        addClass(video, 'fadeIn')
+			        video.className = video.className.replace(/\bhidden\b/, '');
+			    	return
+			    });
+			}
 
-				    var height = $(window).height() + 5;
-				    var unitHeight = parseInt(height) + 'px';
-				    $('.homepage-hero-module').css('height',unitHeight);
-
-				}
-
-				function initBannerVideoSize(element){
-
-				    $(element).each(function(){
-				        $(this).data('height', $(this).height());
-				        $(this).data('width', $(this).width());
-				    });
-
-				    scaleBannerVideoSize(element);
-
-				}
-
-				function scaleBannerVideoSize(element){
-
-				    var windowWidth = $(window).width(),
-				    windowHeight = $(window).height() + 5,
-				    videoWidth,
-				    videoHeight;
-
-				    // console.log(windowHeight);
-
-				    $(element).each(function(){
-				        var videoAspectRatio = $(this).data('height')/$(this).data('width');
-
-				        $(this).width(windowWidth);
-
-			            videoHeight = windowHeight;
-			            videoWidth = videoHeight / videoAspectRatio;
-			            $(this).css({'margin-top' : 0, 'margin-left' : -(videoWidth - windowWidth) / 2 + 'px'});
-
-			            $(this).width(videoWidth).height(videoHeight);
-
-				        $('.homepage-hero-module .video-container video').addClass('fadeIn animated');
-
-				    });
-				}
-			</script>
+			function addClass (element, className) {
+				element.className = element.className + ' ' + className
+			}
+		</script>
 	</body>
 </html>
