@@ -194,6 +194,18 @@
 				document.body.className += (navigator.userAgent.match(/(MSIE|rv:11\.0)/) ? ' is-ie' : '');
 			}
 
+			if ('serviceWorker' in navigator) {
+			  window.addEventListener('load', function() {
+			    navigator.serviceWorker.register('/assets/js/sw.js').then(function(registration) {
+			      // Registration was successful
+			      console.log('ServiceWorker registration successful with scope: ', registration.scope);
+			    }, function(err) {
+			      // registration failed :(
+			      console.log('ServiceWorker registration failed: ', err);
+			    });
+			  });
+			}
+
 			document.addEventListener('DOMContentLoaded', function onDocumentLoad () {
 				console.log('dom')
 			});
