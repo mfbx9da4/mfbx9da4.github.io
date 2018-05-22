@@ -4,8 +4,13 @@
   "lang": "en-GB",
   "start_url": "/",
   "display": "standalone",
-  "theme_color": "#00e4ff59",
+  "theme_color": "#29c1d3",
   "icons": [
+    {
+      "src": "/assets/img/chaordic-profile.jpg",
+      "sizes": "144x144",
+      "type": "image/png"
+    },
     {
       "src": "/assets/img/chaordic-profile.jpg",
       "sizes": "192x192",
