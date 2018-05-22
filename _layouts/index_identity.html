@@ -272,8 +272,10 @@
 			var deferredPrompt;
 			var btnAdd = document.createElement('button')
 			btnAdd.innerText = 'Add to Home Screen'
-			document.querySelector('#wrapper').appendChild(btnAdd)
-			btnAdd.style.display = 'none'
+			var wrapper = document.querySelector('#wrapper')
+			wrapper.insertBefore(btnAdd, wrapper.firstChild);
+			btnAdd.style.display = 'none';
+			btnAdd.style.zIndex = 3;
 
 			window.addEventListener('beforeinstallprompt', (e) => {
 			  console.log('beforeinstallprompt')
