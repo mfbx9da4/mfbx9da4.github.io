@@ -1,17 +1,19 @@
 var CACHE_NAME = 'my-site-cache-v1';
-var urlsToCache = [
+var coreFiles = [
   '/',
   '/assets/img/chaordic-profile.jpg',
   '/assets/html5up-identity/assets/css/main.css',
   '/assets/html5up-identity/images/bg.jpg',
-  '/assets/html5up-identity/assets/css/images/overlay.png',
-  // '/assets/img/Fish-Tank/MP4/Fish-Tank.mp4',
+  '/assets/html5up-identity/assets/css/images/overlay.png'
+]
+var secondaryFiles = [
+  '/assets/img/Fish-Tank/MP4/Fish-Tank.mp4',
+  '/assets/img/Fish-Tank/Snapshots/Fish-Tank.jpg',
   // '/assets/img/Fish-Tank/WEBM/Fish-Tank.webm',
-  // '/assets/img/Fish-Tank/Snapshots/Fish-Tank.jpg',
   // '/assets/cv.pdf',
   // '/assets/cvs.pdf',
-  // 'https://fonts.googleapis.com/css?family=Source+Sans+Pro:300',
-  // 'https://fonts.gstatic.com/s/sourcesanspro/v11/6xKydSBYKcSV-LCoeQqfX1RYOo3ik4zwlxdu3cOWxw.woff2',
+  'https://fonts.googleapis.com/css?family=Source+Sans+Pro:300',
+  'https://fonts.gstatic.com/s/sourcesanspro/v11/6xKydSBYKcSV-LCoeQqfX1RYOo3ik4zwlxdu3cOWxw.woff2',
   '/assets/html5up-identity/assets/fonts/fontawesome-webfont.woff2?v=4.6.3'
 ];
 
@@ -25,11 +27,8 @@ self.addEventListener('install', function(event) {
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then(function(cache) {
-        return cache.addAll(urlsToCache)
-          .then(function(response) {
-            console.log('😊 Finished install')
-            return response;
-          })
+        cache.addAll(secondaryFiles)
+        return cache.addAll(coreFiles)
       })
   );
 });
