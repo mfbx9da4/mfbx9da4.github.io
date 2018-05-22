@@ -7,14 +7,14 @@
   "theme_color": "#00e4ff59",
   "icons": [
     {
-      "src": "https://davidalbertoadler.com/assets/img/chaordic-profile.jpg",
+      "src": "/assets/img/chaordic-profile.jpg",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "https://davidalbertoadler.com/assets/img/chaordic-profile.jpg",
-      "sizes": "192x512",
-      "type": "image/png"
+      "src": "/assets/img/chaordic-profile.jpg",
+      "type": "image/png",
+      "sizes": "512x512"
     }
   ]
 }
