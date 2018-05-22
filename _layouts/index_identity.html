@@ -117,7 +117,7 @@
 	</head>
 	<body class="is-loading">
 
-		<div id="wrapper" class=" homepage-hero-module">
+		<div id="wrapper">
 		    <!-- Main -->
 		    	<section id="main">
 		    		<header>
@@ -270,13 +270,24 @@
 			 * Add to home screen
 			 */
 			var deferredPrompt;
+			var btnAdd = document.createElement('button')
+			btnAdd.innerText = 'Add to Home Screen'
+			document.querySelector('#wrapper').appendChild(btnAdd)
+			btnAdd.style.display = 'none'
+
 			window.addEventListener('beforeinstallprompt', (e) => {
+			  console.log('beforeinstallprompt')
 			  // Prevent Chrome 67 and earlier from automatically showing the prompt
 			  e.preventDefault();
 			  // Stash the event so it can be triggered later.
 			  deferredPrompt = e;
 			  // Update UI notify the user they can add to home screen
 			  btnAdd.style.display = 'block';
+			});
+
+			btnAdd.addEventListener('click', (e) => {
+			  // hide our user interface that shows our A2HS button
+			  btnAdd.style.display = 'none';
 			  // Show the prompt
 			  deferredPrompt.prompt();
 			  // Wait for the user to respond to the prompt
