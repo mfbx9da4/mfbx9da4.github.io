@@ -6,6 +6,7 @@ var urlsToCache = [
   '/assets/img/Fish-Tank/WEBM/Fish-Tank.webm',
   '/assets/img/Fish-Tank/Snapshots/Fish-Tank.jpg',
   '/assets/cv.pdf',
+  '/assets/cvs.pdf',
   '/assets/html5up-identity/assets/css/main.css',
   '/assets/html5up-identity/images/bg.jpg',
   '/assets/html5up-identity/assets/css/images/overlay.png',
@@ -31,10 +32,10 @@ self.addEventListener('fetch', function(event) {
       .then(function(response) {
         // Cache hit - return response
         if (response) {
-          console.log('hit')
+          console.log('hit', event.request.url)
           return response;
         }
-        console.log('miss', event.request)
+        console.log('miss', event.request.url)
 
         // IMPORTANT: Clone the request. A request is a stream and
         // can only be consumed once. Since we are consuming this
@@ -68,18 +69,5 @@ self.addEventListener('fetch', function(event) {
 });
 
 self.addEventListener('activate', function(event) {
-
-  var cacheWhitelist = ['pages-cache-v1', 'blog-posts-cache-v1'];
-
-  event.waitUntil(
-    caches.keys().then(function(cacheNames) {
-      return Promise.all(
-        cacheNames.map(function(cacheName) {
-          if (cacheWhitelist.indexOf(cacheName) === -1) {
-            return caches.delete(cacheName);
-          }
-        })
-      );
-    })
-  );
+  console.log('Service worker updated')
 });
