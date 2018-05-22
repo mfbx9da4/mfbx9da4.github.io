@@ -28,7 +28,9 @@ self.addEventListener('install', function(event) {
     caches.open(CACHE_NAME)
       .then(function(cache) {
         cache.addAll(secondaryFiles)
+          .then(function() {console.log('finished secondaryFiles')})
         return cache.addAll(coreFiles)
+          .then(function(res) {console.log('finished coreFiles'); return res})
       })
   );
 });
