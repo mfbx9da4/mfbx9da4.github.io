@@ -244,15 +244,16 @@
 				video.appendChild(source1)
 				video.appendChild(source2)
 			    video.addEventListener('ended', function(ev) {
+			    	console.log('ended')
 			        video.currentTime = 0.1;
 			        video.play();
 			    });
 			    video.load();
 			    video.addEventListener('loadeddata', function(ev) {
-			    	console.log('video loadeddata')
+			    	console.log('video loadeddata, first frame loaded')
 			        video.play()
 			        	.then(function(event) {
-			        		console.log('Success video.play()', event)
+			        		console.log('Success video.play()')
 			        	})
 			        	.catch(function(event) {
 			        		console.log('Catch video.play()', event)
