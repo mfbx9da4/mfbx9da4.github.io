@@ -21,7 +21,7 @@ self.addEventListener('install', function(event) {
   console.log('install')
 
   // force new service worker to become the active one
-  self.skipWaiting();
+  // self.skipWaiting();
 
   // Perform install steps
   event.waitUntil(
