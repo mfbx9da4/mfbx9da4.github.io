@@ -4,7 +4,8 @@ var coreFiles = [
   '/assets/img/chaordic-profile.jpg',
   '/assets/html5up-identity/assets/css/main.css',
   '/assets/html5up-identity/images/bg.jpg',
-  '/assets/html5up-identity/assets/css/images/overlay.png'
+  '/assets/html5up-identity/assets/css/images/overlay.png',
+  '/assets/html5up-identity/assets/fonts/fontawesome-webfont.woff2?v=4.6.3'
 ]
 var secondaryFiles = [
   '/assets/img/Fish-Tank/MP4/Fish-Tank.mp4',
@@ -13,8 +14,7 @@ var secondaryFiles = [
   // '/assets/cv.pdf',
   // '/assets/cvs.pdf',
   'https://fonts.googleapis.com/css?family=Source+Sans+Pro:300',
-  'https://fonts.gstatic.com/s/sourcesanspro/v11/6xKydSBYKcSV-LCoeQqfX1RYOo3ik4zwlxdu3cOWxw.woff2',
-  '/assets/html5up-identity/assets/fonts/fontawesome-webfont.woff2?v=4.6.3'
+  'https://fonts.gstatic.com/s/sourcesanspro/v11/6xKydSBYKcSV-LCoeQqfX1RYOo3ik4zwlxdu3cOWxw.woff2'
 ];
 
 self.addEventListener('install', function(event) {
@@ -27,6 +27,8 @@ self.addEventListener('install', function(event) {
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then(function(cache) {
+        // TODO: maybe do a split if the device
+        // has a big enough quota for secondary files
         cache.addAll(secondaryFiles)
           .then(function() {console.log('finished secondaryFiles')})
         return cache.addAll(coreFiles)
