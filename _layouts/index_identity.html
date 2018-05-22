@@ -186,10 +186,8 @@
 				window.addEventListener('load', function onWindowLoad () {
 					document.body.className = document.body.className.replace(/\bis-loading\b/, '');
 					console.log('window loaded')
-					setTimeout(function() {
-						console.log('play')
-						playVideo()
-					}, 500)
+					console.log('play')
+					playVideo()
 				});
 				document.body.className += (navigator.userAgent.match(/(MSIE|rv:11\.0)/) ? ' is-ie' : '');
 			}
