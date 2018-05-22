@@ -5,7 +5,7 @@ var urlsToCache = [
   '/assets/html5up-identity/assets/css/main.css',
   '/assets/html5up-identity/images/bg.jpg',
   '/assets/html5up-identity/assets/css/images/overlay.png',
-  '/assets/img/Fish-Tank/MP4/Fish-Tank.mp4',
+  // '/assets/img/Fish-Tank/MP4/Fish-Tank.mp4',
   // '/assets/img/Fish-Tank/WEBM/Fish-Tank.webm',
   // '/assets/img/Fish-Tank/Snapshots/Fish-Tank.jpg',
   // '/assets/cv.pdf',
@@ -25,8 +25,11 @@ self.addEventListener('install', function(event) {
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then(function(cache) {
-        console.log('Opened cache');
-        return cache.addAll(urlsToCache);
+        return cache.addAll(urlsToCache)
+          .then(function(response) {
+            console.log('😊 Finished install')
+            return response;
+          })
       })
   );
 });
@@ -53,12 +56,6 @@ self.addEventListener('fetch', function(event) {
 
   var url = event.request.url;
   console.log('fetch', url)
-
-  // var includes = isIncluded(url, urlsToCache.slice(1))
-  // var split = url.split(location.origin)
-  // url = split[1] || split[0]
-  // var includes = urlsToCache.includes(url)
-  // console.log('includes', url, includes)
 
   if (url.indexOf('chrome-extension') > -1
     || url.indexOf('/sw.js') > -1) {
@@ -98,23 +95,6 @@ function fromCache(event) {
   });
 }
 
-
-// Update consists in opening the cache, performing a network request and
-// storing the new response data.
-// function update(request) {
-//   return caches.open(CACHE_NAME).then(function (cache) {
-//     return fetch(request)
-//       .then(function (response) {
-//         return cache.put(request, response.clone()).then(function () {
-//           console.log('update cache for', request.url)
-//           return response;
-//         });
-//       })
-//       .catch(function (error) {
-//         console.log('fail', error)
-//       })
-//   });
-// }
 
 // Update consists in opening the cache, performing a network request and
 // storing the new response data.
