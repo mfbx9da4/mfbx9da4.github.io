@@ -2,17 +2,17 @@ var CACHE_NAME = 'my-site-cache-v1';
 var urlsToCache = [
   '/',
   '/assets/img/chaordic-profile.jpg',
-  '/assets/img/Fish-Tank/MP4/Fish-Tank.mp4',
-  '/assets/img/Fish-Tank/WEBM/Fish-Tank.webm',
-  '/assets/img/Fish-Tank/Snapshots/Fish-Tank.jpg',
-  '/assets/cv.pdf',
-  '/assets/cvs.pdf',
+  // '/assets/img/Fish-Tank/MP4/Fish-Tank.mp4',
+  // '/assets/img/Fish-Tank/WEBM/Fish-Tank.webm',
+  // '/assets/img/Fish-Tank/Snapshots/Fish-Tank.jpg',
+  // '/assets/cv.pdf',
+  // '/assets/cvs.pdf',
   '/assets/html5up-identity/assets/css/main.css',
   '/assets/html5up-identity/images/bg.jpg',
   '/assets/html5up-identity/assets/css/images/overlay.png',
-  'https://fonts.googleapis.com/css?family=Source+Sans+Pro:300',
-  'https://fonts.gstatic.com/s/sourcesanspro/v11/6xKydSBYKcSV-LCoeQqfX1RYOo3ik4zwlxdu3cOWxw.woff2',
-  '/assets/html5up-identity/assets/fonts/fontawesome-webfont.woff2?v=4.6.3'
+  // 'https://fonts.googleapis.com/css?family=Source+Sans+Pro:300',
+  // 'https://fonts.gstatic.com/s/sourcesanspro/v11/6xKydSBYKcSV-LCoeQqfX1RYOo3ik4zwlxdu3cOWxw.woff2',
+  // '/assets/html5up-identity/assets/fonts/fontawesome-webfont.woff2?v=4.6.3'
 ];
 
 self.addEventListener('install', function(event) {
