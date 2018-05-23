@@ -27,10 +27,10 @@ self.addEventListener('install', function(event) {
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then(function(cache) {
-        // TODO: maybe do a split if the device
-        // has a big enough quota for secondary files
-        cache.addAll(secondaryFiles)
-          .then(function() {console.log('finished secondaryFiles')})
+        if (!mobileAndTabletcheck) {
+          cache.addAll(secondaryFiles)
+            .then(function() {console.log('finished secondaryFiles')})
+        }
         return cache.addAll(coreFiles)
           .then(function(res) {console.log('finished coreFiles'); return res})
       })
