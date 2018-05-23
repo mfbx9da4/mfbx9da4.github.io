@@ -31,7 +31,7 @@ self.addEventListener('install', function(event) {
           cache.addAll(secondaryFiles)
             .then(function() {console.log('finished secondaryFiles')})
         }
-        return cache.addAll(coreFiles)
+        cache.addAll(coreFiles)
           .then(function(res) {console.log('finished coreFiles'); return res})
       })
   );
