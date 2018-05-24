@@ -28,6 +28,7 @@ self.addEventListener('install', function(event) {
     caches.open(CACHE_NAME)
       .then(function(cache) {
         if (!mobileAndTabletcheck) {
+          // Don't cache big files on mobile
           cache.addAll(secondaryFiles)
             .then(function() {console.log('finished secondaryFiles')})
         }

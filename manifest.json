@@ -5,6 +5,7 @@
   "start_url": "/",
   "display": "standalone",
   "theme_color": "#29c1d3",
+  "background_color": "#ffffff",
   "icons": [
     {
       "src": "/assets/img/chaordic-profile.jpg",
