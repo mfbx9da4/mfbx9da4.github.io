@@ -1,6 +1,7 @@
 name: David Alberto Adler
 markdown: kramdown
 highlighter: 'rouge'
+url: 'https://davidalbertoadler.com'
 # pygments: true
 gems:
   - jekyll-sitemap
