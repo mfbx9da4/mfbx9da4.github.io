@@ -3,7 +3,7 @@ markdown: kramdown
 highlighter: 'rouge'
 url: 'https://davidalbertoadler.com'
 # pygments: true
-gems:
+plugins:
   - jekyll-sitemap
 exclude: [node_modules/, README.md. convert-extracts.sh, gulpfile.js, _scss/, vendor]
 collections:

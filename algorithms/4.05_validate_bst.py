@@ -27,7 +27,7 @@ def recurse(graph, node, lo, hi):
   return node
 
 def is_valid_bst(graph, node):
-  return True if recurse(graph, node, float('-inf'), float('inf')) else False
+  return bool(recurse(graph, node, float('-inf'), float('inf')))
 
 print('depth 2 invalid')
 graph = {
