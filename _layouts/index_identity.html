@@ -285,7 +285,10 @@
 			});
 
 			function playVideo () {
-				if (!isGoogleChrome) { document.querySelector('.poster').className = 'poster'; return }
+				if (!isGoogleChrome) {
+					document.querySelector('.poster').className = 'poster';
+					return
+				}
 				var videoContainer = document.querySelector('.video-container')
 				var video = document.createElement('video')
 				video.autoplay = 'autoplay'
@@ -299,7 +302,6 @@
 		    	// </video>
 		    	videoContainer.appendChild(video)
 				window.video = video;
-
 				var source1 = document.createElement('source')
 				source1.setAttribute('src', '/assets/img/Fish-Tank/MP4/Fish-Tank.mp4')
 				source1.setAttribute('type', 'video/mp4')
