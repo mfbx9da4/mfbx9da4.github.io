@@ -9,4 +9,6 @@ exclude: [node_modules/, README.md. convert-extracts.sh, gulpfile.js, _scss/, ve
 collections:
   projects:
     output: true
+sass:
+  sass_dir: _scss
 

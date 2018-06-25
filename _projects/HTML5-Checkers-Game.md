@@ -1,5 +1,5 @@
 ---
-layout: project
+layout: project_phantom
 title:  "HTML5 Checkers Game"
 image:  "/assets/img/projects/checkers.png"
 technologies: [VanillaJS, HTML5-canvas]
@@ -11,6 +11,6 @@ permalink: /checkers
 order: "6"
 ---
 
-Personal side project.   
+Personal side project.
 
-An Object-Oriented javascript and HTML5 canvas implementation of a checkers game. The game includes the option to play against a relatively simple computer I implemented. 
+An Object-Oriented javascript and HTML5 canvas implementation of a checkers game. The game includes the option to play against a relatively simple computer I implemented.
