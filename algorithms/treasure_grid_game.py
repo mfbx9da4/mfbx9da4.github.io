@@ -102,8 +102,7 @@ def bisect_dimension(game, lo, hi, fixed_row=None, fixed_col=None):
 
   while hi > lo:
     count += 1
-    if count > 10:
-      raise ValueError('Too many')
+    if count > 15: raise ValueError('Too many guesses')
     width = (hi - lo)
     mid = (width // 2) + lo
     guess = mid
@@ -134,18 +133,18 @@ def bisect_dimension(game, lo, hi, fixed_row=None, fixed_col=None):
     if not prev_was_colder:
       prev_was_higher = guess < prev
       prev_was_lower = not prev_was_higher
-      mid_guess_to_prev = ((prev - guess) // 2) + guess
-      mid_prev_to_guess = ((1 + guess - prev) // 2) + prev
+      mid_of_guess_to_prev = ((prev - guess) // 2) + guess
+      mid_of_prev_to_guess = ((1 + guess - prev) // 2) + prev
 
       if is_hotter and prev_was_higher:
         # equidistant is hotter
-        hi = mid_guess_to_prev
+        hi = mid_of_guess_to_prev
       elif is_hotter and prev_was_lower:
-        lo = mid_prev_to_guess
+        lo = mid_of_prev_to_guess
       elif is_colder and prev_was_higher:
-        lo = mid_guess_to_prev + 1
+        lo = mid_of_guess_to_prev + 1
       elif is_colder and prev_was_lower:
-        hi = mid_prev_to_guess - 1
+        hi = mid_of_prev_to_guess - 1
 
     prev = guess
     prev_was_colder = is_colder

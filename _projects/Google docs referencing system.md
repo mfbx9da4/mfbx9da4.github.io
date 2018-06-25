@@ -1,5 +1,5 @@
 ---
-layout: project
+layout: project_phantom
 title:  "Google Docs Referencing System"
 image:  "/assets/img/projects/pubmed-gdocs-citation-screenshot.png"
 technologies: [google-apps-script]
@@ -8,11 +8,11 @@ categories: project
 permalink: /gdocs-citation
 ---
 
-Personal project.  
+Personal project.
 
-Whilst writing my final year project I craved a simple referencing system for google docs so I built one.   
+Whilst writing my final year project I craved a simple referencing system for google docs so I built one.
 
-The referencing system is built using google apps script. The script works by scanning the document for pubmed URLs (a medical publications database), gathers information from the pubmed API and generates a bibliography.  
+The referencing system is built using google apps script. The script works by scanning the document for pubmed URLs (a medical publications database), gathers information from the pubmed API and generates a bibliography.
 
 I used the system during my final year thesis but nowadays there are much more complete options for google docs.
 

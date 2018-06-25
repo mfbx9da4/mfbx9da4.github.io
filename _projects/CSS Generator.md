@@ -1,5 +1,5 @@
 ---
-layout: project
+layout: project_phantom
 title:  "CSS Generator"
 image:  "/assets/img/projects/css3.jpg"
 technologies: [python, django, algorithms, CSS, sprites]

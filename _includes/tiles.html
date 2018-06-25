@@ -1,0 +1,21 @@
+{% assign sorted_projects = site.projects | sort: 'order', 'last' %}
+<section class="tiles">
+    {% for project in sorted_projects %}
+    <article class="style{{forloop.index | modulo:6 | plus:1 }} {{project.project_link}}">
+        <span class="image">
+            <img src="{{project.image}}" alt="{{project.title}}" />
+        </span>
+        {% assign project.project_link = project.project_link || project.github_link %}
+        <a href="{{project.permalink}}">
+            <h2>{{project.title | truncate: 50}}</h2>
+            <div class="content">
+                <p>
+                    {{project.content | truncatewords: 10}}
+                </p>
+            </div>
+        </a>
+    </article>
+    {% endfor %}
+</section>
+
+

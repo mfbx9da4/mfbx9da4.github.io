@@ -1,0 +1,44 @@
+---
+layout: index_phantom
+---
+
+<div>
+	<div class="inner">
+		<a href="/work" class="button small">👈 Back to Portfolio</a>
+	</div>
+</div>
+
+<div id="main">
+	<div class="inner">
+		<h1>{{page.title}}</h1>
+		<ul class="actions">
+			{% if page.github_link %}
+			    <li><a class="button" target="_blank" href="{{page.github_link}}"><i class="fa fa-github"></i> Github</a></li>
+			{% endif %}
+			{% if page.project_link %}
+			    <li><a target="_blank" class="button special" href="{{page.project_link}}">🚀 Demo</a></li>
+			{% endif %}
+		</ul>
+		<span class="image main"><img src="{{page.image | replace: 'projects', 'projects2'}}" alt="{{page.title}}" /></span>
+		<h3>{{ page.date | date: "%b %Y" }}</h3>
+		<h4>Technologies:</h4>
+		<div class="row">
+			<div class="6u 12u$(medium)">
+				<ul>
+					{% for technology in page.technologies %}<li class="technology">{{technology}}</li>{% endfor %}
+				</ul>
+			</div>
+		</div>
+		{{page.content}}
+
+		<ul class="actions fit">
+			{% if page.github_link %}
+			    <li><a class="button big fit" target="_blank" href="{{page.github_link}}"><i class="fa fa-github"></i> Github</a></li>
+			{% endif %}
+			{% if page.project_link %}
+			    <li><a target="_blank" class="button big fit special" href="{{page.project_link}}">🚀 Demo</a></li>
+			{% endif %}
+		</ul>
+
+	</div>
+</div>

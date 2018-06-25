@@ -1,5 +1,5 @@
 ---
-layout: project
+layout: project_phantom
 title:  "Angular Server Time"
 image:  "/assets/img/projects/clock.jpg"
 technologies: [angularjs, socket.io, nodejs]
