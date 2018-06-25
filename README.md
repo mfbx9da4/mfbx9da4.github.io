@@ -1,8 +1,11 @@
-### Description
+# [David Alberto Adler](https://davidalbertoadler.com)
 
-My personal site
+## About
 
-#### Install
+Source code for [personal site of David Alberto Adler](https://davidalbertoadler.com)
+
+
+### Install
 
 
 	bundle update
@@ -10,14 +13,14 @@ My personal site
 	npm install
 	sudo npm install -g grunt grunt-cli
 
-#### Build
+#### Develop
+
 Run
 
 	grunt watch
 	bundle exec jekyll serve --watch --host 0.0.0.0
 
-Generates to `_site`. All `_` prefixed folders are ignored in generation.
-Can use `--limit_posts 1` in conjunction with `jekyll serve`. Can use `--incremental`
-
-`grunt-jekyll` no longer works because the latest jekyll is not supported by this grunt plugin.
+- Generates to `_site`. 
+- All `_` prefixed folders are ignored in generation.
+- Can use `--limit_posts 1` in conjunction with `jekyll serve`. Can use `--incremental`
 
