@@ -2,7 +2,7 @@
 
 ## About
 
-Source code for [personal site of David Alberto Adler](https://davidalbertoadler.com)
+Source code for [personal site of David Alberto Adler](https://davidalbertoadler.com). A calling card and a place to aggregate my projects.
 
 
 ### Install
