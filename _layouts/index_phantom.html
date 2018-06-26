@@ -1,13 +1,30 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>Work - David Alberto Adler</title>
+		<title>{{page.title}} - David Alberto Adler</title>
 		<meta charset="utf-8" />
+		<meta name="description" content="{{page.content | strip_html | truncatewords:70}}" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<!--[if lte IE 8]><script src="/assets/html5up-phantom/assets/js/ie/html5shiv.js"></script><![endif]-->
 		<link rel="stylesheet" href="/assets/html5up-phantom/assets/css/main.css" />
 		<!--[if lte IE 9]><link rel="stylesheet" href="/assets/html5up-phantom/assets/css/ie9.css" /><![endif]-->
 		<!--[if lte IE 8]><link rel="stylesheet" href="/assets/html5up-phantom/assets/css/ie8.css" /><![endif]-->
+		{% include favicon.html %}
+
+		{% if page.date %}
+			<meta property="article:published_time" content="{{page.date | date_to_xmlschema}}" />
+			<meta property="article:modified_time" content="{{page.date | date_to_xmlschema}}" />
+			<meta content="{{ site.url }}/" property="article:author">
+		{% endif %}
+
+		{% if page.image %}
+		  <meta content="{{ page.image }}" property="og:image">
+		{% else %}
+		{% if page.tags %}
+		  {% for tag in page.tags %}
+		  <meta content="{{ tag }}" property="article:tag">
+		  {% endfor %}
+		{% endif %}
 	</head>
 	<body>
 		<!-- Wrapper -->
