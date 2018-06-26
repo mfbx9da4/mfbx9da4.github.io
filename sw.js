@@ -61,8 +61,16 @@ self.addEventListener('fetch', function(event) {
   var url = event.request.url;
   console.log('fetch', url)
 
-  if (url.indexOf('chrome-extension') > -1
-    || url.indexOf('/sw.js') > -1) {
+  var files = coreFiles.concat(secondaryFiles)
+  var shouldCache = false
+  for (let i = 0; i < files.length; i ++) {
+    let item = files[i]
+    if (item === url) {
+      shouldCache = true
+    }
+  }
+
+  if (!shouldCache) {
     console.log('ignore', url)
     return
   }
