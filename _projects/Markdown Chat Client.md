@@ -1,5 +1,5 @@
 ---
-layout: project
+layout: project_phantom
 title:  "Markdown Chat Client"
 image:  "/assets/img/projects/chatclient.png"
 technologies: [expressjs, nodejs, websockets]
@@ -11,11 +11,11 @@ permalink: /chatclient
 ---
 
 
-Personal project.   
+Personal project.
 
-Useful for developers who are using a chat client and would like to include code snippets.   
+Useful for developers who are using a chat client and would like to include code snippets.
 
-The web client was built using web sockets, bootstrap and node.   
+The web client was built using web sockets, bootstrap and node.
 
-I used it for sometime to collaborate with colleagues at work.  
+I used it for sometime to collaborate with colleagues at work.
 

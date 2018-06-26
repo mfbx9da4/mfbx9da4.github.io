@@ -1,5 +1,5 @@
 ---
-layout: project
+layout: project_phantom
 title:  "Angular Slideout Directive"
 image:  "/assets/img/projects/slideout-directive-screenshot.png"
 technologies: [angularjs]
@@ -12,6 +12,6 @@ permalink: /slideout
 order: "7"
 ---
 
-An open source reusable angular directive I built for mobile-friendly website menus.   
+An open source reusable angular directive I built for mobile-friendly website menus.
 
-The menu supports multiple layers of navigation and is [available on npm](https://www.npmjs.com/package/angular-slideout).  
+The menu supports multiple layers of navigation and is [available on npm](https://www.npmjs.com/package/angular-slideout).

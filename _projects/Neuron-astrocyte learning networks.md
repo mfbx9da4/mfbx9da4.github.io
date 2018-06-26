@@ -1,5 +1,5 @@
 ---
-layout: project
+layout: project_phantom
 title:  "Neuron-Astrocyte Networks"
 image:  "/assets/img/projects/neuron-astrocyte-screenshot.png"
 technologies: [python, machine-learning, neural-networks, numpy, pybrain]
@@ -10,7 +10,7 @@ permalink: /neuron-astrocyte-networks
 order: "5"
 ---
 
-For my final year project I created one of the first ever computational models of a learning neuron-astrocyte network. 
+For my final year project I created one of the first ever computational models of a learning neuron-astrocyte network.
 
 **Background:** Contrary to popular belief, neurons are not the only cells in the brain which perform learning and cognitive functions. For decades, artificial intelligence researchers have made computational models of neural networks but failed to acknowledge the role of astrocytes. If you are interested in a more comprehensive background information on the topic please read [my literature review](http://dadler.herokuapp.com/static/files/lit_review.pdf).
 

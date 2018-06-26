@@ -1,5 +1,5 @@
 ---
-layout: project
+layout: project_phantom
 title:  "Python Timer Util"
 image:  "/assets/img/projects/timer.png"
 technologies: [python, django, timer]
@@ -11,4 +11,4 @@ permalink: /timer
 order: "1.10"
 ---
 
-A timer util that I found so reuseful in profiling backend code I decided to package it up as an [open source library (pip)](https://pypi.python.org/pypi?name=django-timer&version=0.9&:action=display). It allows developers to quickly find bottlenecks in their code with just one line.
+A timer util that I found so useful and reusable in profiling backend code I decided to package it up as an [open source library (pip)](https://pypi.python.org/pypi?name=django-timer&version=0.9&:action=display). It allows developers to quickly find bottlenecks in their code with just one line.
