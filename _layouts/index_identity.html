@@ -110,21 +110,6 @@
 			  -webkit-animation-name: fadeIn;
 			  animation-name: fadeIn; }
 
-
-			.add-to-home-screen-button {
-				z-index: 3;
-				position: fixed;
-				width: 100%;
-				height: 4em;
-				bottom: 0;
-				left: 0;
-				background: #3498db;
-				border: 0;
-				color: white !IMPORTANT;
-				font-size: 1.3em;
-				border-radius: 0;
-			}
-
 			.filter {
 				    width: 100%;
 				    height: 100%;
@@ -132,10 +117,10 @@
 				    top: 0;
 				    left: 0;
 				    z-index: 98;
-				background-image: url("/assets/html5up-identity/assets/css/images/overlay.png"), -moz-linear-gradient(60deg, rgba(255, 165, 150, 0.5) 5%, rgba(0, 228, 255, 0.35)), url("none.png");
-				background-image: url("/assets/html5up-identity/assets/css/images/overlay.png"), -webkit-linear-gradient(60deg, rgba(255, 165, 150, 0.5) 5%, rgba(0, 228, 255, 0.35)), url("none.png");
-				background-image: url("/assets/html5up-identity/assets/css/images/overlay.png"), -ms-linear-gradient(60deg, rgba(255, 165, 150, 0.5) 5%, rgba(0, 228, 255, 0.35)), url("none.png");
-				background-image: url("/assets/html5up-identity/assets/css/images/overlay.png"), linear-gradient(60deg, rgba(255, 165, 150, 0.5) 5%, rgba(0, 228, 255, 0.35)), url("none.png");
+				background-image: url("/assets/html5up-identity/assets/css/images/overlay.png"), -moz-linear-gradient(60deg, rgba(255, 165, 150, 0.5) 5%, rgba(0, 228, 255, 0.35)), url("/assets/html5up-identity/images/404.jpg");
+				background-image: url("/assets/html5up-identity/assets/css/images/overlay.png"), -webkit-linear-gradient(60deg, rgba(255, 165, 150, 0.5) 5%, rgba(0, 228, 255, 0.35)), url("/assets/html5up-identity/images/404.jpg");
+				background-image: url("/assets/html5up-identity/assets/css/images/overlay.png"), -ms-linear-gradient(60deg, rgba(255, 165, 150, 0.5) 5%, rgba(0, 228, 255, 0.35)), url("/assets/html5up-identity/images/404.jpg");
+				background-image: url("/assets/html5up-identity/assets/css/images/overlay.png"), linear-gradient(60deg, rgba(255, 165, 150, 0.5) 5%, rgba(0, 228, 255, 0.35)), url("/assets/html5up-identity/images/404.jpg");
 				background-repeat: repeat,			no-repeat,			no-repeat;
 				background-size: 100px 100px, cover,				cover;
 				background-position: top left,		center center,		bottom center;
@@ -204,6 +189,10 @@
 		    		</footer>
 		    		<div>
 		    			<a href="/work" class="button">Projects</a>
+		    		</div>
+		    		<div style="display: none">
+		    			<hr />
+		    			<a href="#" class="add-to-home-screen-button button">Add To Home Screen</a>
 		    		</div>
 		    	</section>
 
@@ -343,27 +332,29 @@
 			 * Add to home screen
 			 */
 			var deferredPrompt;
-			var btnAdd = document.createElement('button')
-			btnAdd.innerText = 'Add to Home Screen'
-			var wrapper = document.body;
-			wrapper.insertBefore(btnAdd, wrapper.firstChild);
-			btnAdd.style.display = 'none';
-			btnAdd.style.zIndex = 3;
-			btnAdd.className = 'add-to-home-screen-button'
+			var btnAdd = document.querySelector('.add-to-home-screen-button')
 
+			var isTooSoon = true;
 			window.addEventListener('beforeinstallprompt', (e) => {
-			  console.log('beforeinstallprompt')
-			  // Prevent Chrome 67 and earlier from automatically showing the prompt
-			  e.preventDefault();
-			  // Stash the event so it can be triggered later.
-			  deferredPrompt = e;
-			  // Update UI notify the user they can add to home screen
-			  btnAdd.style.display = 'block';
+		  	  console.log('beforeinstallprompt')
+		  	  // Prevent Chrome 67 and earlier from automatically showing   the prompt
+		  	  e.preventDefault();
+		  	  // Stash the event so it can be triggered later.
+		  	  deferredPrompt = e;
+
+			  // btnAdd.parentElement.style.display = 'block';
+			  if (isTooSoon) {
+			    setTimeout(function() {
+			      isTooSoon = false;
+			      // Throws if called more than once or default not prevented
+			      e.prompt();
+			    }, 10000);
+			  }
 			});
 
 			btnAdd.addEventListener('click', (e) => {
 			  // hide our user interface that shows our A2HS button
-			  btnAdd.style.display = 'none';
+			  btnAdd.parentElement.style.display = 'none';
 			  // Show the prompt
 			  deferredPrompt.prompt();
 			  // Wait for the user to respond to the prompt
