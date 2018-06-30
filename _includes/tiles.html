@@ -10,7 +10,7 @@
             <h2>{{project.title | truncate: 50}}</h2>
             <div class="content">
                 <p>
-                    {{project.content | truncatewords: 10}}
+                    {{project.content | strip_html | split:"What?" | last |  truncatewords: 10}}
                 </p>
             </div>
         </a>
