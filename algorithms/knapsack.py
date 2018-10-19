@@ -1,4 +1,8 @@
+
 def solve(items, total_weight):
+  # for incremental values of calories,
+  # what is the cheapest price + nutrients combination?
+  # maybe do linear programming on the price + nutrients?
   memoized = [0 for x in range(total_weight + 1)]
   for item in items:
     weight, value = item

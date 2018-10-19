@@ -10,6 +10,7 @@ layout: index_phantom
 
 <div id="main">
 	<div class="inner">
+		<span class="image main"><img src="{{page.image | replace: 'projects', 'projects2'}}" alt="{{page.title}}" /></span>
 		<h1>{{page.title}}</h1>
 		<ul class="actions">
 			{% if page.github_link %}
@@ -19,7 +20,6 @@ layout: index_phantom
 			    <li><a target="_blank" class="button special" href="{{page.project_link}}">🚀 Demo</a></li>
 			{% endif %}
 		</ul>
-		<span class="image main"><img src="{{page.image | replace: 'projects', 'projects2'}}" alt="{{page.title}}" /></span>
 		<h3>{{ page.date | date: "%b %Y" }}</h3>
 		<h4>Technologies:</h4>
 		<div class="row">
