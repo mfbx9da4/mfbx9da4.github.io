@@ -1,0 +1,69 @@
+==================================================================
+https://keybase.io/davidadler
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of https://davidalbertoadler.com
+  * I am davidadler (https://keybase.io/davidadler) on keybase.
+  * I have a public key with fingerprint AA68 4370 E7ED 4E46 0FA0  E454 6109 F697 337B FE6C
+
+To do so, I am signing this object:
+
+{
+  "body": {
+    "key": {
+      "eldest_kid": "01013fa8e22efde6f88f444a17ff2d05b6dc56cc429c54f0d905cf25d6d72240cd980a",
+      "fingerprint": "aa684370e7ed4e460fa0e4546109f697337bfe6c",
+      "host": "keybase.io",
+      "key_id": "6109f697337bfe6c",
+      "kid": "01013fa8e22efde6f88f444a17ff2d05b6dc56cc429c54f0d905cf25d6d72240cd980a",
+      "uid": "402a3504839dd7c686a9a75d9ac50019",
+      "username": "davidadler"
+    },
+    "service": {
+      "hostname": "davidalbertoadler.com",
+      "protocol": "https:"
+    },
+    "type": "web_service_binding",
+    "version": 1
+  },
+  "ctime": 1540463605,
+  "expire_in": 157680000,
+  "prev": "15211ddff49f7cb2c70a092e37622a5fd5e25b6f4402cd0747bc9185e4fbc86c",
+  "seqno": 4,
+  "tag": "signature"
+}
+
+which yields the signature:
+
+-----BEGIN PGP MESSAGE-----
+Version: Keybase OpenPGP v2.0.80
+Comment: https://keybase.io/crypto
+
+yMIuAnicrZJbSBVBHMbP6aSZIZSeh26gLCFJZrN7ZvZyyKICgywrKyIqTrNzse0c
+d0+7q10tQgofiqIoEqOLQVRGEUR0eUkpuokQZSBiRXSjoOwipRU0e6iHoMfmZZg/
+v++bbz7mZl4klBvuLm+9Ed5VUBS+395aF1r5oGVgi2Q6dJMU3yIlWWZjKco8P5G0
+qBSXgAzkGMc6UxTGKVO5rnMIIZY1zhUKkKlSglRCoGIQBDmgBkCEK4iqVFMUCAg1
+dIClUolbdg1z065l+8IWY1WHMQ0wjVHIoAo4BgwiqMrA4KqhxWKayZlKhHCt4wUK
+Ec7EHiuzHDETh0Qm3j/4/5y7LmMHgYJjCEA9ZlCqEVVXsYE1RA1MEACyEYAec21c
+ywRNcb1FMU0xV2oolcS83iIsqDZ4y19MymSu72TQMuLUCpu06/gOcVICWev7aS8e
+WPib0oFmAzMTv90SpmVTUalQ1DPXsxxbisuCJL4V2MsIAqjGVIBKJbYxbbksYQUE
+0lQdiBXcw+qFpYwUWaaUc2hwjZgK0QAGhsJimqooGHGKmCLKEt0BhVCgQc0khqwj
+BrlJ9EzhHltvO1Icipi4Rlh6Vo2N/TqXSQ0dN1YND4VzQ9lZw4KvFsodOfrPB2wq
+GTEU+ZrVn1emLCi/nvzpSQfefhl65s68WLFtX2XW4fb1ndObO4fuLei5Gr0VLkl9
+vqvOjUw8/qkbHbnZcrD48uK+6sLX9s+tFe9nTJ3a+PL0o9vfR61qKFp663Pr8ivv
+v+ev6686tXnhnsJXRwomo5zNA/MFPtgx7/ycx5eOau29R48PmzUpO3q29+27H/vK
+Q5WHvn18WjxteLRp8Fy0ujR3zpvdqPl56smZlv01V1aULDq2Pef2geTAFCP6omF7
+ccGPE3knK+90FK22986OdrWuWdJWNa66LdKTv6Oib8z46zNaIh8a2wYfdkUWTb/w
+7lXPy7EP+rNrlx2b0JkGzfHJO5PXutqaRnQ0/gKO4EdE
+=NqPg
+-----END PGP MESSAGE-----
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/davidadler
+
+==================================================================
+
