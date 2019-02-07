@@ -1,5 +1,5 @@
 ---
-layout: project_phantom
+layout: project_phantom2
 title:  "Identify My iPad"
 technologies: [javascript, amp-html]
 date:   2018-04-01

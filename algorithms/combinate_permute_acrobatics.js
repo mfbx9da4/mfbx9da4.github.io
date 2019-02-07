@@ -1,3 +1,17 @@
+// Every unqiue sequence will start with one
+// of the following positions
+// Start with the first position as our base
+// Sequence
+[[P ...], [N ... ], [C ... ], [B ...]]
+// How do we extend the sequence by one position?
+// => Add a position not already in the sequence
+[P, N]
+[P, C]
+[P, B]
+// How do we know we have a full sequence?
+// => sequence of length 4 or all positions used
+[P, N, C, B]
+
 function generateSequences (nMovements, sequenceLength) {
   var openList = []
   for (let i = 0; i < nMovements; i ++) {
