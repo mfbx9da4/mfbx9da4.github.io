@@ -1,0 +1,22 @@
+{
+    "compileOnSave": true,
+    "compilerOptions": {
+        "target": "es6",
+        "lib": [
+            "es2017",
+            "dom"
+        ],
+        "module": "commonjs",
+        "watch": true,
+        "moduleResolution": "node",
+        "sourceMap": true
+        // "types": []
+    },
+    "include": [
+        "."
+    ],
+    "exclude": [
+        "node_modules",
+        "typings"
+    ]
+}
