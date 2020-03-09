@@ -1,0 +1,33 @@
+ponte - bananeira - qdr - negativa
+qdr - bananeira - negativa - ponte
+
+qdr - ponte - bananeira - negativa
+--- done
+cocorinha - qdr - bananeira - ponte
+cocorinha - qdr - ponte - bananeira
+cocorinha - bananeira - qdr - ponte (good)
+cocorinha - bananeira - ponte - qdr
+cocorinha - ponte - qdr - bananeira
+cocorinha - ponte - bananeira - qdr
+qdr - cocorinha - bananeira - ponte
+qdr - cocorinha - ponte - bananeira
+qdr - bananeira - cocorinha - ponte
+qdr - bananeira - ponte - cocorinha
+qdr - ponte - cocorinha - bananeira
+qdr - ponte - bananeira - cocorinha
+bananeira - cocorinha - qdr - ponte
+bananeira - cocorinha - ponte - qdr
+bananeira - qdr - cocorinha - ponte
+bananeira - qdr - ponte - cocorinha
+bananeira - ponte - cocorinha - qdr
+bananeira - ponte - qdr - cocorinha
+ponte - cocorinha - qdr - bananeira
+ponte - cocorinha - bananeira - qdr
+- doing
+ponte - qdr - cocorinha - bananeira
+
+
+
+
+
+

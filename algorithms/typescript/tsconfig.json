@@ -1,9 +1,14 @@
 {
+  "compileOnSave": true,
   "compilerOptions": {
-    "target": "es5",
+    "target": "es6",
+    "lib": ["es2017", "dom"],
     "module": "commonjs",
-    "outDir": "./dist",
-    "sourceMap": true,
-    "esModuleInterop": true
-  }
+    "watch": true,
+    "moduleResolution": "node",
+    "sourceMap": true
+    // "types": []
+  },
+  "include": ["."],
+  "exclude": ["node_modules", "typings"]
 }
