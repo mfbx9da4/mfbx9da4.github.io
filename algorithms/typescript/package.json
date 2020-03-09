@@ -1,0 +1,25 @@
+{
+  "name": "typescript",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "nodemon --watch 'src/**/*.ts' --ignore 'src/**/*.spec.ts' --exec 'ts-node' src/index.ts",
+    "start:debug": "nodemon --watch 'src/**/*.ts' --ignore 'src/**/*.spec.ts' --exec 'ts-node --inspect-brk=5858' src/index.ts",
+    "start:debug2": "nodemon -r ts-node/register --inspect-brk=5858 src/index.ts",
+    "tsnode": "ts-node --inspect=5858 src/index.ts",
+    "start:dende": "nodemon --inspect=5858 -e ts,tsx --exec node -r ts-node/register ./src/index.ts",
+    "dev": "nodemon src/index.ts",
+    "dev:debug": "nodemon --inspect=5858 src/index.ts",
+    "postinstall": "tsc -p ./",
+    "watch": "tsc -w -p ./",
+    "debug": "nodemon --legacy-watch --watch ./dist --inspect=0.0.0.0:5858 --nolazy ./dist/index.js",
+    "docker-debug": "docker-compose up",
+    "start2": "node ./dist/index.js"
+  },
+  "dependencies": {
+    "nodemon": "^1.19.1",
+    "ts-node": "^8.3.0",
+    "typescript": "^3.5.3"
+  }
+}

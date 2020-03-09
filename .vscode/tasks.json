@@ -1,0 +1,18 @@
+{
+  "version": "0.2.0",
+  "tasks": [
+    {
+      "taskName": "tsc-watch",
+      "command": "npm",
+      "args": ["run", "watch"],
+      "options": {
+        "cwd": "${workspaceFolder}/algorithms/typescript"
+      },
+      "isShellCommand": true,
+      "isBackground": true,
+      "isBuildCommand": true,
+      "problemMatcher": "$tsc-watch",
+      "showOutput": "always"
+    }
+  ]
+}
