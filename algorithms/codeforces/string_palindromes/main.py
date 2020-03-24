@@ -21,11 +21,20 @@ def matrix_to_string(arr, sep=' '): return '[\n' + '\n'.join(
     [sep.join(map(str, row)) for row in arr]) + '\n]'
 
 
-def solve(brackets):
-    print('brackets', brackets)
+def solve(string):
+    if string != string[::-1]:
+        return False
+    first = string[0:(len(string) - 1) // 2]
+    if first != first[::-1]:
+        return False
+    second = string[(len(string) + 2) // 2:]
+    if second != second[::-1]:
+        return False
+    return True
 
 
-T = read_int()
-
-brackets = input()
-solve(brackets)
+string = input()
+if solve(string):
+    print('Yes')
+else:
+    print('No')

@@ -1,6 +1,8 @@
 """
 """
 
+from math import factorial
+
 
 def int_as_array(num): return list(map(int, [y for y in str(num)]))
 
@@ -21,11 +23,18 @@ def matrix_to_string(arr, sep=' '): return '[\n' + '\n'.join(
     [sep.join(map(str, row)) for row in arr]) + '\n]'
 
 
-def solve(brackets):
-    print('brackets', brackets)
+def combine(n, r):
+    try:
+        return (factorial(n) / factorial(n - r)) * (1 / r)
+    except:
+        return 0
 
 
-T = read_int()
+def solve(N, M):
+    choose_evens = combine(N, 2)
+    choose_odds = combine(M, 2)
+    return int(choose_evens + choose_odds)
 
-brackets = input()
-solve(brackets)
+
+N, M = read_array()
+print(solve(N, M))

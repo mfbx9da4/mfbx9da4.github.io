@@ -21,11 +21,9 @@ def matrix_to_string(arr, sep=' '): return '[\n' + '\n'.join(
     [sep.join(map(str, row)) for row in arr]) + '\n]'
 
 
-def solve(brackets):
-    print('brackets', brackets)
+def solve(L):
+    return (L / 3) ** 3
 
 
-T = read_int()
-
-brackets = input()
-solve(brackets)
+L = read_int()
+print(solve(L))
