@@ -25,37 +25,30 @@ def matrix_to_string(arr, sep=' '): return '[\n' + '\n'.join(
 
 cache = {}
 
+
 def fac(x):
-    if cache.get(x) is not None:
-        return cache[x]
-    ans = factorial(x)
-    cache[x] = ans
-    return ans
+    return factorial(x)
 
 
 def choose_combination(n, r):
     if r > n:
         return 0
-    return int((fac(n) / fac((n - r))) * (1 / fac(r)))
+    # return int((fac(n) / fac((n - r))) * (1 / fac(r)))
+    # return (fac(n) // fac((n - 2)) * (1 / 2))
+    # return fac((n // n - 2)) * (1 / 2))
+    return (n * (n-1)) // 2
 
 
 def solve(n, array):
     counts = defaultdict(int)
     for x in array:
         counts[x] += 1
-    ways_cache = {}
+    total_ways = 0
+    for x, count in counts.items():
+        total_ways += choose_combination(counts[x], 2)
     for k in array:
-        if ways_cache.get(k) is not None:
-            print(ways_cache[k])
-            continue
-        ways = 0
-        for x, count in counts.items():
-            adjusted_count = counts[x]
-            if x == k:
-                adjusted_count -= 1
-            ways += choose_combination(adjusted_count, 2)
-        ways_cache[k] = ways
-        print(ways)
+        ways = choose_combination(counts[k] - 1, 2)
+        print(total_ways + ways - choose_combination(counts[k], 2))
 
 
 N = read_int()

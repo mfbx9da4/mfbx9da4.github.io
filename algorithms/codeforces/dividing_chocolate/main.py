@@ -22,9 +22,12 @@ def array_to_string(arr, sep=' '): return sep.join(map(str, arr))
 def matrix_to_string(arr, sep=' '): return '[\n' + '\n'.join(
     [sep.join(map(str, row)) for row in arr]) + '\n]'
 
-# check_all_blocks_satisfy_k(blocks)
+
+# pseudo code v1
+
+# def check_all_blocks_satisfy_k(blocks)
 # solve()
-#   - check
+#   - check_all_blocks_satisfy_k(blocks, cuts_count)
 #   - if satisfies => return blocks / 2
 #   - else:
 #       best_ans = Infinity
@@ -33,6 +36,13 @@ def matrix_to_string(arr, sep=' '): return '[\n' + '\n'.join(
 #           min(ans, best_ans)
 #     return ans
 
+# pseudo code v2
+
+# row_blocks = []
+# sum_of_current_block = 0
+# for each row:
+#   if sum_of_current_block + row:
+#
 
 def count_k(rows):
     s = 0
@@ -54,7 +64,7 @@ def solve(blocks, k):
     new_blocks = [x for x in blocks]
     for row_cut in len(width):
         for block in blocks:
-            below = [x for i, x in enumerate(block) if i <]
+            below = [x for i, x in enumerate(block) if i < x]
             # above =
             # solve()
             # for col_cut in cols:
