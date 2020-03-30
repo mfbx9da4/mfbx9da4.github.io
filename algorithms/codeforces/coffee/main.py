@@ -21,14 +21,12 @@ def matrix_to_string(arr, sep=' '): return '[\n' + '\n'.join(
     [sep.join(map(str, row)) for row in arr]) + '\n]'
 
 
-def read(): input()
+def solve(string):
+    if string[2] == string[3] and string[4] == string[5]:
+        print('Yes')
+    else:
+        print('No')
 
 
-def solve(array):
-    print('array', array)
-
-
-T = read_int()
-
-array = read_array()
-print(solve(array))
+string = input()
+solve(string)

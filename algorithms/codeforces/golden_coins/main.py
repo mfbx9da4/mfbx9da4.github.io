@@ -21,14 +21,25 @@ def matrix_to_string(arr, sep=' '): return '[\n' + '\n'.join(
     [sep.join(map(str, row)) for row in arr]) + '\n]'
 
 
-def read(): input()
+coins = {
+    500: 1000,
+    100: 0,
+    50: 0,
+    10: 0,
+    5: 5,
+    1: 0
+}
 
 
-def solve(array):
-    print('array', array)
+def solve(number):
+    points = 0
+    points += (number // 500) * 1000
+    number = number % 500
+    points += (number // 5) * 5
+    number = number % 5
+    return points
 
 
 T = read_int()
 
-array = read_array()
-print(solve(array))
+print(solve(T))
