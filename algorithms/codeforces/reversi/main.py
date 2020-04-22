@@ -60,7 +60,7 @@ def find_available_moves(grid: Grid, pos: Pos, color: str) -> Set[str]:
     return ret
 
 
-def solve(grid_str: str, color: str) -> Set[str]:
+def valid_moves(grid_str: str, color: str) -> Set[str]:
     ret: Set[str] = set()
     grid = parse_grid(grid_str)
     players_locations = find_locations(grid, color)

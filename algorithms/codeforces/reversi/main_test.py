@@ -1,5 +1,5 @@
 import unittest
-from .main import parse_grid, find_locations, solve, Pos
+from .main import parse_grid, find_locations, valid_moves, Pos
 
 
 class TestStringMethods(unittest.TestCase):
@@ -49,7 +49,7 @@ class TestStringMethods(unittest.TestCase):
         ]
         self.assertEqual(locations, expected)
 
-    def test_solve(self):
+    def test_valid_moves(self):
         grid = """
         ........
         ........
@@ -60,7 +60,7 @@ class TestStringMethods(unittest.TestCase):
         ........
         ........
         """
-        ans = solve(grid, "B")
+        ans = valid_moves(grid, "B")
         expected = {"C5", "D6", "E3", "F4"}
         self.assertEqual(ans, expected)
 
